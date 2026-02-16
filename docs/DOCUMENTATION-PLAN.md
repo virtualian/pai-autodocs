@@ -385,5 +385,5 @@ These are the pages that directly address the feedback. Do these first.
 - [x] Phase 0: First draft of all pages — complete (but needs revision per this plan)
 - [x] **Phase 1: User-facing rewrites** — COMPLETE (5 pages: what-is-pai, first-session, memory, self-improvement, customize-your-ai)
 - [x] Phase 2: Edits, references & sidebar — COMPLETE (7 items: working-with-skills, skills-catalog, giving-feedback, configure-skills, configuration, index.mdx, astro.config.mjs)
-- [ ] Phase 3: Cleanup — NOT STARTED
+- [x] Phase 3: Cleanup — COMPLETE (deleted how-pai-learns.md, link audit passed, build clean at 28 pages)
 - [ ] Deferred: Developing + Contributing sections — LATER SESSION
