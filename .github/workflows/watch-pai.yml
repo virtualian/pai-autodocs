@@ -1,0 +1,52 @@
+name: Watch PAI Repository
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # Daily at 6am UTC
+  workflow_dispatch: # Manual trigger
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check upstream for changes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get latest commit SHA from PAI repo
+          LATEST=$(gh api repos/danielmiessler/Personal_AI_Infrastructure/commits/main --jq '.sha')
+          STORED=$(cat .last-pai-sha 2>/dev/null || echo "none")
+
+          echo "Latest PAI SHA: $LATEST"
+          echo "Stored PAI SHA: $STORED"
+
+          if [ "$LATEST" != "$STORED" ]; then
+            echo "PAI repo changed: $STORED -> $LATEST"
+            echo "$LATEST" > .last-pai-sha
+            echo "CHANGED=true" >> $GITHUB_ENV
+            echo "NEW_SHA=$LATEST" >> $GITHUB_ENV
+
+            # Commit the updated SHA file
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .last-pai-sha
+            git commit -m "chore: update last-pai-sha to $LATEST"
+            git push
+          else
+            echo "No changes detected"
+            echo "CHANGED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Trigger regeneration
+        if: env.CHANGED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run regenerate.yml -f pai_sha=${{ env.NEW_SHA }}
