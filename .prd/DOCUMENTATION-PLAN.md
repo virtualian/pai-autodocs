@@ -1,4 +1,4 @@
-# PAI Documentation Plan
+# PAI Auto-Docs Plan
 
 > Updated 2026-02-16 — **Revision 2: Benefits-first rewrite**
 > Previous version was too implementation-heavy. This revision prioritizes what PAI does for users over how it works internally.

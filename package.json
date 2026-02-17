@@ -1,7 +1,8 @@
 {
-  "name": "pai-documentation",
+  "name": "pai-autodocs",
+  "description": "AI-generated documentation for Personal AI Infrastructure by Daniel Miessler",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

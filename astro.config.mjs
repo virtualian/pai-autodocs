@@ -5,12 +5,49 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'PAI Documentation',
-			description: 'Documentation for Personal AI Infrastructure — Agentic AI that magnifies human capabilities.',
+			title: 'PAI Auto-Docs',
+			description: 'AI-generated documentation for Personal AI Infrastructure',
 			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/danielmiessler/Personal_AI_Infrastructure' },
+				{ icon: 'github', label: 'PAI by Daniel Miessler', href: 'https://github.com/danielmiessler/Personal_AI_Infrastructure' },
 			],
+			components: {
+				Footer: './src/components/Footer.astro',
+			},
 			head: [
+				{
+					tag: 'style',
+					content: `
+						.pai-banner { background: var(--sl-color-accent-low); color: var(--sl-color-accent-high); text-align: center; padding: 0.5rem 1rem; font-size: 0.85rem; border-bottom: 1px solid var(--sl-color-accent); }
+						.pai-banner a { color: var(--sl-color-accent-high); font-weight: 600; text-decoration: underline; }
+					`,
+				},
+				{
+					tag: 'script',
+					content: `
+						document.addEventListener('DOMContentLoaded', () => {
+							if (!document.querySelector('.pai-banner')) {
+								const banner = document.createElement('div');
+								banner.className = 'pai-banner';
+								banner.innerHTML = 'Docs for <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">PAI</a> v3.0 (Algorithm v1.5.0) by <strong>Daniel Miessler</strong> — AI-generated and community-maintained.';
+								document.body.prepend(banner);
+							}
+						});
+					`,
+				},
+				{
+					tag: 'meta',
+					attrs: {
+						property: 'og:title',
+						content: 'PAI Auto-Docs — AI-Generated Documentation for Personal AI Infrastructure',
+					},
+				},
+				{
+					tag: 'meta',
+					attrs: {
+						property: 'og:description',
+						content: 'Unofficial, AI-generated documentation for PAI (Personal AI Infrastructure) by Daniel Miessler. Structured with Diataxis. Maintained by the community.',
+					},
+				},
 				{
 					tag: 'script',
 					attrs: {
@@ -84,6 +121,12 @@ export default defineConfig({
 					label: 'Contributing',
 					items: [
 						{ label: 'Upgrade PAI', slug: 'contributing/upgrade-pai' },
+					],
+				},
+				{
+					label: 'Changelog',
+					items: [
+						{ label: 'Changelog', slug: 'changelog' },
 					],
 				},
 			],
