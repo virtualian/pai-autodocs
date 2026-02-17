@@ -77,7 +77,7 @@ export default defineConfig({
 					label: 'User \u2014 Use PAI',
 					items: [
 						{
-							label: 'Understand',
+							label: 'Explanation',
 							items: [
 								{ label: 'What is PAI?', slug: 'user/what-is-pai' },
 								{ label: 'Your AI Remembers', slug: 'user/memory' },
@@ -85,14 +85,14 @@ export default defineConfig({
 							],
 						},
 						{
-							label: 'Get Started',
+							label: 'Tutorials',
 							items: [
 								{ label: 'Install PAI', slug: 'user/install-pai' },
 								{ label: 'Your First Session', slug: 'user/first-session' },
 							],
 						},
 						{
-							label: 'Guides',
+							label: 'How-to Guides',
 							items: [
 								{ label: 'Give Feedback', slug: 'user/giving-feedback' },
 								{ label: 'Work With Skills', slug: 'user/working-with-skills' },
@@ -111,19 +111,19 @@ export default defineConfig({
 					label: 'Power User \u2014 Customise PAI',
 					items: [
 						{
-							label: 'Understand',
+							label: 'Explanation',
 							items: [
 								{ label: 'How Customisation Works', slug: 'power-user/how-customization-works' },
 							],
 						},
 						{
-							label: 'Get Started',
+							label: 'Tutorials',
 							items: [
 								{ label: 'Customise Your AI', slug: 'power-user/customize-your-ai' },
 							],
 						},
 						{
-							label: 'Guides',
+							label: 'How-to Guides',
 							items: [
 								{ label: 'Configure Skills', slug: 'power-user/configure-skills' },
 							],
@@ -141,20 +141,20 @@ export default defineConfig({
 					label: 'Developer \u2014 Extend PAI',
 					items: [
 						{
-							label: 'Understand',
+							label: 'Explanation',
 							items: [
 								{ label: 'The Extension Model', slug: 'developer/extension-model' },
 							],
 						},
 						{
-							label: 'Get Started',
+							label: 'Tutorials',
 							items: [
 								{ label: 'Your First Skill', slug: 'developer/first-skill' },
 								{ label: 'Your First Hook', slug: 'developer/first-hook' },
 							],
 						},
 						{
-							label: 'Guides',
+							label: 'How-to Guides',
 							items: [
 								{ label: 'Write Hooks', slug: 'developer/write-hooks' },
 								{ label: 'Manage Memory', slug: 'developer/manage-memory' },
@@ -177,7 +177,7 @@ export default defineConfig({
 					label: 'Contributor \u2014 Improve PAI',
 					items: [
 						{
-							label: 'Understand',
+							label: 'Explanation',
 							items: [
 								{ label: 'System Architecture', slug: 'contributor/architecture' },
 								{ label: 'The Algorithm', slug: 'contributor/the-algorithm' },
@@ -187,7 +187,7 @@ export default defineConfig({
 							],
 						},
 						{
-							label: 'Guides',
+							label: 'How-to Guides',
 							items: [
 								{ label: 'Upgrade PAI', slug: 'contributor/upgrade-pai' },
 							],
