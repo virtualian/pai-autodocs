@@ -28,7 +28,7 @@ export default defineConfig({
 							if (!document.querySelector('.pai-banner')) {
 								const banner = document.createElement('div');
 								banner.className = 'pai-banner';
-								banner.innerHTML = 'Docs for <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">PAI</a> v3.0 (Algorithm v1.5.0) by <strong>Daniel Miessler</strong> — AI-generated and community-maintained.';
+								banner.innerHTML = '<strong><a href="https://github.com/danielmiessler">Daniel Miessler</a></strong>\\'s <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">PAI</a> v3.0 — AI-generated docs · <a href="/about/">About this site</a>';
 								document.body.prepend(banner);
 							}
 						});
@@ -72,61 +72,79 @@ export default defineConfig({
 				},
 			],
 			sidebar: [
+				// ── User: Use PAI ──
 				{
-					label: 'Getting Started',
+					label: 'User — Use PAI',
 					items: [
-						{ label: 'What is PAI?', slug: 'getting-started/what-is-pai' },
-						{ label: 'Install PAI', slug: 'getting-started/install-pai' },
-						{ label: 'First Session', slug: 'getting-started/first-session' },
+						// Explanation
+						{ label: 'What is PAI?', slug: 'user/what-is-pai' },
+						{ label: 'How PAI Remembers', slug: 'user/memory' },
+						{ label: 'How PAI Improves', slug: 'user/self-improvement' },
+						// Tutorial
+						{ label: 'Install PAI', slug: 'user/install-pai' },
+						{ label: 'Your First Session', slug: 'user/first-session' },
+						// How-to
+						{ label: 'Give Feedback', slug: 'user/giving-feedback' },
+						{ label: 'Work With Skills', slug: 'user/working-with-skills' },
+						// Reference
+						{ label: 'Skills Catalog', slug: 'user/skills-catalog' },
 					],
 				},
+				// ── Power User: Customise PAI ──
 				{
-					label: 'Using PAI',
+					label: 'Power User — Customise PAI',
 					items: [
-						{ label: 'Your AI Remembers', slug: 'using-pai/memory' },
-						{ label: 'Your AI Gets Better', slug: 'using-pai/self-improvement' },
-						{ label: 'Working With Skills', slug: 'using-pai/working-with-skills' },
-						{ label: 'Giving Feedback', slug: 'using-pai/giving-feedback' },
-						{ label: 'Skills Catalog', slug: 'using-pai/skills-catalog' },
+						// Tutorial
+						{ label: 'Customise Your AI', slug: 'power-user/customize-your-ai' },
+						// How-to
+						{ label: 'Configure Skills', slug: 'power-user/configure-skills' },
+						// Reference
+						{ label: 'Configuration Reference', slug: 'power-user/configuration' },
 					],
 				},
+				// ── Developer: Extend PAI ──
 				{
-					label: 'Customizing PAI',
+					label: 'Developer — Extend PAI',
 					items: [
-						{ label: 'Customize Your AI', slug: 'customizing/customize-your-ai' },
-						{ label: 'Configure Skills', slug: 'customizing/configure-skills' },
-						{ label: 'Configuration Reference', slug: 'customizing/configuration' },
+						// Tutorial
+						{ label: 'Your First Skill', slug: 'developer/first-skill' },
+						{ label: 'Your First Hook', slug: 'developer/first-hook' },
+						// How-to
+						{ label: 'Write Hooks', slug: 'developer/write-hooks' },
+						{ label: 'Manage Memory', slug: 'developer/manage-memory' },
+						{ label: 'Set Up Agents', slug: 'developer/set-up-agents' },
+						// Reference
+						{ label: 'Algorithm Reference', slug: 'developer/algorithm' },
+						{ label: 'Hook Types', slug: 'developer/hook-types' },
+						{ label: 'Agent Types', slug: 'developer/agent-types' },
+						{ label: 'Tools Reference', slug: 'developer/tools-reference' },
 					],
 				},
+				// ── Contributor: Improve PAI ──
 				{
-					label: 'Developing PAI',
+					label: 'Contributor — Improve PAI',
 					items: [
-						{ label: 'Your First Skill', slug: 'developing/first-skill' },
-						{ label: 'Your First Hook', slug: 'developing/first-hook' },
-						{ label: 'Write Hooks', slug: 'developing/write-hooks' },
-						{ label: 'Manage Memory', slug: 'developing/manage-memory' },
-						{ label: 'Set Up Agents', slug: 'developing/set-up-agents' },
-						{ label: 'Algorithm Reference', slug: 'developing/algorithm' },
-						{ label: 'Hook Types', slug: 'developing/hook-types' },
-						{ label: 'Agent Types', slug: 'developing/agent-types' },
-						{ label: 'Tools Reference', slug: 'developing/tools-reference' },
-						{ label: 'Architecture', slug: 'developing/architecture' },
-						{ label: 'The Algorithm', slug: 'developing/the-algorithm' },
-						{ label: 'CLI-First Design', slug: 'developing/cli-first' },
-						{ label: 'SYSTEM/USER Model', slug: 'developing/system-user-model' },
-						{ label: 'Memory and Learning', slug: 'developing/memory-and-learning' },
+						// Explanation
+						{ label: 'System Architecture', slug: 'contributor/architecture' },
+						{ label: 'The Algorithm', slug: 'contributor/the-algorithm' },
+						{ label: 'Memory & Learning', slug: 'contributor/memory-and-learning' },
+						{ label: 'CLI-First Design', slug: 'contributor/cli-first' },
+						{ label: 'SYSTEM/USER Model', slug: 'contributor/system-user-model' },
+						// How-to
+						{ label: 'Upgrade PAI', slug: 'contributor/upgrade-pai' },
 					],
 				},
-				{
-					label: 'Contributing',
-					items: [
-						{ label: 'Upgrade PAI', slug: 'contributing/upgrade-pai' },
-					],
-				},
+				// ── Site ──
 				{
 					label: 'Changelog',
 					items: [
 						{ label: 'Changelog', slug: 'changelog' },
+					],
+				},
+				{
+					label: 'About',
+					items: [
+						{ label: 'About This Site', slug: 'about' },
 					],
 				},
 			],
