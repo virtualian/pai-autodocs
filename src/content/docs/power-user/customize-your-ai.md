@@ -127,7 +127,7 @@ Personal journaling system for daily reflection.
 - WeeklyReview: Summarize the past week
 ```
 
-Your private skill loads alongside all other skills at session start. For a full walkthrough of building skills, see [Build Your First Skill](/developing/first-skill/).
+Your private skill loads alongside all other skills at session start. For a full walkthrough of building skills, see [Build Your First Skill](/developer/first-skill/).
 
 ---
 
@@ -151,6 +151,6 @@ If something is not working, check for typos in file paths and make sure you res
 
 ## What to read next
 
-- [Configure Skills](/customizing/configure-skills/) -- manage which skills are active
-- [Configuration Reference](/customizing/configuration/) -- complete list of all config files
-- [Build Your First Skill](/developing/first-skill/) -- full tutorial on creating skills from scratch
+- [Configure Skills](/power-user/configure-skills/) -- manage which skills are active
+- [Configuration Reference](/power-user/configuration/) -- complete list of all config files
+- [Build Your First Skill](/developer/first-skill/) -- full tutorial on creating skills from scratch

@@ -24,7 +24,7 @@ In this tutorial, you will build a complete PAI skill from scratch. You will cre
 Before starting this tutorial, you need:
 
 - **PAI installed and working** -- you should be able to run `pai` and see the Algorithm header
-- **Completed the [getting started tutorial](/getting-started/first-session/)** -- you understand the Algorithm phases
+- **Completed the [getting started tutorial](/user/first-session/)** -- you understand the Algorithm phases
 - **A text editor** for creating files (or you can ask PAI to create them for you)
 - **Basic familiarity with Markdown** syntax
 

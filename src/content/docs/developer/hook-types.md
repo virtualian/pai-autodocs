@@ -209,6 +209,6 @@ PreCompact is useful for persisting critical state before context compression. I
 
 ## What to read next
 
-- [Write Hooks](/developing/write-hooks/) -- How-to guide for creating and registering hooks
-- [Write Your First Hook](/developing/first-hook/) -- Step-by-step tutorial for building your first hook
-- [Architecture](/developing/architecture/) -- How hooks fit into the broader PAI system
+- [Write Hooks](/developer/write-hooks/) -- How-to guide for creating and registering hooks
+- [Write Your First Hook](/developer/first-hook/) -- Step-by-step tutorial for building your first hook
+- [Architecture](/contributor/architecture/) -- How hooks fit into the broader PAI system

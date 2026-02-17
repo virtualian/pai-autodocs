@@ -77,6 +77,6 @@ It just works. Use PAI, and it remembers.
 
 ## What to read next
 
-- [Your AI Gets Better](/using-pai/self-improvement/) -- how feedback drives continuous improvement
-- [Working With Skills](/using-pai/working-with-skills/) -- what your AI can do
-- [Giving Feedback](/using-pai/giving-feedback/) -- how to help PAI learn faster
+- [Your AI Gets Better](/user/self-improvement/) -- how feedback drives continuous improvement
+- [Working With Skills](/user/working-with-skills/) -- what your AI can do
+- [Giving Feedback](/user/giving-feedback/) -- how to help PAI learn faster

@@ -96,5 +96,5 @@ This catalog is organized by the kind of work you are trying to do, with example
 
 ## What to read next
 
-- **[Working with Skills](/using-pai/working-with-skills/)** -- Learn how to get the most out of skills with tips on prompting and combining them.
-- **[Configure Skills](/customizing/configure-skills/)** -- Customize skill behavior and create your own personal skills.
+- **[Working with Skills](/user/working-with-skills/)** -- Learn how to get the most out of skills with tips on prompting and combining them.
+- **[Configure Skills](/power-user/configure-skills/)** -- Customize skill behavior and create your own personal skills.

@@ -244,6 +244,6 @@ Each layer builds on the previous. Code is the foundation. CLI makes code access
 
 ## What to read next
 
-- [Tools Reference](/developing/tools-reference/) -- Inventory of all CLI tools in PAI
-- [Architecture](/developing/architecture/) -- How CLI-first fits into the broader system
-- [Build Your First Skill](/developing/first-skill/) -- Create a skill that uses the CLI-first pattern
+- [Tools Reference](/developer/tools-reference/) -- Inventory of all CLI tools in PAI
+- [Architecture](/contributor/architecture/) -- How CLI-first fits into the broader system
+- [Build Your First Skill](/developer/first-skill/) -- Create a skill that uses the CLI-first pattern

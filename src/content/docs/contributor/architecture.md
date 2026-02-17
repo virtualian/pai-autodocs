@@ -41,7 +41,7 @@ At the highest level, PAI has four layers:
 
 The Algorithm is the gravitational center of PAI. It is a universal cycle for moving from current state to ideal state through verifiable iteration. Every response, every task, every interaction passes through the Algorithm. The only variable is depth — how many criteria, how many phases are expanded, how deep the verification goes.
 
-The Algorithm is covered in full detail in [The Algorithm](/developing/the-algorithm/).
+The Algorithm is covered in full detail in [The Algorithm](/contributor/the-algorithm/).
 
 ### Skills
 
@@ -323,5 +323,5 @@ The system can update its own documentation, modify skill files, create new tool
 
 ## What to read next
 
-- [The Algorithm](/developing/the-algorithm/) — Deep dive into the universal problem-solving loop
-- [What is PAI?](/getting-started/what-is-pai/) — The philosophy and motivation behind PAI
+- [The Algorithm](/contributor/the-algorithm/) — Deep dive into the universal problem-solving loop
+- [What is PAI?](/user/what-is-pai/) — The philosophy and motivation behind PAI

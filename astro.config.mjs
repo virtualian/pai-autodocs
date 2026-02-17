@@ -28,7 +28,7 @@ export default defineConfig({
 							if (!document.querySelector('.pai-banner')) {
 								const banner = document.createElement('div');
 								banner.className = 'pai-banner';
-								banner.innerHTML = '<strong><a href="https://github.com/danielmiessler">Daniel Miessler</a></strong>\\'s <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">PAI</a> v3.0 — AI-generated docs · <a href="/about/">About this site</a>';
+								banner.innerHTML = '<strong><a href="https://github.com/danielmiessler">Daniel Miessler</a></strong>\\'s <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">PAI</a> v3.0 \\u2014 AI-generated docs \\u00b7 <a href="/about/">About this site</a>';
 								document.body.prepend(banner);
 							}
 						});
@@ -38,7 +38,7 @@ export default defineConfig({
 					tag: 'meta',
 					attrs: {
 						property: 'og:title',
-						content: 'PAI Auto-Docs — AI-Generated Documentation for Personal AI Infrastructure',
+						content: 'PAI Auto-Docs \u2014 AI-Generated Documentation for Personal AI Infrastructure',
 					},
 				},
 				{
@@ -74,64 +74,124 @@ export default defineConfig({
 			sidebar: [
 				// ── User: Use PAI ──
 				{
-					label: 'User — Use PAI',
+					label: 'User \u2014 Use PAI',
 					items: [
-						// Explanation
-						{ label: 'What is PAI?', slug: 'user/what-is-pai' },
-						{ label: 'How PAI Remembers', slug: 'user/memory' },
-						{ label: 'How PAI Improves', slug: 'user/self-improvement' },
-						// Tutorial
-						{ label: 'Install PAI', slug: 'user/install-pai' },
-						{ label: 'Your First Session', slug: 'user/first-session' },
-						// How-to
-						{ label: 'Give Feedback', slug: 'user/giving-feedback' },
-						{ label: 'Work With Skills', slug: 'user/working-with-skills' },
-						// Reference
-						{ label: 'Skills Catalog', slug: 'user/skills-catalog' },
+						{
+							label: 'Understand',
+							items: [
+								{ label: 'What is PAI?', slug: 'user/what-is-pai' },
+								{ label: 'Your AI Remembers', slug: 'user/memory' },
+								{ label: 'Your AI Gets Better', slug: 'user/self-improvement' },
+							],
+						},
+						{
+							label: 'Get Started',
+							items: [
+								{ label: 'Install PAI', slug: 'user/install-pai' },
+								{ label: 'Your First Session', slug: 'user/first-session' },
+							],
+						},
+						{
+							label: 'Guides',
+							items: [
+								{ label: 'Give Feedback', slug: 'user/giving-feedback' },
+								{ label: 'Work With Skills', slug: 'user/working-with-skills' },
+							],
+						},
+						{
+							label: 'Reference',
+							items: [
+								{ label: 'Skills Catalog', slug: 'user/skills-catalog' },
+							],
+						},
 					],
 				},
 				// ── Power User: Customise PAI ──
 				{
-					label: 'Power User — Customise PAI',
+					label: 'Power User \u2014 Customise PAI',
 					items: [
-						// Tutorial
-						{ label: 'Customise Your AI', slug: 'power-user/customize-your-ai' },
-						// How-to
-						{ label: 'Configure Skills', slug: 'power-user/configure-skills' },
-						// Reference
-						{ label: 'Configuration Reference', slug: 'power-user/configuration' },
+						{
+							label: 'Understand',
+							items: [
+								{ label: 'How Customisation Works', slug: 'power-user/how-customization-works' },
+							],
+						},
+						{
+							label: 'Get Started',
+							items: [
+								{ label: 'Customise Your AI', slug: 'power-user/customize-your-ai' },
+							],
+						},
+						{
+							label: 'Guides',
+							items: [
+								{ label: 'Configure Skills', slug: 'power-user/configure-skills' },
+							],
+						},
+						{
+							label: 'Reference',
+							items: [
+								{ label: 'Configuration Reference', slug: 'power-user/configuration' },
+							],
+						},
 					],
 				},
 				// ── Developer: Extend PAI ──
 				{
-					label: 'Developer — Extend PAI',
+					label: 'Developer \u2014 Extend PAI',
 					items: [
-						// Tutorial
-						{ label: 'Your First Skill', slug: 'developer/first-skill' },
-						{ label: 'Your First Hook', slug: 'developer/first-hook' },
-						// How-to
-						{ label: 'Write Hooks', slug: 'developer/write-hooks' },
-						{ label: 'Manage Memory', slug: 'developer/manage-memory' },
-						{ label: 'Set Up Agents', slug: 'developer/set-up-agents' },
-						// Reference
-						{ label: 'Algorithm Reference', slug: 'developer/algorithm' },
-						{ label: 'Hook Types', slug: 'developer/hook-types' },
-						{ label: 'Agent Types', slug: 'developer/agent-types' },
-						{ label: 'Tools Reference', slug: 'developer/tools-reference' },
+						{
+							label: 'Understand',
+							items: [
+								{ label: 'The Extension Model', slug: 'developer/extension-model' },
+							],
+						},
+						{
+							label: 'Get Started',
+							items: [
+								{ label: 'Your First Skill', slug: 'developer/first-skill' },
+								{ label: 'Your First Hook', slug: 'developer/first-hook' },
+							],
+						},
+						{
+							label: 'Guides',
+							items: [
+								{ label: 'Write Hooks', slug: 'developer/write-hooks' },
+								{ label: 'Manage Memory', slug: 'developer/manage-memory' },
+								{ label: 'Set Up Agents', slug: 'developer/set-up-agents' },
+							],
+						},
+						{
+							label: 'Reference',
+							items: [
+								{ label: 'Algorithm Reference', slug: 'developer/algorithm' },
+								{ label: 'Hook Types', slug: 'developer/hook-types' },
+								{ label: 'Agent Types', slug: 'developer/agent-types' },
+								{ label: 'Tools Reference', slug: 'developer/tools-reference' },
+							],
+						},
 					],
 				},
 				// ── Contributor: Improve PAI ──
 				{
-					label: 'Contributor — Improve PAI',
+					label: 'Contributor \u2014 Improve PAI',
 					items: [
-						// Explanation
-						{ label: 'System Architecture', slug: 'contributor/architecture' },
-						{ label: 'The Algorithm', slug: 'contributor/the-algorithm' },
-						{ label: 'Memory & Learning', slug: 'contributor/memory-and-learning' },
-						{ label: 'CLI-First Design', slug: 'contributor/cli-first' },
-						{ label: 'SYSTEM/USER Model', slug: 'contributor/system-user-model' },
-						// How-to
-						{ label: 'Upgrade PAI', slug: 'contributor/upgrade-pai' },
+						{
+							label: 'Understand',
+							items: [
+								{ label: 'System Architecture', slug: 'contributor/architecture' },
+								{ label: 'The Algorithm', slug: 'contributor/the-algorithm' },
+								{ label: 'Memory & Learning', slug: 'contributor/memory-and-learning' },
+								{ label: 'CLI-First Design', slug: 'contributor/cli-first' },
+								{ label: 'SYSTEM/USER Model', slug: 'contributor/system-user-model' },
+							],
+						},
+						{
+							label: 'Guides',
+							items: [
+								{ label: 'Upgrade PAI', slug: 'contributor/upgrade-pai' },
+							],
+						},
 					],
 				},
 				// ── Site ──

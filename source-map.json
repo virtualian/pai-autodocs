@@ -17,6 +17,7 @@
     "SYSTEM/PAISYSTEMARCHITECTURE.md": [
       "user/what-is-pai",
       "user/first-session",
+      "power-user/how-customization-works",
       "developer/algorithm",
       "contributor/architecture",
       "contributor/the-algorithm",
@@ -35,14 +36,17 @@
       "user/working-with-skills",
       "user/skills-catalog",
       "power-user/configure-skills",
+      "developer/extension-model",
       "developer/first-skill"
     ],
     "SYSTEM/THEHOOKSYSTEM.md": [
+      "developer/extension-model",
       "developer/first-hook",
       "developer/write-hooks",
       "developer/hook-types"
     ],
     "SYSTEM/PAIAGENTSYSTEM.md": [
+      "developer/extension-model",
       "developer/set-up-agents",
       "developer/agent-types"
     ],
@@ -63,6 +67,7 @@
       "developer/tools-reference"
     ],
     "settings.json": [
+      "power-user/how-customization-works",
       "power-user/customize-your-ai",
       "power-user/configuration",
       "developer/write-hooks",
@@ -84,9 +89,11 @@
     "user/working-with-skills": ["SKILL.md", "SYSTEM/SKILLSYSTEM.md"],
     "user/giving-feedback": ["SKILL.md", "SYSTEM/MEMORYSYSTEM.md"],
     "user/skills-catalog": ["SYSTEM/SKILLSYSTEM.md"],
+    "power-user/how-customization-works": ["SYSTEM/PAISYSTEMARCHITECTURE.md", "settings.json"],
     "power-user/customize-your-ai": ["settings.json"],
     "power-user/configure-skills": ["SYSTEM/SKILLSYSTEM.md"],
     "power-user/configuration": ["settings.json", "SYSTEM/MEMORYSYSTEM.md"],
+    "developer/extension-model": ["SYSTEM/SKILLSYSTEM.md", "SYSTEM/THEHOOKSYSTEM.md", "SYSTEM/PAIAGENTSYSTEM.md"],
     "developer/first-skill": ["SKILL.md", "SYSTEM/SKILLSYSTEM.md"],
     "developer/first-hook": ["SYSTEM/THEHOOKSYSTEM.md"],
     "developer/write-hooks": ["SYSTEM/THEHOOKSYSTEM.md", "settings.json"],

@@ -155,6 +155,6 @@ The system you use on day one is good. The system you use on day ninety is yours
 
 ## What to read next
 
-- [Your AI Gets Better](/using-pai/self-improvement/) -- the full picture of PAI's learning and improvement system
-- [Working With Skills](/using-pai/working-with-skills/) -- how skills improve based on your feedback
-- [Skills Catalog](/using-pai/skills-catalog/) -- explore all the capabilities you can rate and improve
+- [Your AI Gets Better](/user/self-improvement/) -- the full picture of PAI's learning and improvement system
+- [Working With Skills](/user/working-with-skills/) -- how skills improve based on your feedback
+- [Skills Catalog](/user/skills-catalog/) -- explore all the capabilities you can rate and improve

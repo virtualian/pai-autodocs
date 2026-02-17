@@ -236,6 +236,6 @@ The hook system is how PAI automates behavior around your sessions. The built-in
 
 ## Next steps
 
-- **[Write Hooks](/developing/write-hooks/)** — Detailed how-to for creating hooks with matchers, timeouts, and background processes
-- **[Hook Types Reference](/developing/hook-types/)** — Complete reference for all hook events and their data payloads
+- **[Write Hooks](/developer/write-hooks/)** — Detailed how-to for creating hooks with matchers, timeouts, and background processes
+- **[Hook Types Reference](/developer/hook-types/)** — Complete reference for all hook events and their data payloads
 - **Explore built-in hooks** — Read the scripts in `~/.claude/hooks/` to see production hook patterns

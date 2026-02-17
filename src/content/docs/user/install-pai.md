@@ -225,6 +225,6 @@ Then open `http://localhost:1337` in your browser.
 With PAI installed, you are ready to:
 
 - **Start using PAI**: Run `pai` to launch your Digital Assistant
-- **Configure skills**: See [Configure Skills](/customizing/configure-skills/) to customize how PAI works for you
+- **Configure skills**: See [Configure Skills](/power-user/configure-skills/) to customize how PAI works for you
 - **Set up your TELOS**: Define your goals, mission, and preferences in `~/.claude/skills/PAI/USER/`
 - **Explore the skill library**: PAI ships with 38 skills covering research, development, content creation, security analysis, and more

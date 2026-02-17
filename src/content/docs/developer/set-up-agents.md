@@ -218,6 +218,6 @@ Task subagents (generic types like Intern, Engineer) use the default system voic
 
 ## What to read next
 
-- [Agent Types Reference](/developing/agent-types/) -- Complete reference for all agent types, named agents, and custom agents
-- [Tools Reference](/developing/tools-reference/) -- CLI tools that agents use during execution
-- [The Algorithm](/developing/the-algorithm/) -- How the Algorithm governs agent selection and execution
+- [Agent Types Reference](/developer/agent-types/) -- Complete reference for all agent types, named agents, and custom agents
+- [Tools Reference](/developer/tools-reference/) -- CLI tools that agents use during execution
+- [The Algorithm](/contributor/the-algorithm/) -- How the Algorithm governs agent selection and execution
