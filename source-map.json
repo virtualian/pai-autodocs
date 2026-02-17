@@ -1,0 +1,106 @@
+{
+  "$schema": "Source mapping: PAI repo files -> doc pages they feed into",
+  "$docs": "When a PAI source file changes, the mapped doc pages get regenerated",
+  "mappings": {
+    "SKILL.md": [
+      "getting-started/what-is-pai",
+      "getting-started/first-session",
+      "using-pai/self-improvement",
+      "using-pai/working-with-skills",
+      "using-pai/giving-feedback",
+      "developing/first-skill",
+      "developing/set-up-agents",
+      "developing/algorithm",
+      "developing/architecture",
+      "developing/the-algorithm"
+    ],
+    "SYSTEM/PAISYSTEMARCHITECTURE.md": [
+      "getting-started/what-is-pai",
+      "getting-started/first-session",
+      "developing/algorithm",
+      "developing/architecture",
+      "developing/the-algorithm",
+      "developing/cli-first",
+      "developing/system-user-model"
+    ],
+    "SYSTEM/MEMORYSYSTEM.md": [
+      "using-pai/memory",
+      "using-pai/self-improvement",
+      "using-pai/giving-feedback",
+      "customizing/configuration",
+      "developing/manage-memory",
+      "developing/memory-and-learning"
+    ],
+    "SYSTEM/SKILLSYSTEM.md": [
+      "using-pai/working-with-skills",
+      "using-pai/skills-catalog",
+      "customizing/configure-skills",
+      "developing/first-skill"
+    ],
+    "SYSTEM/THEHOOKSYSTEM.md": [
+      "developing/first-hook",
+      "developing/write-hooks",
+      "developing/hook-types"
+    ],
+    "SYSTEM/PAIAGENTSYSTEM.md": [
+      "developing/set-up-agents",
+      "developing/agent-types"
+    ],
+    "SYSTEM/THEDELEGATIONSYSTEM.md": [
+      "developing/set-up-agents",
+      "developing/agent-types"
+    ],
+    "SYSTEM/BROWSERAUTOMATION.md": [
+      "developing/tools-reference"
+    ],
+    "SYSTEM/CLIFIRSTARCHITECTURE.md": [
+      "developing/cli-first"
+    ],
+    "SYSTEM/THENOTIFICATIONSYSTEM.md": [
+      "developing/tools-reference"
+    ],
+    "SYSTEM/TOOLS.md": [
+      "developing/tools-reference"
+    ],
+    "settings.json": [
+      "customizing/customize-your-ai",
+      "customizing/configuration",
+      "developing/write-hooks",
+      "developing/hook-types",
+      "contributing/upgrade-pai"
+    ],
+    "README.md": [
+      "getting-started/install-pai",
+      "developing/architecture"
+    ]
+  },
+  "reverse": {
+    "$docs": "Auto-generated reverse index: doc page -> PAI source files that feed it. Used by the regeneration script to know which sources to fetch for a given page.",
+    "getting-started/what-is-pai": ["SKILL.md", "SYSTEM/PAISYSTEMARCHITECTURE.md"],
+    "getting-started/install-pai": ["README.md"],
+    "getting-started/first-session": ["SKILL.md", "SYSTEM/PAISYSTEMARCHITECTURE.md"],
+    "using-pai/memory": ["SYSTEM/MEMORYSYSTEM.md"],
+    "using-pai/self-improvement": ["SKILL.md", "SYSTEM/MEMORYSYSTEM.md"],
+    "using-pai/working-with-skills": ["SKILL.md", "SYSTEM/SKILLSYSTEM.md"],
+    "using-pai/giving-feedback": ["SKILL.md", "SYSTEM/MEMORYSYSTEM.md"],
+    "using-pai/skills-catalog": ["SYSTEM/SKILLSYSTEM.md"],
+    "customizing/customize-your-ai": ["settings.json"],
+    "customizing/configure-skills": ["SYSTEM/SKILLSYSTEM.md"],
+    "customizing/configuration": ["settings.json", "SYSTEM/MEMORYSYSTEM.md"],
+    "developing/first-skill": ["SKILL.md", "SYSTEM/SKILLSYSTEM.md"],
+    "developing/first-hook": ["SYSTEM/THEHOOKSYSTEM.md"],
+    "developing/write-hooks": ["SYSTEM/THEHOOKSYSTEM.md", "settings.json"],
+    "developing/manage-memory": ["SYSTEM/MEMORYSYSTEM.md"],
+    "developing/set-up-agents": ["SYSTEM/PAIAGENTSYSTEM.md", "SYSTEM/THEDELEGATIONSYSTEM.md"],
+    "developing/algorithm": ["SKILL.md", "SYSTEM/PAISYSTEMARCHITECTURE.md"],
+    "developing/hook-types": ["SYSTEM/THEHOOKSYSTEM.md", "settings.json"],
+    "developing/agent-types": ["SYSTEM/PAIAGENTSYSTEM.md", "SYSTEM/THEDELEGATIONSYSTEM.md"],
+    "developing/tools-reference": ["SYSTEM/TOOLS.md", "SYSTEM/BROWSERAUTOMATION.md", "SYSTEM/THENOTIFICATIONSYSTEM.md"],
+    "developing/architecture": ["SKILL.md", "SYSTEM/PAISYSTEMARCHITECTURE.md", "README.md"],
+    "developing/the-algorithm": ["SKILL.md", "SYSTEM/PAISYSTEMARCHITECTURE.md"],
+    "developing/cli-first": ["SYSTEM/CLIFIRSTARCHITECTURE.md", "SYSTEM/PAISYSTEMARCHITECTURE.md"],
+    "developing/system-user-model": ["SYSTEM/PAISYSTEMARCHITECTURE.md"],
+    "developing/memory-and-learning": ["SYSTEM/MEMORYSYSTEM.md"],
+    "contributing/upgrade-pai": ["settings.json"]
+  }
+}

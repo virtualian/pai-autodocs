@@ -1,0 +1,118 @@
+name: Regenerate Docs from PAI Source
+
+on:
+  workflow_dispatch:
+    inputs:
+      pai_sha:
+        description: 'PAI commit SHA to generate from'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get previous SHA
+        id: prev
+        run: |
+          if [ -f .last-pai-sha ]; then
+            # Read the SHA that was stored BEFORE the watcher updated it
+            # The watcher already committed the new SHA, so we need the parent commit's version
+            PREV=$(git show HEAD~1:.last-pai-sha 2>/dev/null || echo "none")
+            echo "sha=$PREV" >> $GITHUB_OUTPUT
+          else
+            echo "sha=none" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Regenerate affected pages
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          node scripts/regenerate.mjs \
+            --pai-sha ${{ inputs.pai_sha }} \
+            --prev-sha ${{ steps.prev.outputs.sha }}
+
+      - name: Read regeneration result
+        id: result
+        run: |
+          if [ -f .regeneration-result.json ]; then
+            PAGES=$(jq -r '.pagesWritten' .regeneration-result.json)
+            PAGE_LIST=$(jq -r '.pages | join(", ")' .regeneration-result.json)
+            echo "pages_written=$PAGES" >> $GITHUB_OUTPUT
+            echo "page_list=$PAGE_LIST" >> $GITHUB_OUTPUT
+          else
+            echo "pages_written=0" >> $GITHUB_OUTPUT
+            echo "page_list=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Bump patch version
+        if: steps.result.outputs.pages_written != '0'
+        run: |
+          # Bump patch version in package.json
+          CURRENT=$(jq -r '.version' package.json)
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
+          NEW_PATCH=$((PATCH + 1))
+          NEW_VERSION="$MAJOR.$MINOR.$NEW_PATCH"
+          jq ".version = \"$NEW_VERSION\"" package.json > package.json.tmp
+          mv package.json.tmp package.json
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo "Bumped version: $CURRENT -> $NEW_VERSION"
+
+      - name: Update changelog
+        if: steps.result.outputs.pages_written != '0'
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          SHORT_SHA=$(echo "${{ inputs.pai_sha }}" | cut -c1-7)
+          PAGES="${{ steps.result.outputs.page_list }}"
+          ENTRY="## v${NEW_VERSION} — ${DATE}\n\n**PAI version:** [${SHORT_SHA}](https://github.com/danielmiessler/Personal_AI_Infrastructure/commit/${{ inputs.pai_sha }})\n\n### Regenerated\n\n- Pages updated: ${PAGES}\n- Triggered by upstream PAI changes\n"
+
+          # Insert after the frontmatter separator (after the second ---)
+          # Find line number of the first ## heading and insert before it
+          CHANGELOG="src/content/docs/changelog.md"
+          FIRST_HEADING=$(grep -n "^## " "$CHANGELOG" | head -1 | cut -d: -f1)
+          if [ -n "$FIRST_HEADING" ]; then
+            head -n $((FIRST_HEADING - 1)) "$CHANGELOG" > changelog.tmp
+            echo -e "$ENTRY" >> changelog.tmp
+            tail -n +$FIRST_HEADING "$CHANGELOG" >> changelog.tmp
+            mv changelog.tmp "$CHANGELOG"
+          fi
+
+      - name: Update footer version
+        if: steps.result.outputs.pages_written != '0'
+        run: |
+          # Update version in Footer.astro
+          sed -i "s/Site v[0-9]*\.[0-9]*\.[0-9]*/Site v${NEW_VERSION}/" src/components/Footer.astro
+
+      - name: Verify build
+        if: steps.result.outputs.pages_written != '0'
+        run: npm run build
+
+      - name: Commit and push
+        if: steps.result.outputs.pages_written != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "docs: regenerate ${steps.result.outputs.pages_written} pages from PAI ${inputs.pai_sha:0:7}
+
+          Pages updated: ${{ steps.result.outputs.page_list }}
+          PAI SHA: ${{ inputs.pai_sha }}"
+          git push
+
+      - name: Clean up
+        if: always()
+        run: rm -f .regeneration-result.json
