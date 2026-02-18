@@ -1,6 +1,6 @@
 ---
 title: Configure Skills
-description: How to list, invoke, customize, and manage PAI skills.
+description: Control which skills are active and customise how they behave so PAI does exactly what you need.
 sidebar:
   order: 2
 ---

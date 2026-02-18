@@ -35,7 +35,7 @@ export default defineConfig({
 					content: `
 						document.addEventListener('DOMContentLoaded', () => {
 							var path = window.location.pathname.replace(/^\\/|\\/$|^\\/pai-autodocs\\//g, '');
-							if (!path || path === 'about' || path === 'changelog') return;
+							if (!path || path === 'about' || path === 'changelog' || path.endsWith('/overview')) return;
 
 							var sourceMap = {
 								'user/what-is-pai': ['SKILL.md', 'SYSTEM/PAISYSTEMARCHITECTURE.md'],
@@ -180,6 +180,7 @@ export default defineConfig({
 				{
 					label: 'User \u2014 Use PAI',
 					items: [
+						{ label: 'Start Here', slug: 'user/overview' },
 						{
 							label: 'Explanation',
 							items: [
@@ -214,6 +215,7 @@ export default defineConfig({
 				{
 					label: 'Power User \u2014 Customise PAI',
 					items: [
+						{ label: 'Start Here', slug: 'power-user/overview' },
 						{
 							label: 'Explanation',
 							items: [
@@ -244,6 +246,7 @@ export default defineConfig({
 				{
 					label: 'Developer \u2014 Extend PAI',
 					items: [
+						{ label: 'Start Here', slug: 'developer/overview' },
 						{
 							label: 'Explanation',
 							items: [
@@ -280,6 +283,7 @@ export default defineConfig({
 				{
 					label: 'Contributor \u2014 Improve PAI',
 					items: [
+						{ label: 'Start Here', slug: 'contributor/overview' },
 						{
 							label: 'Explanation',
 							items: [

@@ -1,6 +1,6 @@
 ---
 title: The Algorithm
-description: Complete reference for the PAI Algorithm v0.2.25 specification including all phases, ISC criteria, thinking tools, capability selection, and composition patterns.
+description: The full Algorithm specification — phases, ISC criteria, capability selection, and composition patterns.
 sidebar:
   order: 10
 ---
@@ -542,3 +542,9 @@ Custom values are stored in `settings.json`:
 - **Composition Patterns** — 7 named patterns for combining capabilities.
 - **Execution Tiers** — Conceptual framework for recursive sub-algorithm execution.
 - **Hook Authority Rule** — Hook's depth classification is authoritative.
+
+## What to read next
+
+- **[The Extension Model](/developer/extension-model/)** — How skills, hooks, and agents compose on top of the Algorithm
+- **[Hook Types](/developer/hook-types/)** — Every hook event that the Algorithm triggers
+- **[The Algorithm (Contributor)](/contributor/the-algorithm/)** — Deeper explanation of the Algorithm's design philosophy

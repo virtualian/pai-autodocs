@@ -1,6 +1,6 @@
 ---
 title: Install PAI
-description: Step-by-step guide to installing Personal AI Infrastructure on your system.
+description: Get PAI running on your machine so you can start using a personal AI that knows you.
 sidebar:
   order: 2
 ---

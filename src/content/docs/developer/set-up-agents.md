@@ -1,6 +1,6 @@
 ---
 title: Set Up Agents
-description: Configure agent delegation, model selection, and parallel execution patterns.
+description: Delegate complex tasks to specialised agents so PAI can work in parallel on your behalf.
 sidebar:
   order: 5
 ---

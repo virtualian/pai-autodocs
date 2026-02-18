@@ -156,3 +156,9 @@ The `STATE/` directory contains ephemeral runtime data that rebuilds automatical
 | `RESEARCH/` | Agent output captures | AgentOutputCapture hook |
 | `SECURITY/` | Security audit events | SecurityValidator hook |
 | `STATE/` | Runtime state | Various hooks and tools |
+
+## What to read next
+
+- **[Write Hooks](/developer/write-hooks/)** — Create hooks that capture and process memory events
+- **[Memory and Learning](/contributor/memory-and-learning/)** — Deep dive into how the memory system works internally
+- **[Set Up Agents](/developer/set-up-agents/)** — Configure agents that use memory for context
