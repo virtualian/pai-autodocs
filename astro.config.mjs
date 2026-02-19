@@ -101,8 +101,8 @@ export default defineConfig({
 
 							var labels = {
 								'explanation': 'Explanation',
-								'tutorial': 'Tutorial',
-								'how-to': 'How-to Guide',
+								'tutorial': 'Tutorials',
+								'how-to': 'How-to',
 								'reference': 'Reference'
 							};
 
@@ -176,9 +176,9 @@ export default defineConfig({
 				},
 			],
 			sidebar: [
-				// ── User: Use PAI ──
+				// ── Users ──
 				{
-					label: 'User \u2014 Use PAI',
+					label: 'Users',
 					items: [
 						{ label: 'Start Here', slug: 'user/overview' },
 						{
@@ -197,7 +197,7 @@ export default defineConfig({
 							],
 						},
 						{
-							label: 'How-to Guides',
+							label: 'How-to',
 							items: [
 								{ label: 'Give Feedback', slug: 'user/giving-feedback' },
 								{ label: 'Work With Skills', slug: 'user/working-with-skills' },
@@ -211,9 +211,9 @@ export default defineConfig({
 						},
 					],
 				},
-				// ── Power User: Customise PAI ──
+				// ── Power-Users ──
 				{
-					label: 'Power User \u2014 Customise PAI',
+					label: 'Power-Users',
 					items: [
 						{ label: 'Start Here', slug: 'power-user/overview' },
 						{
@@ -229,7 +229,7 @@ export default defineConfig({
 							],
 						},
 						{
-							label: 'How-to Guides',
+							label: 'How-to',
 							items: [
 								{ label: 'Configure Skills', slug: 'power-user/configure-skills' },
 							],
@@ -242,9 +242,9 @@ export default defineConfig({
 						},
 					],
 				},
-				// ── Developer: Extend PAI ──
+				// ── Developers ──
 				{
-					label: 'Developer \u2014 Extend PAI',
+					label: 'Developers',
 					items: [
 						{ label: 'Start Here', slug: 'developer/overview' },
 						{
@@ -261,7 +261,7 @@ export default defineConfig({
 							],
 						},
 						{
-							label: 'How-to Guides',
+							label: 'How-to',
 							items: [
 								{ label: 'Write Hooks', slug: 'developer/write-hooks' },
 								{ label: 'Manage Memory', slug: 'developer/manage-memory' },
@@ -279,9 +279,9 @@ export default defineConfig({
 						},
 					],
 				},
-				// ── Contributor: Improve PAI ──
+				// ── Contributors ──
 				{
-					label: 'Contributor \u2014 Improve PAI',
+					label: 'Contributors',
 					items: [
 						{ label: 'Start Here', slug: 'contributor/overview' },
 						{
@@ -295,7 +295,7 @@ export default defineConfig({
 							],
 						},
 						{
-							label: 'How-to Guides',
+							label: 'How-to',
 							items: [
 								{ label: 'Upgrade PAI', slug: 'contributor/upgrade-pai' },
 							],
