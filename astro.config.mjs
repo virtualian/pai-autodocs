@@ -23,7 +23,7 @@ export default defineConfig({
 							if (!document.querySelector('.pai-banner')) {
 								const banner = document.createElement('div');
 								banner.className = 'pai-banner';
-								banner.innerHTML = '<strong><a href="https://github.com/danielmiessler">Daniel Miessler</a></strong>\\'s <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">PAI</a> \\u2014 Unofficial, AI-generated documentation \\u00b7 <a href="/about/">About this site</a>';
+								banner.innerHTML = '\\u25C6 <span class="pai-author"><a href="https://github.com/danielmiessler">Daniel Miessler</a></span>\\'s <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">PAI</a> \\u2014 Unofficial, AI-generated docs \\u00b7 <a href="/about/">About this site</a>';
 								document.body.prepend(banner);
 							}
 						});
@@ -132,6 +132,11 @@ export default defineConfig({
 									container.appendChild(a);
 								});
 								titleEl.parentNode.insertBefore(container, titleEl.nextSibling);
+
+								var synced = document.createElement('div');
+								synced.className = 'last-synced';
+								synced.textContent = 'Last synced from PAI: 20 Feb 2026';
+								container.parentNode.insertBefore(synced, container.nextSibling);
 							}
 						});
 					`,
