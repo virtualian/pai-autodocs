@@ -172,7 +172,7 @@ If you are not sure what PAI can do, just ask:
 - "What can you help me with?"
 - "Show me what you can do for security testing"
 
-PAI will describe its capabilities in plain language. For a complete list, see the [Skills Catalog](/using-pai/skills-catalog/).
+PAI will describe its capabilities in plain language. For a complete list, see the [Skills Catalog](/user/skills-catalog/).
 
 ## What to expect
 
@@ -211,6 +211,6 @@ You can also request custom skills for workflows specific to your work. If you h
 
 ## What to read next
 
-- [Skills Catalog](/using-pai/skills-catalog/) -- the full list of every built-in skill with descriptions and example prompts
-- [How PAI Improves Over Time](/using-pai/self-improvement/) -- how your usage and feedback make PAI better at helping you
-- [Giving Effective Feedback](/using-pai/giving-feedback/) -- how to rate outputs so PAI keeps improving
+- [Skills Catalog](/user/skills-catalog/) -- the full list of every built-in skill with descriptions and example prompts
+- [How PAI Improves Over Time](/user/self-improvement/) -- how your usage and feedback make PAI better at helping you
+- [Giving Effective Feedback](/user/giving-feedback/) -- how to rate outputs so PAI keeps improving

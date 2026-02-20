@@ -207,6 +207,6 @@ Each memory directory is populated by specific hooks. This table maps the relati
 
 ## What to read next
 
-- [Manage Memory](/developing/manage-memory/) -- Hands-on guide for inspecting and managing memory data
-- [Your AI Gets Better](/using-pai/self-improvement/) -- Non-technical explanation of PAI's learning loop
-- [Write Hooks](/developing/write-hooks/) -- Create custom hooks that feed the memory system
+- [Manage Memory](/developer/manage-memory/) -- Hands-on guide for inspecting and managing memory data
+- [Your AI Gets Better](/user/self-improvement/) -- Non-technical explanation of PAI's learning loop
+- [Write Hooks](/developer/write-hooks/) -- Create custom hooks that feed the memory system

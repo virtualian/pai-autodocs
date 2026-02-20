@@ -1,6 +1,6 @@
 ---
 title: Configure Skills
-description: How to list, invoke, customize, and manage PAI skills.
+description: Control which skills are active and customise how they behave so PAI does exactly what you need.
 sidebar:
   order: 2
 ---
@@ -417,7 +417,7 @@ Running the **WorkflowName** workflow in the **MySkill** skill to accomplish the
 
 ## Next steps
 
-- [Working With Skills](/using-pai/working-with-skills/) -- practical guide to using skills day-to-day
-- [Skills Catalog](/using-pai/skills-catalog/) -- browse every built-in skill
-- [Configuration Reference](/customizing/configuration/) -- all config files and their locations
-- [Your First Skill](/developing/first-skill/) -- build your own skill from scratch
+- [Working With Skills](/user/working-with-skills/) -- practical guide to using skills day-to-day
+- [Skills Catalog](/user/skills-catalog/) -- browse every built-in skill
+- [Configuration Reference](/power-user/configuration/) -- all config files and their locations
+- [Your First Skill](/developer/first-skill/) -- build your own skill from scratch

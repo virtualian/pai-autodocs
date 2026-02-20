@@ -124,6 +124,6 @@ The system you use after three months is measurably more effective than the one 
 
 ## What to read next
 
-- [Your AI Remembers](/using-pai/memory/) -- how memory persists across sessions
-- [Giving Feedback](/using-pai/giving-feedback/) -- detailed guide on effective feedback
-- [Working With Skills](/using-pai/working-with-skills/) -- the skills that improve from your feedback
+- [Your AI Remembers](/user/memory/) -- how memory persists across sessions
+- [Giving Feedback](/user/giving-feedback/) -- detailed guide on effective feedback
+- [Working With Skills](/user/working-with-skills/) -- the skills that improve from your feedback

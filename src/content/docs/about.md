@@ -40,4 +40,4 @@ PAI Auto-Docs uses an automated pipeline to stay in sync with the official PAI r
 
 ## Source transparency
 
-Every documentation page on this site can be traced back to specific files in the official PAI repository. The source files that generated each page are tracked in `source-map.json` and will be displayed per-page in a future update.
+Every documentation page on this site can be traced back to specific files in the official PAI repository. Each page displays **source file badges** linking directly to the PAI source files that generated it. These mappings are tracked in `source-map.json` and rendered automatically on every content page.

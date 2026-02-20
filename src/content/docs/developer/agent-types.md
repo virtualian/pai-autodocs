@@ -187,6 +187,6 @@ Voice routing follows the agent identity. If Serena (Architect) completes a desi
 
 ## What to read next
 
-- [Set Up Agents](/developing/set-up-agents/) -- How to configure agent delegation and parallel execution
-- [Architecture](/developing/architecture/) -- How agents fit into the broader PAI system
-- [Tools Reference](/developing/tools-reference/) -- CLI tools that agents use, including Inference
+- [Set Up Agents](/developer/set-up-agents/) -- How to configure agent delegation and parallel execution
+- [Architecture](/contributor/architecture/) -- How agents fit into the broader PAI system
+- [Tools Reference](/developer/tools-reference/) -- CLI tools that agents use, including Inference

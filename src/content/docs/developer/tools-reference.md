@@ -217,6 +217,6 @@ PAI runs TruffleHog automatically during integrity audits. Use it manually befor
 
 ## What to read next
 
-- [CLI-First Architecture](/developing/cli-first/) -- The philosophy behind building deterministic tools first
-- [Write Hooks](/developing/write-hooks/) -- How to use these tools inside hooks
-- [Agent Types Reference](/developing/agent-types/) -- How agents select and invoke these tools
+- [CLI-First Architecture](/contributor/cli-first/) -- The philosophy behind building deterministic tools first
+- [Write Hooks](/developer/write-hooks/) -- How to use these tools inside hooks
+- [Agent Types Reference](/developer/agent-types/) -- How agents select and invoke these tools

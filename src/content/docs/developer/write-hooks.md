@@ -216,3 +216,9 @@ echo '{"session_id":"test","transcript_path":"/tmp/test.jsonl","hook_event_name"
 | No stdin timeout | Hook hangs waiting for input | Add a 500ms timeout on stdin reads |
 | Invalid JSON in settings.json | No hooks load at all | Validate with `jq` after editing |
 | Exit code 1 | Claude Code treats the hook as failed | Always exit 0, even on errors |
+
+## What to read next
+
+- **[Hook Types](/developer/hook-types/)** — Complete reference of every hook event and its payload
+- **[Your First Hook](/developer/first-hook/)** — Guided tutorial if you haven't written a hook yet
+- **[Manage Memory](/developer/manage-memory/)** — Hooks often need to read or write memory

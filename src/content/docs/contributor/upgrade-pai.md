@@ -190,5 +190,5 @@ After a rollback, start a fresh PAI session to ensure all hooks and skills reloa
 
 ## What to read next
 
-- [The SYSTEM/USER Model](/developing/system-user-model/) -- Why the two-tier architecture makes upgrades safe
-- [Configuration Reference](/customizing/configuration/) -- All configuration files and their locations
+- [The SYSTEM/USER Model](/contributor/system-user-model/) -- Why the two-tier architecture makes upgrades safe
+- [Configuration Reference](/power-user/configuration/) -- All configuration files and their locations

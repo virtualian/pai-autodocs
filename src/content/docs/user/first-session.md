@@ -140,6 +140,6 @@ You don't have to think about this. PAI reads the complexity of your request and
 
 Now that you've seen PAI in action, explore what makes it powerful over time:
 
-- **[Your AI Remembers](/using-pai/memory/)** -- how context and memory work across sessions
-- **[Your AI Gets Better](/using-pai/self-improvement/)** -- how feedback and learning drive continuous improvement
-- **[Working With Skills](/using-pai/working-with-skills/)** -- what your AI can do and how to extend it
+- **[Your AI Remembers](/user/memory/)** -- how context and memory work across sessions
+- **[Your AI Gets Better](/user/self-improvement/)** -- how feedback and learning drive continuous improvement
+- **[Working With Skills](/user/working-with-skills/)** -- what your AI can do and how to extend it

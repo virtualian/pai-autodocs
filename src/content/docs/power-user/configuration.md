@@ -85,7 +85,7 @@ Defines event-driven scripts that run during Claude Code sessions. The structure
 
 **Event types:** `SessionStart`, `UserPromptSubmit`, `Stop`, `SubagentStop`, `PreToolUse`, `PostToolUse`, `SessionEnd`
 
-See [Write Hooks](/developing/write-hooks/) for the full hook configuration format with examples.
+See [Write Hooks](/developer/write-hooks/) for the full hook configuration format with examples.
 
 ### permissions section
 
@@ -137,7 +137,7 @@ description: Deep research workflow. USE WHEN user wants to research, investigat
 | `implements` | No | Protocol compliance (e.g., `Science`) |
 | `science_cycle_time` | No | Cycle time level (`micro`, `meso`, `macro`) |
 
-The markdown body contains workflow routing tables, examples, and documentation. See [Configure Skills](/customizing/configure-skills/) for the full anatomy.
+The markdown body contains workflow routing tables, examples, and documentation. See [Configure Skills](/power-user/configure-skills/) for the full anatomy.
 
 ---
 
@@ -183,6 +183,6 @@ Overrides the default response formatting rules -- section headers, formatting c
 
 ## What to read next
 
-- [Customize Your AI](/customizing/customize-your-ai/) -- Hands-on tutorial for configuring identity and behavior
-- [The SYSTEM/USER Model](/developing/system-user-model/) -- How the two-tier override system works
-- [Write Hooks](/developing/write-hooks/) -- Create custom hooks referenced in settings.json
+- [Customize Your AI](/power-user/customize-your-ai/) -- Hands-on tutorial for configuring identity and behavior
+- [The SYSTEM/USER Model](/contributor/system-user-model/) -- How the two-tier override system works
+- [Write Hooks](/developer/write-hooks/) -- Create custom hooks referenced in settings.json

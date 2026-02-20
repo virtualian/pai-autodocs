@@ -248,5 +248,5 @@ The Algorithm is versioned and tracked like software because it is treated as so
 
 ## What to read next
 
-- [Architecture](/developing/architecture/) — How the Algorithm fits into the broader PAI system
-- [What is PAI?](/getting-started/what-is-pai/) — The philosophy and motivation behind PAI
+- [Architecture](/contributor/architecture/) — How the Algorithm fits into the broader PAI system
+- [What is PAI?](/user/what-is-pai/) — The philosophy and motivation behind PAI

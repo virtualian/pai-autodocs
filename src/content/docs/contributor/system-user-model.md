@@ -184,6 +184,6 @@ This is the trade-off of replacement over merge: you get predictability at the c
 
 ## What to read next
 
-- [Customize Your AI](/customizing/customize-your-ai/) -- Hands-on tutorial for creating USER overrides
-- [Configuration Reference](/customizing/configuration/) -- Complete list of all configuration files
-- [Architecture](/developing/architecture/) -- How the SYSTEM/USER model fits into the broader architecture
+- [Customize Your AI](/power-user/customize-your-ai/) -- Hands-on tutorial for creating USER overrides
+- [Configuration Reference](/power-user/configuration/) -- Complete list of all configuration files
+- [Architecture](/contributor/architecture/) -- How the SYSTEM/USER model fits into the broader architecture
