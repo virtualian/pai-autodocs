@@ -198,16 +198,16 @@ async function fetchSources(sourceFiles, sha) {
 }
 
 function readExistingDoc(page) {
-  const mdPath = join(ROOT, 'src/content/docs', `${page}.md`);
-  const mdxPath = join(ROOT, 'src/content/docs', `${page}.mdx`);
+  const mdPath = join(ROOT, 'docs', `${page}.md`);
+  const mdxPath = join(ROOT, 'docs', `${page}.mdx`);
   if (existsSync(mdPath)) return readFileSync(mdPath, 'utf-8');
   if (existsSync(mdxPath)) return readFileSync(mdxPath, 'utf-8');
   return null;
 }
 
 function writeDocPage(page, content) {
-  const mdPath = join(ROOT, 'src/content/docs', `${page}.md`);
-  const mdxPath = join(ROOT, 'src/content/docs', `${page}.mdx`);
+  const mdPath = join(ROOT, 'docs', `${page}.md`);
+  const mdxPath = join(ROOT, 'docs', `${page}.mdx`);
   // Prefer existing file extension
   const target = existsSync(mdxPath) ? mdxPath : mdPath;
   writeFileSync(target, content, 'utf-8');
@@ -219,25 +219,26 @@ function buildPrompt(page, sourceContents, existingDoc) {
     .join('\n\n---\n\n');
 
   const existingSection = existingDoc
-    ? `\n\n## Existing Documentation Page\n\nUpdate this page to reflect any changes in the source material. Preserve the frontmatter (title, description), overall structure, and Starlight-compatible formatting. Only change content that is affected by the source changes.\n\n${existingDoc}`
+    ? `\n\n## Existing Documentation Page\n\nUpdate this page to reflect any changes in the source material. Preserve the frontmatter (title, description, diataxis_type), overall structure, and Docusaurus-compatible formatting. Only change content that is affected by the source changes.\n\n${existingDoc}`
     : '\n\n## No Existing Page\n\nCreate a new documentation page for this topic.';
 
   return `You are a technical documentation writer for PAI (Personal AI Infrastructure) by Daniel Miessler.
 
 ## Task
 
-Regenerate the documentation page "${page}" based on the PAI source material below. This page is part of an Astro Starlight documentation site.
+Regenerate the documentation page "${page}" based on the PAI source material below. This page is part of a Docusaurus documentation site.
 
 ## Rules
 
-1. Output ONLY the complete markdown file content including frontmatter (---title/description---)
-2. Use Starlight-compatible markdown (Astro components like <Aside>, <Card> are available via imports)
-3. Follow the Diataxis framework: getting-started/* = tutorials, using-pai/* = how-to guides, customizing/* = how-to guides, developing/* = reference/explanation
+1. Output ONLY the complete markdown file content including frontmatter (---title/description/diataxis_type---)
+2. Use Docusaurus-compatible markdown (admonitions via :::note, :::tip, :::warning syntax)
+3. Follow the Diataxis framework: user/* tutorials/explanation, power-user/* how-to/reference, developer/* how-to/reference/explanation, contributor/* explanation
 4. Keep content accurate to the source material — do not invent features
-5. Write for PAI users, not PAI developers (unless in the developing/ section)
+5. Write for PAI users, not PAI developers (unless in the developer/ section)
 6. Be concise but complete — users should be able to follow instructions successfully
 7. Preserve any existing structure and section ordering where possible
 8. Attribution: PAI is by Daniel Miessler. These docs are AI-generated and community-maintained.
+9. Preserve the diataxis_type frontmatter field if present in the existing page
 
 ## PAI Source Material
 
