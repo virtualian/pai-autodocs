@@ -35,6 +35,7 @@ const config = {
       ({
         hashed: true,
         docsRouteBasePath: '/',
+        indexBlog: false,
       }),
     ],
   ],
