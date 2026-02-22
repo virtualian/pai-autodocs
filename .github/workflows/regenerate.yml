@@ -82,7 +82,7 @@ jobs:
 
           # Insert after the frontmatter separator (after the second ---)
           # Find line number of the first ## heading and insert before it
-          CHANGELOG="src/content/docs/changelog.md"
+          CHANGELOG="docs/changelog.md"
           FIRST_HEADING=$(grep -n "^## " "$CHANGELOG" | head -1 | cut -d: -f1)
           if [ -n "$FIRST_HEADING" ]; then
             head -n $((FIRST_HEADING - 1)) "$CHANGELOG" > changelog.tmp
@@ -94,8 +94,8 @@ jobs:
       - name: Update footer version
         if: steps.result.outputs.pages_written != '0'
         run: |
-          # Update version in Footer.astro
-          sed -i "s/Site v[0-9]*\.[0-9]*\.[0-9]*/Site v${NEW_VERSION}/" src/components/Footer.astro
+          # Update version in docusaurus.config.js footer
+          sed -i "s/Site v[0-9]*\.[0-9]*\.[0-9]*/Site v${NEW_VERSION}/" docusaurus.config.js
 
       - name: Verify build
         if: steps.result.outputs.pages_written != '0'
