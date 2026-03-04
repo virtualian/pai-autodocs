@@ -145,31 +145,6 @@ const sidebars = {
         },
       ],
     },
-    // ── SpecVerse ──
-    {
-      type: 'category',
-      label: 'SpecVerse',
-      items: [
-        {
-          type: 'category',
-          label: 'Explanation',
-          items: [
-            { type: 'doc', id: 'specverse/introduction', label: 'What is SpecVerse?' },
-            { type: 'doc', id: 'specverse/four-pillars', label: 'The Four Pillars' },
-            { type: 'doc', id: 'specverse/architecture', label: 'Specification Architecture' },
-            { type: 'doc', id: 'specverse/ecosystem', label: 'The Ecosystem' },
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Reference',
-          items: [
-            { type: 'doc', id: 'specverse/language-coverage', label: 'Language Coverage' },
-            { type: 'doc', id: 'specverse/component-status', label: 'Component Status' },
-          ],
-        },
-      ],
-    },
     // ── Site pages ──
     { type: 'doc', id: 'changelog', label: 'Changelog' },
     { type: 'doc', id: 'about', label: 'About This Site' },
