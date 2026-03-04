@@ -156,16 +156,16 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Build args based on which signal fired (priority: commit > new_release > body_edit)
+          # Always include release_tag — the regeneration script needs it for path resolution
           if [ "$COMMIT_CHANGED" = "true" ]; then
-            ARGS="-f pai_sha=$NEW_SHA -f trigger_type=commit"
-            [ "$NEW_RELEASE" = "true" ] && ARGS="$ARGS -f release_tag=$RELEASE_TAG"
-            echo "Triggering regeneration: commit (sha: $NEW_SHA)"
+            ARGS="-f pai_sha=$NEW_SHA -f trigger_type=commit -f release_tag=$RELEASE_TAG"
+            echo "Triggering regeneration: commit (sha: $NEW_SHA, release: $RELEASE_TAG)"
           elif [ "$NEW_RELEASE" = "true" ]; then
             ARGS="-f pai_sha=$NEW_SHA -f trigger_type=new_release -f release_tag=$RELEASE_TAG"
             echo "Triggering regeneration: new_release ($RELEASE_TAG)"
           else
-            ARGS="-f pai_sha=$NEW_SHA -f trigger_type=release_body_edit -f edited_tags=\"$EDITED_TAGS\""
-            echo "Triggering regeneration: release_body_edit ($EDITED_TAGS)"
+            ARGS="-f pai_sha=$NEW_SHA -f trigger_type=release_body_edit -f release_tag=$RELEASE_TAG -f edited_tags=\"$EDITED_TAGS\""
+            echo "Triggering regeneration: release_body_edit ($EDITED_TAGS, release: $RELEASE_TAG)"
           fi
 
           # Try with extended inputs; fall back to basic dispatch if regenerate.yml
