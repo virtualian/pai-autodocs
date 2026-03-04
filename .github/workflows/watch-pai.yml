@@ -74,34 +74,29 @@ jobs:
             echo "RELEASE_TAG=$LATEST_TAG" >> $GITHUB_ENV
           fi
 
-          # Compute body hashes for all fetched releases
-          # Use jq to produce "tag:hash" pairs
+          # Compute body hashes and check for edits
+          # Build current hashes JSON from fetched releases using jq + sha256sum
+          echo "{}" > /tmp/current_hashes.json
           EDITED_TAGS=""
           for i in $(seq 0 4); do
             TAG=$(jq -r ".[$i].tag_name // \"\"" /tmp/releases.json)
             [ -z "$TAG" ] && continue
 
-            # Hash the release body
-            BODY=$(jq -r ".[$i].body // \"\"" /tmp/releases.json)
-            HASH=$(echo -n "$BODY" | sha256sum | cut -d' ' -f1)
+            HASH=$(jq -r ".[$i].body // \"\"" /tmp/releases.json | sha256sum | cut -d' ' -f1)
+            jq --arg t "$TAG" --arg h "$HASH" '. + {($t): $h}' /tmp/current_hashes.json > /tmp/current_hashes.tmp
+            mv /tmp/current_hashes.tmp /tmp/current_hashes.json
 
-            # Compare with stored hash
+            # Compare with stored hash (only flag if we had a previous hash)
             if [ -f .last-pai-state.json ]; then
               STORED_HASH=$(jq -r ".releaseBodyHashes[\"$TAG\"] // \"\"" .last-pai-state.json)
-            else
-              STORED_HASH=""
+              if [ -n "$STORED_HASH" ] && [ "$HASH" != "$STORED_HASH" ]; then
+                echo "Release body changed: $TAG"
+                EDITED_TAGS="$EDITED_TAGS $TAG"
+              fi
             fi
-
-            if [ -n "$STORED_HASH" ] && [ "$HASH" != "$STORED_HASH" ]; then
-              echo "Release body changed: $TAG"
-              EDITED_TAGS="$EDITED_TAGS $TAG"
-            fi
-
-            # Store for state update
-            echo "HASH_${i}=${TAG}:${HASH}" >> $GITHUB_ENV
           done
 
-          EDITED_TAGS=$(echo "$EDITED_TAGS" | xargs) # trim whitespace
+          EDITED_TAGS=$(echo "$EDITED_TAGS" | xargs)
           if [ -n "$EDITED_TAGS" ]; then
             echo "BODY_EDITED=true" >> $GITHUB_ENV
             echo "EDITED_TAGS=$EDITED_TAGS" >> $GITHUB_ENV
@@ -115,27 +110,13 @@ jobs:
           echo "LATEST_RELEASE_TAG=$LATEST_TAG" >> $GITHUB_ENV
           echo "LATEST_RELEASE_ID=$LATEST_ID" >> $GITHUB_ENV
           echo "LATEST_RELEASE_PUBLISHED=$LATEST_PUBLISHED" >> $GITHUB_ENV
-          # Store the latest release body hash
-          LATEST_BODY=$(jq -r '.[0].body // ""' /tmp/releases.json)
-          LATEST_BODY_HASH=$(echo -n "$LATEST_BODY" | sha256sum | cut -d' ' -f1)
-          echo "LATEST_BODY_HASH=$LATEST_BODY_HASH" >> $GITHUB_ENV
 
       - name: Update state
         if: env.COMMIT_CHANGED == 'true' || env.NEW_RELEASE == 'true' || env.BODY_EDITED == 'true'
         run: |
-          # Build new state JSON
-          # Start with release body hashes from all fetched releases
-          HASHES="{}"
-          for i in $(seq 0 4); do
-            PAIR="${!HASH_VAR:-}"
-            HASH_VAR="HASH_${i}"
-            PAIR="${!HASH_VAR:-}"
-            if [ -n "$PAIR" ]; then
-              TAG=$(echo "$PAIR" | cut -d: -f1)
-              HASH=$(echo "$PAIR" | cut -d: -f2-)
-              HASHES=$(echo "$HASHES" | jq --arg t "$TAG" --arg h "$HASH" '. + {($t): $h}')
-            fi
-          done
+          # Read hashes computed in "Check releases" step
+          HASHES=$(cat /tmp/current_hashes.json)
+          LATEST_BODY_HASH=$(echo "$HASHES" | jq -r ".[\"$LATEST_RELEASE_TAG\"] // \"\"")
 
           # Build state file
           jq -n \
