@@ -17,36 +17,160 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check upstream for changes
+      - name: Check commits
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Get latest commit SHA from PAI repo
           LATEST=$(gh api repos/danielmiessler/Personal_AI_Infrastructure/commits/main --jq '.sha')
-          STORED=$(cat .last-pai-sha 2>/dev/null || echo "none")
+
+          # Read stored SHA from state file, fall back to .last-pai-sha
+          if [ -f .last-pai-state.json ]; then
+            STORED=$(jq -r '.sha // "none"' .last-pai-state.json)
+          elif [ -f .last-pai-sha ]; then
+            STORED=$(cat .last-pai-sha)
+          else
+            STORED="none"
+          fi
 
           echo "Latest PAI SHA: $LATEST"
           echo "Stored PAI SHA: $STORED"
 
           if [ "$LATEST" != "$STORED" ]; then
-            echo "PAI repo changed: $STORED -> $LATEST"
-            echo "$LATEST" > .last-pai-sha
-            echo "CHANGED=true" >> $GITHUB_ENV
-            echo "NEW_SHA=$LATEST" >> $GITHUB_ENV
-
-            # Commit the updated SHA file
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add .last-pai-sha
-            git commit -m "chore: update last-pai-sha to $LATEST"
-            git push
+            echo "COMMIT_CHANGED=true" >> $GITHUB_ENV
           else
-            echo "No changes detected"
-            echo "CHANGED=false" >> $GITHUB_ENV
+            echo "COMMIT_CHANGED=false" >> $GITHUB_ENV
           fi
+          echo "NEW_SHA=$LATEST" >> $GITHUB_ENV
 
-      - name: Trigger regeneration
-        if: env.CHANGED == 'true'
+      - name: Check releases
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run regenerate.yml -f pai_sha=${{ env.NEW_SHA }}
+        run: |
+          # Fetch latest 5 releases from PAI repo
+          gh api repos/danielmiessler/Personal_AI_Infrastructure/releases?per_page=5 > /tmp/releases.json
+
+          # Extract latest release tag
+          LATEST_TAG=$(jq -r '.[0].tag_name // ""' /tmp/releases.json)
+          LATEST_ID=$(jq -r '.[0].id // 0' /tmp/releases.json)
+          LATEST_PUBLISHED=$(jq -r '.[0].published_at // ""' /tmp/releases.json)
+
+          echo "Latest release: $LATEST_TAG (id: $LATEST_ID)"
+
+          # Read stored release state
+          if [ -f .last-pai-state.json ]; then
+            STORED_TAG=$(jq -r '.latestRelease.tag // ""' .last-pai-state.json)
+          else
+            STORED_TAG=""
+          fi
+
+          # Check for new release
+          if [ -n "$LATEST_TAG" ] && [ "$LATEST_TAG" != "$STORED_TAG" ]; then
+            echo "NEW_RELEASE=true" >> $GITHUB_ENV
+            echo "RELEASE_TAG=$LATEST_TAG" >> $GITHUB_ENV
+            echo "New release detected: $LATEST_TAG (was: $STORED_TAG)"
+          else
+            echo "NEW_RELEASE=false" >> $GITHUB_ENV
+            echo "RELEASE_TAG=$LATEST_TAG" >> $GITHUB_ENV
+          fi
+
+          # Compute body hashes and check for edits
+          # Build current hashes JSON from fetched releases using jq + sha256sum
+          echo "{}" > /tmp/current_hashes.json
+          EDITED_TAGS=""
+          for i in $(seq 0 4); do
+            TAG=$(jq -r ".[$i].tag_name // \"\"" /tmp/releases.json)
+            [ -z "$TAG" ] && continue
+
+            HASH=$(jq -r ".[$i].body // \"\"" /tmp/releases.json | sha256sum | cut -d' ' -f1)
+            jq --arg t "$TAG" --arg h "$HASH" '. + {($t): $h}' /tmp/current_hashes.json > /tmp/current_hashes.tmp
+            mv /tmp/current_hashes.tmp /tmp/current_hashes.json
+
+            # Compare with stored hash (only flag if we had a previous hash)
+            if [ -f .last-pai-state.json ]; then
+              STORED_HASH=$(jq -r ".releaseBodyHashes[\"$TAG\"] // \"\"" .last-pai-state.json)
+              if [ -n "$STORED_HASH" ] && [ "$HASH" != "$STORED_HASH" ]; then
+                echo "Release body changed: $TAG"
+                EDITED_TAGS="$EDITED_TAGS $TAG"
+              fi
+            fi
+          done
+
+          EDITED_TAGS=$(echo "$EDITED_TAGS" | xargs)
+          if [ -n "$EDITED_TAGS" ]; then
+            echo "BODY_EDITED=true" >> $GITHUB_ENV
+            echo "EDITED_TAGS=$EDITED_TAGS" >> $GITHUB_ENV
+            echo "Edited release bodies: $EDITED_TAGS"
+          else
+            echo "BODY_EDITED=false" >> $GITHUB_ENV
+            echo "EDITED_TAGS=" >> $GITHUB_ENV
+          fi
+
+          # Store release metadata for state file
+          echo "LATEST_RELEASE_TAG=$LATEST_TAG" >> $GITHUB_ENV
+          echo "LATEST_RELEASE_ID=$LATEST_ID" >> $GITHUB_ENV
+          echo "LATEST_RELEASE_PUBLISHED=$LATEST_PUBLISHED" >> $GITHUB_ENV
+
+      - name: Update state
+        if: env.COMMIT_CHANGED == 'true' || env.NEW_RELEASE == 'true' || env.BODY_EDITED == 'true'
+        run: |
+          # Read hashes computed in "Check releases" step
+          HASHES=$(cat /tmp/current_hashes.json)
+          LATEST_BODY_HASH=$(echo "$HASHES" | jq -r ".[\"$LATEST_RELEASE_TAG\"] // \"\"")
+
+          # Build state file
+          jq -n \
+            --arg sha "$NEW_SHA" \
+            --arg tag "$LATEST_RELEASE_TAG" \
+            --arg id "$LATEST_RELEASE_ID" \
+            --arg published "$LATEST_RELEASE_PUBLISHED" \
+            --arg bodyHash "$LATEST_BODY_HASH" \
+            --argjson hashes "$HASHES" \
+            '{
+              sha: $sha,
+              latestRelease: {
+                tag: $tag,
+                id: ($id | tonumber),
+                publishedAt: $published,
+                bodyHash: $bodyHash
+              },
+              releaseBodyHashes: $hashes
+            }' > .last-pai-state.json
+
+          # Maintain .last-pai-sha for backwards compatibility
+          echo "$NEW_SHA" > .last-pai-sha
+
+          echo "State updated:"
+          cat .last-pai-state.json
+
+          # Commit state files
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .last-pai-state.json .last-pai-sha
+          git commit -m "chore: update PAI tracking state to $NEW_SHA"
+          git push
+
+      - name: Trigger regeneration
+        if: env.COMMIT_CHANGED == 'true' || env.NEW_RELEASE == 'true' || env.BODY_EDITED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Build args based on which signal fired (priority: commit > new_release > body_edit)
+          if [ "$COMMIT_CHANGED" = "true" ]; then
+            ARGS="-f pai_sha=$NEW_SHA -f trigger_type=commit"
+            [ "$NEW_RELEASE" = "true" ] && ARGS="$ARGS -f release_tag=$RELEASE_TAG"
+            echo "Triggering regeneration: commit (sha: $NEW_SHA)"
+          elif [ "$NEW_RELEASE" = "true" ]; then
+            ARGS="-f pai_sha=$NEW_SHA -f trigger_type=new_release -f release_tag=$RELEASE_TAG"
+            echo "Triggering regeneration: new_release ($RELEASE_TAG)"
+          else
+            ARGS="-f pai_sha=$NEW_SHA -f trigger_type=release_body_edit -f edited_tags=\"$EDITED_TAGS\""
+            echo "Triggering regeneration: release_body_edit ($EDITED_TAGS)"
+          fi
+
+          # Try with extended inputs; fall back to basic dispatch if regenerate.yml
+          # on main doesn't have the new inputs yet
+          if ! gh workflow run regenerate.yml $ARGS 2>/dev/null; then
+            echo "Extended dispatch failed — falling back to basic trigger"
+            gh workflow run regenerate.yml -f pai_sha=$NEW_SHA
+          fi

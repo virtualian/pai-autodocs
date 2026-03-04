@@ -1,6 +1,12 @@
 {
   "$schema": "Source mapping: PAI repo files -> doc pages they feed into",
   "$docs": "When a PAI source file changes, the mapped doc pages get regenerated",
+  "releasePages": [
+    "user/what-is-pai",
+    "user/install-pai",
+    "contributor/architecture",
+    "contributor/upgrade-pai"
+  ],
   "mappings": {
     "SKILL.md": [
       "user/what-is-pai",
