@@ -27,13 +27,15 @@ const PAI_RAW_BASE = `https://raw.githubusercontent.com/${PAI_REPO}`;
 const BATCH_API_URL = 'https://api.anthropic.com/v1/messages/batches';
 const BATCH_POLL_INTERVAL_MS = 30_000; // 30 seconds
 const BATCH_MAX_WAIT_MS = 3_600_000; // 1 hour
+// PAI repo stores releases under Releases/{tag}/.claude/
+const RELEASE_PATH_PREFIX_RE = /^Releases\/[^/]+\/\.claude\//;
 
 // --- Args ---
 const args = process.argv.slice(2);
 const paiSha = getArg(args, '--pai-sha');
 const prevSha = getArg(args, '--prev-sha');
 const triggerType = getArg(args, '--trigger-type') || 'commit';
-const releaseTag = getArg(args, '--release-tag') || '';
+let releaseTag = getArg(args, '--release-tag') || '';
 const editedTags = (getArg(args, '--edited-tags') || '').split(/\s+/).filter(Boolean);
 
 if (!paiSha) {
@@ -48,13 +50,25 @@ if (!apiKey) {
 }
 
 // --- Main ---
+
+// Resolve release tag from state file if not provided via args
+if (!releaseTag) {
+  releaseTag = resolveReleaseTag();
+}
+
 await main();
 
 async function main() {
   console.log(`\n--- PAI Auto-Docs Regeneration ---`);
   console.log(`PAI SHA: ${paiSha}`);
   console.log(`Prev SHA: ${prevSha || '(full regeneration)'}`);
+  console.log(`Release tag: ${releaseTag || '(unknown)'}`);
   console.log(`Trigger: ${triggerType}${releaseTag ? ` (${releaseTag})` : ''}${editedTags.length ? ` [edited: ${editedTags.join(', ')}]` : ''}`);
+
+  if (!releaseTag) {
+    console.error('Error: Could not determine release tag. Pass --release-tag or ensure .last-pai-state.json exists.');
+    process.exit(1);
+  }
 
   // 1. Load source map
   const sourceMap = JSON.parse(readFileSync(join(ROOT, 'source-map.json'), 'utf-8'));
@@ -113,11 +127,11 @@ async function main() {
 
   for (const page of affectedPages) {
     const sources = pageSourceMap[page] || [];
-    const sourceContents = await fetchSources(sources, paiSha);
+    const sourceContents = await fetchSources(sources, paiSha, releaseTag);
     const existingDoc = readExistingDoc(page);
 
     batchRequests.push({
-      custom_id: page,
+      custom_id: encodeCustomId(page),
       params: {
         model: MODEL,
         max_tokens: 8192,
@@ -147,13 +161,13 @@ async function main() {
 
   for (const result of results) {
     if (result.result.type === 'succeeded') {
-      const page = result.custom_id;
+      const page = decodeCustomId(result.custom_id);
       const content = result.result.message.content[0].text;
       writeDocPage(page, content);
       pagesWritten++;
       console.log(`  Updated: ${page}`);
     } else {
-      console.error(`  Failed: ${result.custom_id} — ${result.result.type}`);
+      console.error(`  Failed: ${decodeCustomId(result.custom_id)} — ${result.result.type}`);
     }
   }
 
@@ -203,7 +217,14 @@ async function getChangedFiles(prevSha, currentSha) {
 function getAffectedPages(changedFiles, mappings) {
   const pages = new Set();
   for (const file of changedFiles) {
-    const mapped = mappings[file];
+    // Try direct match first
+    let mapped = mappings[file];
+    if (!mapped) {
+      // Strip versioned prefix: Releases/v4.0.3/.claude/PAI/X.md -> PAI/X.md
+      // Also handle: Releases/v4.0.3/.claude/settings.json -> settings.json
+      const stripped = file.replace(RELEASE_PATH_PREFIX_RE, '');
+      mapped = mappings[stripped];
+    }
     if (mapped) {
       mapped.forEach(page => pages.add(page));
     }
@@ -211,16 +232,32 @@ function getAffectedPages(changedFiles, mappings) {
   return [...pages];
 }
 
-async function fetchSources(sourceFiles, sha) {
+/**
+ * Resolve a canonical source name to a full repo path using the release tag.
+ *
+ * Canonical names in source-map.json:
+ *   - "PAI/SKILL.md"            -> "Releases/{tag}/.claude/PAI/SKILL.md"
+ *   - "settings.json"           -> "Releases/{tag}/.claude/settings.json"
+ *   - "README.md"               -> "README.md" (repo root)
+ */
+function resolveSourcePath(canonicalName, tag) {
+  if (canonicalName === 'README.md') {
+    return 'README.md';
+  }
+  return `Releases/${tag}/.claude/${canonicalName}`;
+}
+
+async function fetchSources(sourceFiles, sha, tag) {
   const contents = {};
   for (const file of sourceFiles) {
-    const url = `${PAI_RAW_BASE}/${sha}/${file}`;
+    const repoPath = resolveSourcePath(file, tag);
+    const url = `${PAI_RAW_BASE}/${sha}/${repoPath}`;
     try {
       const res = await fetch(url);
       if (res.ok) {
         contents[file] = await res.text();
       } else {
-        console.warn(`  Could not fetch ${file}: ${res.status}`);
+        console.warn(`  Could not fetch ${file} (${repoPath}): ${res.status}`);
         contents[file] = `[File not found at SHA ${sha}]`;
       }
     } catch (err) {
@@ -591,6 +628,42 @@ async function retrieveResults(resultsUrl) {
   // Batch results are JSONL (one JSON object per line)
   const text = await res.text();
   return text.trim().split('\n').map(line => JSON.parse(line));
+}
+
+/**
+ * Resolve the release tag from .last-pai-state.json when not passed via CLI args.
+ */
+function resolveReleaseTag() {
+  const statePath = join(ROOT, '.last-pai-state.json');
+  if (existsSync(statePath)) {
+    try {
+      const state = JSON.parse(readFileSync(statePath, 'utf-8'));
+      const tag = state.latestRelease?.tag;
+      if (tag) {
+        console.log(`Resolved release tag from state file: ${tag}`);
+        return tag;
+      }
+    } catch (err) {
+      console.warn(`Could not read state file: ${err.message}`);
+    }
+  }
+  return '';
+}
+
+/**
+ * Encode a page path as a Batch API custom_id.
+ * The Batch API requires custom_id to match ^[a-zA-Z0-9_-]{1,64}$.
+ * Page paths like "user/what-is-pai" contain slashes, so we replace / with --.
+ */
+function encodeCustomId(page) {
+  return page.replace(/\//g, '--');
+}
+
+/**
+ * Decode a Batch API custom_id back to a page path.
+ */
+function decodeCustomId(customId) {
+  return customId.replace(/--/g, '/');
 }
 
 function sleep(ms) {

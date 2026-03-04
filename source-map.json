@@ -1,6 +1,6 @@
 {
   "$schema": "Source mapping: PAI repo files -> doc pages they feed into",
-  "$docs": "When a PAI source file changes, the mapped doc pages get regenerated",
+  "$docs": "When a PAI source file changes, the mapped doc pages get regenerated. Source paths are canonical names resolved to full repo paths by regenerate.mjs using the release tag.",
   "releasePages": [
     "user/what-is-pai",
     "user/install-pai",
@@ -8,7 +8,7 @@
     "contributor/upgrade-pai"
   ],
   "mappings": {
-    "SKILL.md": [
+    "PAI/SKILL.md": [
       "user/what-is-pai",
       "user/first-session",
       "user/self-improvement",
@@ -20,7 +20,7 @@
       "contributor/architecture",
       "contributor/the-algorithm"
     ],
-    "SYSTEM/PAISYSTEMARCHITECTURE.md": [
+    "PAI/PAISYSTEMARCHITECTURE.md": [
       "user/what-is-pai",
       "user/first-session",
       "power-user/how-customization-works",
@@ -30,7 +30,7 @@
       "contributor/cli-first",
       "contributor/system-user-model"
     ],
-    "SYSTEM/MEMORYSYSTEM.md": [
+    "PAI/MEMORYSYSTEM.md": [
       "user/memory",
       "user/self-improvement",
       "user/giving-feedback",
@@ -38,38 +38,35 @@
       "developer/manage-memory",
       "contributor/memory-and-learning"
     ],
-    "SYSTEM/SKILLSYSTEM.md": [
+    "PAI/SKILLSYSTEM.md": [
       "user/working-with-skills",
       "user/skills-catalog",
       "power-user/configure-skills",
       "developer/extension-model",
       "developer/first-skill"
     ],
-    "SYSTEM/THEHOOKSYSTEM.md": [
+    "PAI/THEHOOKSYSTEM.md": [
       "developer/extension-model",
       "developer/first-hook",
       "developer/write-hooks",
       "developer/hook-types"
     ],
-    "SYSTEM/PAIAGENTSYSTEM.md": [
+    "PAI/PAIAGENTSYSTEM.md": [
       "developer/extension-model",
       "developer/set-up-agents",
       "developer/agent-types"
     ],
-    "SYSTEM/THEDELEGATIONSYSTEM.md": [
+    "PAI/THEDELEGATIONSYSTEM.md": [
       "developer/set-up-agents",
       "developer/agent-types"
     ],
-    "SYSTEM/BROWSERAUTOMATION.md": [
-      "developer/tools-reference"
-    ],
-    "SYSTEM/CLIFIRSTARCHITECTURE.md": [
+    "PAI/CLIFIRSTARCHITECTURE.md": [
       "contributor/cli-first"
     ],
-    "SYSTEM/THENOTIFICATIONSYSTEM.md": [
+    "PAI/THENOTIFICATIONSYSTEM.md": [
       "developer/tools-reference"
     ],
-    "SYSTEM/TOOLS.md": [
+    "PAI/TOOLS.md": [
       "developer/tools-reference"
     ],
     "settings.json": [
@@ -87,33 +84,33 @@
   },
   "reverse": {
     "$docs": "Auto-generated reverse index: doc page -> PAI source files that feed it. Used by the regeneration script to know which sources to fetch for a given page.",
-    "user/what-is-pai": ["SKILL.md", "SYSTEM/PAISYSTEMARCHITECTURE.md"],
+    "user/what-is-pai": ["PAI/SKILL.md", "PAI/PAISYSTEMARCHITECTURE.md"],
     "user/install-pai": ["README.md"],
-    "user/first-session": ["SKILL.md", "SYSTEM/PAISYSTEMARCHITECTURE.md"],
-    "user/memory": ["SYSTEM/MEMORYSYSTEM.md"],
-    "user/self-improvement": ["SKILL.md", "SYSTEM/MEMORYSYSTEM.md"],
-    "user/working-with-skills": ["SKILL.md", "SYSTEM/SKILLSYSTEM.md"],
-    "user/giving-feedback": ["SKILL.md", "SYSTEM/MEMORYSYSTEM.md"],
-    "user/skills-catalog": ["SYSTEM/SKILLSYSTEM.md"],
-    "power-user/how-customization-works": ["SYSTEM/PAISYSTEMARCHITECTURE.md", "settings.json"],
+    "user/first-session": ["PAI/SKILL.md", "PAI/PAISYSTEMARCHITECTURE.md"],
+    "user/memory": ["PAI/MEMORYSYSTEM.md"],
+    "user/self-improvement": ["PAI/SKILL.md", "PAI/MEMORYSYSTEM.md"],
+    "user/working-with-skills": ["PAI/SKILL.md", "PAI/SKILLSYSTEM.md"],
+    "user/giving-feedback": ["PAI/SKILL.md", "PAI/MEMORYSYSTEM.md"],
+    "user/skills-catalog": ["PAI/SKILLSYSTEM.md"],
+    "power-user/how-customization-works": ["PAI/PAISYSTEMARCHITECTURE.md", "settings.json"],
     "power-user/customize-your-ai": ["settings.json"],
-    "power-user/configure-skills": ["SYSTEM/SKILLSYSTEM.md"],
-    "power-user/configuration": ["settings.json", "SYSTEM/MEMORYSYSTEM.md"],
-    "developer/extension-model": ["SYSTEM/SKILLSYSTEM.md", "SYSTEM/THEHOOKSYSTEM.md", "SYSTEM/PAIAGENTSYSTEM.md"],
-    "developer/first-skill": ["SKILL.md", "SYSTEM/SKILLSYSTEM.md"],
-    "developer/first-hook": ["SYSTEM/THEHOOKSYSTEM.md"],
-    "developer/write-hooks": ["SYSTEM/THEHOOKSYSTEM.md", "settings.json"],
-    "developer/manage-memory": ["SYSTEM/MEMORYSYSTEM.md"],
-    "developer/set-up-agents": ["SYSTEM/PAIAGENTSYSTEM.md", "SYSTEM/THEDELEGATIONSYSTEM.md"],
-    "developer/algorithm": ["SKILL.md", "SYSTEM/PAISYSTEMARCHITECTURE.md"],
-    "developer/hook-types": ["SYSTEM/THEHOOKSYSTEM.md", "settings.json"],
-    "developer/agent-types": ["SYSTEM/PAIAGENTSYSTEM.md", "SYSTEM/THEDELEGATIONSYSTEM.md"],
-    "developer/tools-reference": ["SYSTEM/TOOLS.md", "SYSTEM/BROWSERAUTOMATION.md", "SYSTEM/THENOTIFICATIONSYSTEM.md"],
-    "contributor/architecture": ["SKILL.md", "SYSTEM/PAISYSTEMARCHITECTURE.md", "README.md"],
-    "contributor/the-algorithm": ["SKILL.md", "SYSTEM/PAISYSTEMARCHITECTURE.md"],
-    "contributor/cli-first": ["SYSTEM/CLIFIRSTARCHITECTURE.md", "SYSTEM/PAISYSTEMARCHITECTURE.md"],
-    "contributor/system-user-model": ["SYSTEM/PAISYSTEMARCHITECTURE.md"],
-    "contributor/memory-and-learning": ["SYSTEM/MEMORYSYSTEM.md"],
+    "power-user/configure-skills": ["PAI/SKILLSYSTEM.md"],
+    "power-user/configuration": ["settings.json", "PAI/MEMORYSYSTEM.md"],
+    "developer/extension-model": ["PAI/SKILLSYSTEM.md", "PAI/THEHOOKSYSTEM.md", "PAI/PAIAGENTSYSTEM.md"],
+    "developer/first-skill": ["PAI/SKILL.md", "PAI/SKILLSYSTEM.md"],
+    "developer/first-hook": ["PAI/THEHOOKSYSTEM.md"],
+    "developer/write-hooks": ["PAI/THEHOOKSYSTEM.md", "settings.json"],
+    "developer/manage-memory": ["PAI/MEMORYSYSTEM.md"],
+    "developer/set-up-agents": ["PAI/PAIAGENTSYSTEM.md", "PAI/THEDELEGATIONSYSTEM.md"],
+    "developer/algorithm": ["PAI/SKILL.md", "PAI/PAISYSTEMARCHITECTURE.md"],
+    "developer/hook-types": ["PAI/THEHOOKSYSTEM.md", "settings.json"],
+    "developer/agent-types": ["PAI/PAIAGENTSYSTEM.md", "PAI/THEDELEGATIONSYSTEM.md"],
+    "developer/tools-reference": ["PAI/TOOLS.md", "PAI/THENOTIFICATIONSYSTEM.md"],
+    "contributor/architecture": ["PAI/SKILL.md", "PAI/PAISYSTEMARCHITECTURE.md", "README.md"],
+    "contributor/the-algorithm": ["PAI/SKILL.md", "PAI/PAISYSTEMARCHITECTURE.md"],
+    "contributor/cli-first": ["PAI/CLIFIRSTARCHITECTURE.md", "PAI/PAISYSTEMARCHITECTURE.md"],
+    "contributor/system-user-model": ["PAI/PAISYSTEMARCHITECTURE.md"],
+    "contributor/memory-and-learning": ["PAI/MEMORYSYSTEM.md"],
     "contributor/upgrade-pai": ["settings.json"]
   }
 }
