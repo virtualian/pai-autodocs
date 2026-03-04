@@ -7,7 +7,7 @@
  * and regenerates them using Claude Batch API (Haiku 4.5).
  *
  * Usage:
- *   node scripts/regenerate.mjs --pai-sha <sha> --prev-sha <sha>
+ *   node scripts/regenerate.mjs --pai-sha <sha> --prev-sha <sha> [--trigger-type commit|new_release|release_body_edit] [--release-tag v4.0.3] [--edited-tags "v4.0.3 v4.0.1"]
  *
  * Environment:
  *   ANTHROPIC_API_KEY - Required for Claude Batch API
@@ -32,9 +32,12 @@ const BATCH_MAX_WAIT_MS = 3_600_000; // 1 hour
 const args = process.argv.slice(2);
 const paiSha = getArg(args, '--pai-sha');
 const prevSha = getArg(args, '--prev-sha');
+const triggerType = getArg(args, '--trigger-type') || 'commit';
+const releaseTag = getArg(args, '--release-tag') || '';
+const editedTags = (getArg(args, '--edited-tags') || '').split(/\s+/).filter(Boolean);
 
 if (!paiSha) {
-  console.error('Usage: node regenerate.mjs --pai-sha <sha> [--prev-sha <sha>]');
+  console.error('Usage: node regenerate.mjs --pai-sha <sha> [--prev-sha <sha>] [--trigger-type commit|new_release|release_body_edit]');
   process.exit(1);
 }
 
@@ -51,23 +54,52 @@ async function main() {
   console.log(`\n--- PAI Auto-Docs Regeneration ---`);
   console.log(`PAI SHA: ${paiSha}`);
   console.log(`Prev SHA: ${prevSha || '(full regeneration)'}`);
+  console.log(`Trigger: ${triggerType}${releaseTag ? ` (${releaseTag})` : ''}${editedTags.length ? ` [edited: ${editedTags.join(', ')}]` : ''}`);
 
   // 1. Load source map
   const sourceMap = JSON.parse(readFileSync(join(ROOT, 'source-map.json'), 'utf-8'));
 
-  // 2. Determine changed PAI files
-  const changedFiles = await getChangedFiles(prevSha, paiSha);
-  console.log(`\nChanged PAI files: ${changedFiles.length}`);
-  changedFiles.forEach(f => console.log(`  - ${f}`));
+  // 2. Determine affected pages based on trigger type
+  let affectedPages;
+  let releaseNotes = {};
 
-  // 3. Map to affected doc pages
-  const affectedPages = getAffectedPages(changedFiles, sourceMap.mappings);
+  if (triggerType === 'commit') {
+    // Existing logic: compare API → changed files → affected pages
+    const changedFiles = await getChangedFiles(prevSha, paiSha);
+    console.log(`\nChanged PAI files: ${changedFiles.length}`);
+    changedFiles.forEach(f => console.log(`  - ${f}`));
+    affectedPages = getAffectedPages(changedFiles, sourceMap.mappings);
+
+    // If a new release also exists, include release-sensitive pages
+    if (releaseTag) {
+      releaseNotes = await fetchReleaseNotes([releaseTag]);
+      const releasePages = sourceMap.releasePages || [];
+      affectedPages = [...new Set([...affectedPages, ...releasePages])];
+    }
+  } else if (triggerType === 'new_release') {
+    // Regenerate release-sensitive pages with release notes as context
+    affectedPages = sourceMap.releasePages || [];
+    releaseNotes = await fetchReleaseNotes([releaseTag]);
+    console.log(`\nNew release detected: ${releaseTag}`);
+  } else if (triggerType === 'release_body_edit') {
+    // Regenerate release-sensitive pages with edited release notes
+    affectedPages = sourceMap.releasePages || [];
+    releaseNotes = await fetchReleaseNotes(editedTags);
+    console.log(`\nRelease body edits detected: ${editedTags.join(', ')}`);
+  } else {
+    console.error(`Unknown trigger type: ${triggerType}`);
+    process.exit(1);
+  }
+
+  // Deduplicate
+  affectedPages = [...new Set(affectedPages)];
+
   if (affectedPages.length === 0) {
     console.log('\nNo doc pages affected by these changes. Done.');
-    // Write empty result for the workflow
     writeFileSync(join(ROOT, '.regeneration-result.json'), JSON.stringify({
       pages: [],
       paiSha,
+      triggerType,
       timestamp: new Date().toISOString(),
     }));
     process.exit(0);
@@ -75,7 +107,7 @@ async function main() {
   console.log(`\nAffected doc pages: ${affectedPages.length}`);
   affectedPages.forEach(p => console.log(`  - ${p}`));
 
-  // 4. Fetch PAI source content for each affected page
+  // 3. Fetch PAI source content for each affected page
   const pageSourceMap = sourceMap.reverse;
   const batchRequests = [];
 
@@ -92,7 +124,7 @@ async function main() {
         messages: [
           {
             role: 'user',
-            content: buildPrompt(page, sourceContents, existingDoc),
+            content: buildPrompt(page, sourceContents, existingDoc, releaseNotes),
           },
         ],
       },
@@ -130,6 +162,8 @@ async function main() {
     pages: affectedPages,
     pagesWritten,
     paiSha,
+    triggerType,
+    releaseTag: releaseTag || undefined,
     timestamp: new Date().toISOString(),
   };
   writeFileSync(join(ROOT, '.regeneration-result.json'), JSON.stringify(resultSummary, null, 2));
@@ -213,10 +247,18 @@ function writeDocPage(page, content) {
   writeFileSync(target, content, 'utf-8');
 }
 
-function buildPrompt(page, sourceContents, existingDoc) {
+function buildPrompt(page, sourceContents, existingDoc, releaseNotes = {}) {
   const sourceSection = Object.entries(sourceContents)
     .map(([file, content]) => `### Source: ${file}\n\n${content}`)
     .join('\n\n---\n\n');
+
+  let releaseSection = '';
+  if (Object.keys(releaseNotes).length > 0) {
+    releaseSection = '\n\n## Release Notes Context\n\nThe following release notes provide additional context about recent PAI changes. Use this to update version references, migration instructions, and feature descriptions where relevant.\n\n';
+    releaseSection += Object.entries(releaseNotes)
+      .map(([tag, info]) => `### ${info.name} (${tag})\n\nPublished: ${info.publishedAt}\n\n${info.body}`)
+      .join('\n\n---\n\n');
+  }
 
   const existingSection = existingDoc
     ? `\n\n## Existing Documentation Page\n\nUpdate this page to reflect any changes in the source material. Preserve the frontmatter (title, description, diataxis_type), overall structure, and Docusaurus-compatible formatting. Only change content that is affected by the source changes.\n\n${existingDoc}`
@@ -243,7 +285,31 @@ Regenerate the documentation page "${page}" based on the PAI source material bel
 ## PAI Source Material
 
 ${sourceSection}
+${releaseSection}
 ${existingSection}`;
+}
+
+async function fetchReleaseNotes(tags) {
+  const notes = {};
+  for (const tag of tags) {
+    if (!tag) continue;
+    const url = `https://api.github.com/repos/${PAI_REPO}/releases/tags/${tag}`;
+    try {
+      const res = await fetch(url, {
+        headers: { 'Accept': 'application/vnd.github.v3+json' },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        notes[tag] = { name: data.name, body: data.body, publishedAt: data.published_at };
+        console.log(`  Fetched release notes: ${tag} (${data.name})`);
+      } else {
+        console.warn(`  Could not fetch release ${tag}: ${res.status}`);
+      }
+    } catch (err) {
+      console.warn(`  Error fetching release ${tag}: ${err.message}`);
+    }
+  }
+  return notes;
 }
 
 async function submitBatch(requests) {

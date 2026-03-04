@@ -1,0 +1,16 @@
+{
+  "sha": "2306de68a998c346fa1ae99c06d3e5125b1df9d7",
+  "latestRelease": {
+    "tag": "v4.0.3",
+    "id": 291883971,
+    "publishedAt": "2026-03-02T02:30:06Z",
+    "bodyHash": "a3fd780d3f755bbe4b8e0361fa92a655c316fa253b5b93ccadee15dc72a8c6bd"
+  },
+  "releaseBodyHashes": {
+    "v4.0.3": "a3fd780d3f755bbe4b8e0361fa92a655c316fa253b5b93ccadee15dc72a8c6bd",
+    "v4.0.1": "0563c1ab9075b627de0e5bfdeec30a4f34b11dc9e6c3de57b8530d9799b19dc7",
+    "v4.0.0": "61e0f54859fcfcf1bb8791da83a00703f5e57e1f917f8262e42241c94d17038a",
+    "v3.0.0": "251bb6fe5e15ebc9d173efd60be9302204f816b97cdcf8045aefc86af52f6520",
+    "v2.5.0": "b113d10c36d8407ef7383905149a2e4e641aacc11e733c55a4953551837d344d"
+  }
+}

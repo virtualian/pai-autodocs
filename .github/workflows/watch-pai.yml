@@ -17,36 +17,188 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check upstream for changes
+      - name: Check commits
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Get latest commit SHA from PAI repo
           LATEST=$(gh api repos/danielmiessler/Personal_AI_Infrastructure/commits/main --jq '.sha')
-          STORED=$(cat .last-pai-sha 2>/dev/null || echo "none")
+
+          # Read stored SHA from state file, fall back to .last-pai-sha
+          if [ -f .last-pai-state.json ]; then
+            STORED=$(jq -r '.sha // "none"' .last-pai-state.json)
+          elif [ -f .last-pai-sha ]; then
+            STORED=$(cat .last-pai-sha)
+          else
+            STORED="none"
+          fi
 
           echo "Latest PAI SHA: $LATEST"
           echo "Stored PAI SHA: $STORED"
 
           if [ "$LATEST" != "$STORED" ]; then
-            echo "PAI repo changed: $STORED -> $LATEST"
-            echo "$LATEST" > .last-pai-sha
-            echo "CHANGED=true" >> $GITHUB_ENV
-            echo "NEW_SHA=$LATEST" >> $GITHUB_ENV
-
-            # Commit the updated SHA file
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add .last-pai-sha
-            git commit -m "chore: update last-pai-sha to $LATEST"
-            git push
+            echo "COMMIT_CHANGED=true" >> $GITHUB_ENV
           else
-            echo "No changes detected"
-            echo "CHANGED=false" >> $GITHUB_ENV
+            echo "COMMIT_CHANGED=false" >> $GITHUB_ENV
           fi
+          echo "NEW_SHA=$LATEST" >> $GITHUB_ENV
 
-      - name: Trigger regeneration
-        if: env.CHANGED == 'true'
+      - name: Check releases
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run regenerate.yml -f pai_sha=${{ env.NEW_SHA }}
+        run: |
+          # Fetch latest 5 releases from PAI repo
+          gh api repos/danielmiessler/Personal_AI_Infrastructure/releases?per_page=5 > /tmp/releases.json
+
+          # Extract latest release tag
+          LATEST_TAG=$(jq -r '.[0].tag_name // ""' /tmp/releases.json)
+          LATEST_ID=$(jq -r '.[0].id // 0' /tmp/releases.json)
+          LATEST_PUBLISHED=$(jq -r '.[0].published_at // ""' /tmp/releases.json)
+
+          echo "Latest release: $LATEST_TAG (id: $LATEST_ID)"
+
+          # Read stored release state
+          if [ -f .last-pai-state.json ]; then
+            STORED_TAG=$(jq -r '.latestRelease.tag // ""' .last-pai-state.json)
+          else
+            STORED_TAG=""
+          fi
+
+          # Check for new release
+          if [ -n "$LATEST_TAG" ] && [ "$LATEST_TAG" != "$STORED_TAG" ]; then
+            echo "NEW_RELEASE=true" >> $GITHUB_ENV
+            echo "RELEASE_TAG=$LATEST_TAG" >> $GITHUB_ENV
+            echo "New release detected: $LATEST_TAG (was: $STORED_TAG)"
+          else
+            echo "NEW_RELEASE=false" >> $GITHUB_ENV
+            echo "RELEASE_TAG=$LATEST_TAG" >> $GITHUB_ENV
+          fi
+
+          # Compute body hashes for all fetched releases
+          # Use jq to produce "tag:hash" pairs
+          EDITED_TAGS=""
+          for i in $(seq 0 4); do
+            TAG=$(jq -r ".[$i].tag_name // \"\"" /tmp/releases.json)
+            [ -z "$TAG" ] && continue
+
+            # Hash the release body
+            BODY=$(jq -r ".[$i].body // \"\"" /tmp/releases.json)
+            HASH=$(echo -n "$BODY" | sha256sum | cut -d' ' -f1)
+
+            # Compare with stored hash
+            if [ -f .last-pai-state.json ]; then
+              STORED_HASH=$(jq -r ".releaseBodyHashes[\"$TAG\"] // \"\"" .last-pai-state.json)
+            else
+              STORED_HASH=""
+            fi
+
+            if [ -n "$STORED_HASH" ] && [ "$HASH" != "$STORED_HASH" ]; then
+              echo "Release body changed: $TAG"
+              EDITED_TAGS="$EDITED_TAGS $TAG"
+            fi
+
+            # Store for state update
+            echo "HASH_${i}=${TAG}:${HASH}" >> $GITHUB_ENV
+          done
+
+          EDITED_TAGS=$(echo "$EDITED_TAGS" | xargs) # trim whitespace
+          if [ -n "$EDITED_TAGS" ]; then
+            echo "BODY_EDITED=true" >> $GITHUB_ENV
+            echo "EDITED_TAGS=$EDITED_TAGS" >> $GITHUB_ENV
+            echo "Edited release bodies: $EDITED_TAGS"
+          else
+            echo "BODY_EDITED=false" >> $GITHUB_ENV
+            echo "EDITED_TAGS=" >> $GITHUB_ENV
+          fi
+
+          # Store release metadata for state file
+          echo "LATEST_RELEASE_TAG=$LATEST_TAG" >> $GITHUB_ENV
+          echo "LATEST_RELEASE_ID=$LATEST_ID" >> $GITHUB_ENV
+          echo "LATEST_RELEASE_PUBLISHED=$LATEST_PUBLISHED" >> $GITHUB_ENV
+          # Store the latest release body hash
+          LATEST_BODY=$(jq -r '.[0].body // ""' /tmp/releases.json)
+          LATEST_BODY_HASH=$(echo -n "$LATEST_BODY" | sha256sum | cut -d' ' -f1)
+          echo "LATEST_BODY_HASH=$LATEST_BODY_HASH" >> $GITHUB_ENV
+
+      - name: Update state
+        if: env.COMMIT_CHANGED == 'true' || env.NEW_RELEASE == 'true' || env.BODY_EDITED == 'true'
+        run: |
+          # Build new state JSON
+          # Start with release body hashes from all fetched releases
+          HASHES="{}"
+          for i in $(seq 0 4); do
+            PAIR="${!HASH_VAR:-}"
+            HASH_VAR="HASH_${i}"
+            PAIR="${!HASH_VAR:-}"
+            if [ -n "$PAIR" ]; then
+              TAG=$(echo "$PAIR" | cut -d: -f1)
+              HASH=$(echo "$PAIR" | cut -d: -f2-)
+              HASHES=$(echo "$HASHES" | jq --arg t "$TAG" --arg h "$HASH" '. + {($t): $h}')
+            fi
+          done
+
+          # Build state file
+          jq -n \
+            --arg sha "$NEW_SHA" \
+            --arg tag "$LATEST_RELEASE_TAG" \
+            --arg id "$LATEST_RELEASE_ID" \
+            --arg published "$LATEST_RELEASE_PUBLISHED" \
+            --arg bodyHash "$LATEST_BODY_HASH" \
+            --argjson hashes "$HASHES" \
+            '{
+              sha: $sha,
+              latestRelease: {
+                tag: $tag,
+                id: ($id | tonumber),
+                publishedAt: $published,
+                bodyHash: $bodyHash
+              },
+              releaseBodyHashes: $hashes
+            }' > .last-pai-state.json
+
+          # Maintain .last-pai-sha for backwards compatibility
+          echo "$NEW_SHA" > .last-pai-sha
+
+          echo "State updated:"
+          cat .last-pai-state.json
+
+          # Commit state files
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .last-pai-state.json .last-pai-sha
+          git commit -m "chore: update PAI tracking state to $NEW_SHA"
+          git push
+
+      - name: Trigger regeneration (commit)
+        if: env.COMMIT_CHANGED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ARGS="-f pai_sha=$NEW_SHA -f trigger_type=commit"
+          if [ "$NEW_RELEASE" = "true" ]; then
+            ARGS="$ARGS -f release_tag=$RELEASE_TAG"
+          fi
+          echo "Triggering regeneration: commit (sha: $NEW_SHA)"
+          gh workflow run regenerate.yml $ARGS
+
+      - name: Trigger regeneration (new release)
+        if: env.COMMIT_CHANGED != 'true' && env.NEW_RELEASE == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Triggering regeneration: new_release ($RELEASE_TAG)"
+          gh workflow run regenerate.yml \
+            -f pai_sha=$NEW_SHA \
+            -f trigger_type=new_release \
+            -f release_tag=$RELEASE_TAG
+
+      - name: Trigger regeneration (release body edit)
+        if: env.COMMIT_CHANGED != 'true' && env.NEW_RELEASE != 'true' && env.BODY_EDITED == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Triggering regeneration: release_body_edit ($EDITED_TAGS)"
+          gh workflow run regenerate.yml \
+            -f pai_sha=$NEW_SHA \
+            -f trigger_type=release_body_edit \
+            -f edited_tags="$EDITED_TAGS"

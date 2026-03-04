@@ -6,6 +6,18 @@ on:
       pai_sha:
         description: 'PAI commit SHA to generate from'
         required: true
+      trigger_type:
+        description: 'What triggered this: commit, new_release, release_body_edit'
+        required: false
+        default: 'commit'
+      release_tag:
+        description: 'Latest release tag (e.g. v4.0.3)'
+        required: false
+        default: ''
+      edited_tags:
+        description: 'Space-separated release tags whose bodies were edited'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -44,7 +56,10 @@ jobs:
         run: |
           node scripts/regenerate.mjs \
             --pai-sha ${{ inputs.pai_sha }} \
-            --prev-sha ${{ steps.prev.outputs.sha }}
+            --prev-sha ${{ steps.prev.outputs.sha }} \
+            --trigger-type ${{ inputs.trigger_type || 'commit' }} \
+            --release-tag "${{ inputs.release_tag }}" \
+            --edited-tags "${{ inputs.edited_tags }}"
 
       - name: Read regeneration result
         id: result
