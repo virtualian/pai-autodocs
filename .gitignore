@@ -1,6 +1,8 @@
 # build output
 build/
+dist/
 .docusaurus/
+.astro/
 
 # dependencies
 node_modules/
