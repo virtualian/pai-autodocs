@@ -150,36 +150,27 @@ jobs:
           git commit -m "chore: update PAI tracking state to $NEW_SHA"
           git push
 
-      - name: Trigger regeneration (commit)
-        if: env.COMMIT_CHANGED == 'true'
+      - name: Trigger regeneration
+        if: env.COMMIT_CHANGED == 'true' || env.NEW_RELEASE == 'true' || env.BODY_EDITED == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ARGS="-f pai_sha=$NEW_SHA -f trigger_type=commit"
-          if [ "$NEW_RELEASE" = "true" ]; then
-            ARGS="$ARGS -f release_tag=$RELEASE_TAG"
+          # Build args based on which signal fired (priority: commit > new_release > body_edit)
+          if [ "$COMMIT_CHANGED" = "true" ]; then
+            ARGS="-f pai_sha=$NEW_SHA -f trigger_type=commit"
+            [ "$NEW_RELEASE" = "true" ] && ARGS="$ARGS -f release_tag=$RELEASE_TAG"
+            echo "Triggering regeneration: commit (sha: $NEW_SHA)"
+          elif [ "$NEW_RELEASE" = "true" ]; then
+            ARGS="-f pai_sha=$NEW_SHA -f trigger_type=new_release -f release_tag=$RELEASE_TAG"
+            echo "Triggering regeneration: new_release ($RELEASE_TAG)"
+          else
+            ARGS="-f pai_sha=$NEW_SHA -f trigger_type=release_body_edit -f edited_tags=\"$EDITED_TAGS\""
+            echo "Triggering regeneration: release_body_edit ($EDITED_TAGS)"
           fi
-          echo "Triggering regeneration: commit (sha: $NEW_SHA)"
-          gh workflow run regenerate.yml $ARGS
 
-      - name: Trigger regeneration (new release)
-        if: env.COMMIT_CHANGED != 'true' && env.NEW_RELEASE == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Triggering regeneration: new_release ($RELEASE_TAG)"
-          gh workflow run regenerate.yml \
-            -f pai_sha=$NEW_SHA \
-            -f trigger_type=new_release \
-            -f release_tag=$RELEASE_TAG
-
-      - name: Trigger regeneration (release body edit)
-        if: env.COMMIT_CHANGED != 'true' && env.NEW_RELEASE != 'true' && env.BODY_EDITED == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Triggering regeneration: release_body_edit ($EDITED_TAGS)"
-          gh workflow run regenerate.yml \
-            -f pai_sha=$NEW_SHA \
-            -f trigger_type=release_body_edit \
-            -f edited_tags="$EDITED_TAGS"
+          # Try with extended inputs; fall back to basic dispatch if regenerate.yml
+          # on main doesn't have the new inputs yet
+          if ! gh workflow run regenerate.yml $ARGS 2>/dev/null; then
+            echo "Extended dispatch failed — falling back to basic trigger"
+            gh workflow run regenerate.yml -f pai_sha=$NEW_SHA
+          fi
