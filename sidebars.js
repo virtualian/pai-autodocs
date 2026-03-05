@@ -146,8 +146,14 @@ const sidebars = {
       ],
     },
     // ── Site pages ──
-    { type: 'doc', id: 'changelog', label: 'Changelog' },
-    { type: 'doc', id: 'about', label: 'About This Site' },
+    {
+      type: 'category',
+      label: 'About This Site',
+      items: [
+        { type: 'doc', id: 'about', label: 'Overview' },
+        { type: 'doc', id: 'changelog', label: 'Changelog' },
+      ],
+    },
   ],
 };
 
