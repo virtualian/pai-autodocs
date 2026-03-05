@@ -10,8 +10,8 @@ Welcome to the User section. This is where you learn what Personal AI Infrastruc
 ### Understand Personal AI Infrastructure
 
 - **[What is Personal AI Infrastructure?](/user/what-is-pai/)** — What PAI is, what makes it different, and who it's for
-- **[Your AI Remembers](/user/memory/)** — How PAI persists your projects, preferences, and decisions across sessions using memory files
-- **[Your AI Gets Better](/user/self-improvement/)** — How rating responses 1–10 and natural feedback shape PAI's behaviour over time
+- **[Your AI Remembers](/user/memory/)** — PAI's memory file scaffolding: what's in place today and the vision for automatic context persistence
+- **[Your AI Gets Better](/user/self-improvement/)** — PAI's feedback scaffolding: the 1–10 rating system exists, but closed-loop automatic improvement is still planned
 
 ### Get started
 
