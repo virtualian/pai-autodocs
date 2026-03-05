@@ -11,7 +11,7 @@ const sidebars = {
           type: 'category',
           label: 'Explanation',
           items: [
-            { type: 'doc', id: 'user/what-is-pai', label: 'What is PAI?' },
+            { type: 'doc', id: 'user/what-is-pai', label: 'What is Personal AI Infrastructure?' },
             { type: 'doc', id: 'user/memory', label: 'Your AI Remembers' },
             { type: 'doc', id: 'user/self-improvement', label: 'Your AI Gets Better' },
           ],
@@ -130,7 +130,7 @@ const sidebars = {
           label: 'Explanation',
           items: [
             { type: 'doc', id: 'contributor/architecture', label: 'System Architecture' },
-            { type: 'doc', id: 'contributor/the-algorithm', label: 'The Algorithm' },
+            { type: 'doc', id: 'contributor/the-algorithm', label: 'The PAI Algorithm' },
             { type: 'doc', id: 'contributor/memory-and-learning', label: 'Memory & Learning' },
             { type: 'doc', id: 'contributor/cli-first', label: 'CLI-First Design' },
             { type: 'doc', id: 'contributor/system-user-model', label: 'SYSTEM/USER Model' },

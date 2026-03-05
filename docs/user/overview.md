@@ -1,15 +1,15 @@
 ---
-title: "Start Here: Use PAI"
-description: "As a user, I want to understand what PAI offers and how to get started so I can benefit from a personal AI that knows me."
+title: "Start Here: Use Personal AI Infrastructure"
+description: "As a user, I want to understand what Personal AI Infrastructure offers and how to get started so I can benefit from a personal AI that knows me."
 ---
 
-Welcome to the User section. This is where you learn what PAI can do for you, get it running, and start using it day-to-day.
+Welcome to the User section. This is where you learn what Personal AI Infrastructure (PAI) can do for you, get it running, and start using it day-to-day.
 
 ## What you'll find here
 
-### Understand PAI
+### Understand Personal AI Infrastructure
 
-- **[What is PAI?](/user/what-is-pai/)** — What PAI is, what makes it different, and who it's for
+- **[What is Personal AI Infrastructure?](/user/what-is-pai/)** — What PAI is, what makes it different, and who it's for
 - **[Your AI Remembers](/user/memory/)** — How PAI persists your context, preferences, and decisions across every session
 - **[Your AI Gets Better](/user/self-improvement/)** — How feedback signals compound into a better AI over time
 
@@ -29,4 +29,4 @@ Welcome to the User section. This is where you learn what PAI can do for you, ge
 
 ## Recommended path
 
-If you're new to PAI, start with **[What is PAI?](/user/what-is-pai/)** to understand what you're getting into, then follow **[Install PAI](/user/install-pai/)** and **[Your First Session](/user/first-session/)** to get hands-on.
+If you're new, start with **[What is Personal AI Infrastructure?](/user/what-is-pai/)** to understand what you're getting into, then follow **[Install PAI](/user/install-pai/)** and **[Your First Session](/user/first-session/)** to get hands-on.

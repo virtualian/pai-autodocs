@@ -8,13 +8,18 @@ function HeroSection() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">PAI Auto-Docs</h1>
+        <h1 className="hero__title">Personal AI Infrastructure</h1>
         <p className="hero__subtitle">
-          AI-generated documentation for PAI &mdash; Personal AI Infrastructure by Daniel Miessler.
+          Auto-generated documentation for Daniel Miessler&rsquo;s{' '}
+          <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">
+            Personal AI Infrastructure
+          </a>{' '}
+          (PAI) project &mdash; an open-source agent that remembers you, learns from you,
+          and magnifies your capabilities through AI.
         </p>
         <div className={styles.buttons}>
           <Link className="button button--secondary button--lg" to="/user/what-is-pai">
-            What is PAI? &rarr;
+            What is Personal AI Infrastructure? &rarr;
           </Link>
           <Link className="button button--outline button--lg" to="/about">
             About this site
@@ -29,28 +34,28 @@ const cards = [
   {
     title: '\uD83D\uDC64 Users',
     description:
-      'Discover what PAI is, how it remembers and learns, then install it and run your first session.',
+      'Discover what Personal AI Infrastructure is, how it remembers and learns, then install it and run your first session.',
     link: '/user/what-is-pai',
-    linkText: 'Understand PAI \u2192',
+    linkText: 'Get started \u2192',
   },
   {
     title: '\u26A1 Power-Users',
     description:
-      'Learn how customisation works, then make PAI yours \u2014 personality, skills, and behaviour rules.',
+      'Learn how customisation works, then make your AI yours \u2014 personality, skills, and behaviour rules.',
     link: '/power-user/how-customization-works',
     linkText: 'Understand customisation \u2192',
   },
   {
     title: '\uD83D\uDD27 Developers',
     description:
-      "Understand PAI's extension model, then build skills, write hooks, and set up agents.",
+      "Understand the extension model, then build skills, write hooks, and set up agents.",
     link: '/developer/extension-model',
     linkText: 'Understand extensions \u2192',
   },
   {
     title: '\uD83C\uDFD7\uFE0F Contributors',
     description:
-      'Explore the architecture, the Algorithm, memory, and design philosophy behind PAI.',
+      'Explore the architecture, the Algorithm, memory, and design philosophy behind the system.',
     link: '/contributor/architecture',
     linkText: 'Explore architecture \u2192',
   },
@@ -60,11 +65,12 @@ function CardGrid() {
   return (
     <section className={styles.features}>
       <div className="container">
-        <h2>What can PAI do for me?</h2>
+        <h2>Find what you need</h2>
         <p>
-          PAI is an agent that magnifies your capabilities. It remembers you, learns from you, and
-          has dozens of specialised skills that activate automatically. It follows a structured
-          Algorithm to solve problems systematically. Here&rsquo;s how to find what you need:
+          Personal AI Infrastructure is an agent that magnifies your capabilities &mdash; it
+          remembers you, learns from you, and has dozens of specialised skills that activate
+          automatically. These docs are organised by role so you can jump straight to what
+          matters:
         </p>
         <div className="row">
           {cards.map((card, idx) => (
@@ -94,10 +100,10 @@ function DifferentiatorSection() {
   return (
     <section className={styles.differentiators}>
       <div className="container">
-        <h2>What makes PAI different</h2>
+        <h2>What makes Personal AI Infrastructure different</h2>
         <ul>
           <li>
-            <strong>It&rsquo;s an agent, not a chatbot.</strong> PAI doesn&rsquo;t just generate
+            <strong>It&rsquo;s an agent, not a chatbot.</strong> It doesn&rsquo;t just generate
             text &mdash; it thinks about your problem, brings specialised skills to bear, delegates
             to other agents, and verifies its own work.
           </li>
@@ -106,8 +112,8 @@ function DifferentiatorSection() {
             across every session. No re-explaining. No starting over.
           </li>
           <li>
-            <strong>It learns from you.</strong> Rate responses 1-10 and PAI adapts to how you think
-            and work. The AI you use on day 90 is measurably better than day 1.
+            <strong>It learns from you.</strong> Rate responses 1-10 and your AI adapts to how you
+            think and work. The AI you use on day 90 is measurably better than day 1.
           </li>
           <li>
             <strong>It has real capabilities.</strong> 27+ specialised skills &mdash; from deep
@@ -115,7 +121,7 @@ function DifferentiatorSection() {
             on what you need.
           </li>
           <li>
-            <strong>It knows your goals.</strong> PAI factors your mission, projects, and priorities
+            <strong>It knows your goals.</strong> Your mission, projects, and priorities factor
             into every interaction. Context is the starting point, not an afterthought.
           </li>
         </ul>
@@ -127,8 +133,8 @@ function DifferentiatorSection() {
 export default function Home(): React.JSX.Element {
   return (
     <Layout
-      title="PAI Auto-Docs"
-      description="AI-generated documentation for Personal AI Infrastructure by Daniel Miessler"
+      title="Personal AI Infrastructure — Documentation"
+      description="Auto-generated documentation for Daniel Miessler's Personal AI Infrastructure (PAI) project. Structured with Diataxis for users, power users, developers, and contributors."
     >
       <HeroSection />
       <main>
@@ -142,13 +148,16 @@ export default function Home(): React.JSX.Element {
                 <p>
                   This is an <strong>unofficial</strong>, AI-generated documentation site for{' '}
                   <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">
-                    PAI (Personal AI Infrastructure)
+                    Personal AI Infrastructure
                   </a>{' '}
-                  created by <strong>Daniel Miessler</strong>. Content is generated by Claude,
-                  organised using the{' '}
-                  <a href="https://diataxis.fr/">Diataxis framework</a>, and maintained by{' '}
-                  <a href="https://github.com/virtualian">@virtualian</a>. For the official PAI
-                  source, visit{' '}
+                  (PAI), created by <strong>Daniel Miessler</strong>. The PAI project focuses on
+                  building the system itself &mdash; this site complements it by providing
+                  structured, role-based documentation organised using the{' '}
+                  <a href="https://diataxis.fr/">Diataxis framework</a>
+                  : tutorials for learning, how-to guides for tasks, reference for lookup,
+                  and explanations for understanding. Maintained by{' '}
+                  <a href="https://github.com/virtualian">@virtualian</a>. For the official source,
+                  visit{' '}
                   <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">
                     Daniel&rsquo;s repository
                   </a>

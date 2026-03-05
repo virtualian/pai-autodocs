@@ -1,9 +1,9 @@
 ---
-title: "Start Here: Improve PAI"
-description: "As a contributor, I want to understand PAI's architecture and design philosophy so I can contribute meaningful improvements to the project."
+title: "Start Here: Improve the System"
+description: "As a contributor, I want to understand Personal AI Infrastructure's architecture and design philosophy so I can contribute meaningful improvements to the project."
 ---
 
-Welcome to the Contributor section. This is where you go deep into PAI's internals — the architecture, the Algorithm, memory, and design philosophy that make the system work.
+Welcome to the Contributor section. This is where you go deep into Personal AI Infrastructure's (PAI) internals — the architecture, the Algorithm, memory, and design philosophy that make the system work.
 
 ## What you'll find here
 
