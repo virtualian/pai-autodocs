@@ -16,14 +16,7 @@ function HeroSection() {
           An open-source AI agent that remembers you, learns from you,
           and magnifies your capabilities. Known as <strong>PAI</strong>.
         </p>
-        <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/user/what-is-pai">
-            Learn more &rarr;
-          </Link>
-          <Link className="button button--outline button--lg" to="/about">
-            About this site
-          </Link>
-        </div>
+
       </div>
     </header>
   );
