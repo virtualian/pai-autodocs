@@ -80,8 +80,15 @@ const config = {
         },
       ],
       navbar: {
-        title: 'PAI Docs',
-        items: [],
+        title: 'Home',
+        items: [
+          {
+            type: 'doc',
+            docId: 'user/overview',
+            position: 'left',
+            label: 'Start here',
+          },
+        ],
       },
       footer: {
         style: 'dark',
