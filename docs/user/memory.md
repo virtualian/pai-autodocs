@@ -1,12 +1,16 @@
 ---
 title: "Your AI Remembers"
-description: PAI maintains context across sessions — your projects, preferences, and history persist.
+description: PAI's memory system is designed to persist your context, preferences, and history across sessions — here's where it stands today and where it's heading.
 diataxis_type: explanation
 ---
 
+:::info Where this stands
+PAI's memory system is **partially implemented and actively evolving**. The foundation exists — PAI stores memory files, loads context at session start, and can reference past decisions. However, the seamless experience described below (automatic preference detection, effortless cross-session recall, zero-effort context building) is the **design goal**, not the current reality. Today, memory works best when you actively manage it: telling PAI what to remember, organizing memory files, and occasionally reminding it of prior context. The gap between the vision and the current state is narrowing with each release.
+:::
+
 Most AI tools forget everything between conversations. You explain your project on Monday, and by Wednesday you're starting over. Every session begins with the same ritual: re-establishing context, reminding the AI what you're working on, restating your preferences. It's like working with a brilliant colleague who has amnesia.
 
-PAI works differently. It remembers.
+PAI is designed to work differently — to remember.
 
 ## What PAI remembers
 
