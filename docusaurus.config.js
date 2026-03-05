@@ -81,18 +81,7 @@ const config = {
       ],
       navbar: {
         title: 'PAI Docs',
-        items: [
-          {
-            href: 'https://github.com/danielmiessler/Personal_AI_Infrastructure',
-            label: 'PAI Source',
-            position: 'right',
-          },
-          {
-            href: 'https://github.com/virtualian/pai-autodocs',
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
+        items: [],
       },
       footer: {
         style: 'dark',
