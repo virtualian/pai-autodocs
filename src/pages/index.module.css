@@ -5,6 +5,14 @@
   overflow: hidden;
 }
 
+.heroEyebrow {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+  margin-bottom: 0.25rem;
+}
+
 .buttons {
   display: flex;
   align-items: center;
