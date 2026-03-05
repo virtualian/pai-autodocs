@@ -80,13 +80,13 @@ const config = {
         },
       ],
       navbar: {
-        title: 'Home',
+        title: 'HOME',
         items: [
           {
             type: 'doc',
             docId: 'user/overview',
             position: 'left',
-            label: 'Start here',
+            label: 'START HERE',
           },
         ],
       },

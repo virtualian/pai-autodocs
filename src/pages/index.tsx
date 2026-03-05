@@ -16,7 +16,6 @@ function HeroSection() {
           An open-source AI agent that remembers you, learns from you,
           and magnifies your capabilities. Known as <strong>PAI</strong>.
         </p>
-
       </div>
     </header>
   );
@@ -69,7 +68,7 @@ function CardGrid() {
                   <p>{card.description}</p>
                 </div>
                 <div className="card__footer">
-                  <Link className="button button--primary button--sm" to={card.link}>
+                  <Link className={clsx('button button--primary', styles.cardButton)} to={card.link}>
                     {card.linkText}
                   </Link>
                 </div>
@@ -87,28 +86,43 @@ function DifferentiatorSection() {
     <section className={styles.differentiators}>
       <div className="container">
         <h2>What makes PAI different</h2>
-        <ul>
-          <li>
-            <strong>It&rsquo;s an agent, not a chatbot.</strong> It thinks about your problem,
-            brings specialised skills to bear, delegates to other agents, and verifies its own work.
-          </li>
-          <li>
-            <strong>It remembers.</strong> Your projects, preferences, and past conversations persist
-            across every session. No re-explaining. No starting over.
-          </li>
-          <li>
-            <strong>It learns from you.</strong> Rate responses 1&ndash;10 and your AI adapts to how
-            you think and work. Day 90 is measurably better than day 1.
-          </li>
-          <li>
-            <strong>It has real capabilities.</strong> 27+ specialised skills &mdash; from deep
-            research to security testing &mdash; that activate automatically.
-          </li>
-          <li>
-            <strong>It knows your goals.</strong> Your mission, projects, and priorities factor
-            into every interaction. Context is the starting point, not an afterthought.
-          </li>
-        </ul>
+        <div className={styles.diffGrid}>
+          <div className={styles.diffItem}>
+            <h4>Agent, not chatbot</h4>
+            <p>
+              It thinks about your problem, brings specialised skills to bear,
+              delegates to other agents, and verifies its own work.
+            </p>
+          </div>
+          <div className={styles.diffItem}>
+            <h4>It remembers</h4>
+            <p>
+              Your projects, preferences, and past conversations persist across
+              every session. No re-explaining. No starting over.
+            </p>
+          </div>
+          <div className={styles.diffItem}>
+            <h4>It learns from you</h4>
+            <p>
+              Rate responses 1&ndash;10 and your AI adapts to how you think and
+              work. Day 90 is measurably better than day 1.
+            </p>
+          </div>
+          <div className={styles.diffItem}>
+            <h4>Real capabilities</h4>
+            <p>
+              27+ specialised skills &mdash; from deep research to security
+              testing &mdash; that activate automatically.
+            </p>
+          </div>
+          <div className={styles.diffItem}>
+            <h4>It knows your goals</h4>
+            <p>
+              Your mission, projects, and priorities factor into every
+              interaction. Context is the starting point, not an afterthought.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -133,6 +147,7 @@ export default function Home(): React.JSX.Element {
                   </a>{' '}
                   by <strong>Daniel Miessler</strong>. Structured with{' '}
                   <a href="https://diataxis.fr/">Diataxis</a>. Maintained by{' '}
+                  <a href="https://claude.ai">Claude</a> and{' '}
                   <a href="https://github.com/virtualian">@virtualian</a>.
                 </p>
               </div>

@@ -6,19 +6,12 @@
 }
 
 .heroEyebrow {
-  font-size: 1.1rem;
+  font-size: 1.35rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.85;
-  margin-bottom: 0.25rem;
-}
-
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  letter-spacing: 0.12em;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 .features {
@@ -29,6 +22,12 @@
   margin-bottom: 1.5rem;
 }
 
+.cardButton {
+  font-size: 1rem;
+  padding: 0.6rem 1.4rem;
+  font-weight: 400;
+}
+
 .noteBox {
   padding: 1.5rem 0;
 }
@@ -37,10 +36,29 @@
   padding: 2rem 0 3rem;
 }
 
-.differentiators ul {
-  max-width: 48rem;
+.diffGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+  max-width: 64rem;
 }
 
-.differentiators li {
-  margin-bottom: 0.75rem;
+.diffItem {
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-card-background-color);
+}
+
+.diffItem h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.diffItem p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  opacity: 0.85;
 }
