@@ -1,7 +1,7 @@
 {
   "name": "pai-autodocs",
   "description": "AI-generated documentation for Personal AI Infrastructure by Daniel Miessler",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
