@@ -83,12 +83,6 @@ const config = {
         title: 'PAI Docs',
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'docs',
-            position: 'left',
-            label: 'Docs',
-          },
-          {
             href: 'https://github.com/danielmiessler/Personal_AI_Infrastructure',
             label: 'PAI Source',
             position: 'right',
