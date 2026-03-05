@@ -64,7 +64,7 @@ const config = {
       announcementBar: {
         id: 'pai_attribution',
         content:
-          '\u25C6 <strong><a href="https://github.com/danielmiessler">Daniel Miessler</a></strong>\'s <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">Personal AI Infrastructure</a> \u2014 Unofficial, AI-generated docs \u00b7 <a href="/about">About this site</a>',
+          '\u25C6 Unofficial, AI-generated docs for <strong><a href="https://github.com/danielmiessler">Daniel Miessler</a></strong>\'s <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">Personal AI Infrastructure</a> \u00b7 <a href="/about">About this site</a>',
         backgroundColor: 'var(--ifm-color-primary-darkest)',
         textColor: 'var(--ifm-color-primary-lightest)',
         isCloseable: false,
