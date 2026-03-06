@@ -44,7 +44,7 @@ You had a detailed conversation about your team's coding standards. Two weeks la
 
 PAI gets more useful the longer you use it. Here's what that progression feels like.
 
-<pre class="mermaid">
+```mermaid
 graph LR
     A["📅 Day 1\nName, goals,\nbasic prefs"] --> B["📅 Week 1\nWork style,\ncommon tasks"]
     B --> C["📅 Month 1\nDeep project context,\nformat preferences"]
@@ -54,7 +54,7 @@ graph LR
     style B fill:#93c5fd,stroke:#2563eb,color:#1e293b
     style C fill:#60a5fa,stroke:#1d4ed8,color:#ffffff
     style D fill:#3b82f6,stroke:#1e40af,color:#ffffff
-</pre>
+```
 
 **Day 1.** PAI knows your name, your stated goals, and any preferences you shared during setup. It's helpful, but generic. Like a smart new hire on their first day -- capable, but still learning the landscape.
 

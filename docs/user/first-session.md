@@ -76,7 +76,7 @@ At the end of every response, PAI notes what worked and what to adjust next time
 
 Here's the process PAI follows for every meaningful request:
 
-<pre class="mermaid">
+```mermaid
 graph LR
     A["👁️ Observe"] --> B["🧠 Think"]
     B --> C["📋 Plan"]
@@ -90,7 +90,7 @@ graph LR
     style D fill:#f59e0b,stroke:#d97706,color:#ffffff
     style E fill:#10b981,stroke:#059669,color:#ffffff
     style F fill:#ec4899,stroke:#db2777,color:#ffffff
-</pre>
+```
 
 Each step builds on the last. By the time you get the output, it has been observed, planned, built, and verified. Not just generated.
 

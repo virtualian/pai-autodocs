@@ -106,7 +106,7 @@ A 3 with an explanation is more valuable than a silent 7. The explanation gives 
 
 PAI's improvement follows a continuous cycle. Every pass through this loop makes your experience incrementally better.
 
-<pre class="mermaid">
+```mermaid
 graph TD
     A["🗣️ You use PAI"] --> B["⭐ You give feedback"]
     B --> C["📡 PAI captures signals"]
@@ -121,7 +121,7 @@ graph TD
     style D fill:#f59e0b,stroke:#d97706,color:#ffffff
     style E fill:#10b981,stroke:#059669,color:#ffffff
     style F fill:#3b82f6,stroke:#1e40af,color:#ffffff
-</pre>
+```
 
 The system you use after three months is measurably more effective than the one you started with -- not because the underlying AI model changed, but because PAI has built a detailed understanding of what works for you. Your feedback is the engine that drives that improvement.
 
