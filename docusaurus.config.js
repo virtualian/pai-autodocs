@@ -5,7 +5,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 const config = {
   title: 'Personal AI Infrastructure Docs',
   tagline: 'Auto-generated documentation for Daniel Miessler\'s Personal AI Infrastructure (PAI) project',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   url: 'https://pai-autodocs.vercel.app',
   baseUrl: '/',
