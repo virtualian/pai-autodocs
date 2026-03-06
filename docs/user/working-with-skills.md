@@ -145,9 +145,9 @@ When your request spans multiple domains, PAI automatically combines skills into
 
 ```mermaid
 graph LR
-    A["🔍 Research\nGather intelligence"] --> B["📊 Visualize\nCreate charts & diagrams"]
-    B --> C["📝 Write\nStructure into report"]
-    C --> D["✅ Deliver\nPolished result"]
+    A["🔍 Research<br/>Gather intelligence"] --> B["📊 Visualize<br/>Create charts & diagrams"]
+    B --> C["📝 Write<br/>Structure into report"]
+    C --> D["✅ Deliver<br/>Polished result"]
 
     style A fill:#3b82f6,stroke:#1e40af,color:#ffffff
     style B fill:#8b5cf6,stroke:#6d28d9,color:#ffffff

@@ -46,9 +46,9 @@ PAI gets more useful the longer you use it. Here's what that progression feels l
 
 ```mermaid
 graph LR
-    A["📅 Day 1\nName, goals,\nbasic prefs"] --> B["📅 Week 1\nWork style,\ncommon tasks"]
-    B --> C["📅 Month 1\nDeep project context,\nformat preferences"]
-    C --> D["📅 Month 3\nFull understanding,\nanticipates needs"]
+    A["📅 Day 1<br/>Name, goals,<br/>basic prefs"] --> B["📅 Week 1<br/>Work style,<br/>common tasks"]
+    B --> C["📅 Month 1<br/>Deep project context,<br/>format preferences"]
+    C --> D["📅 Month 3<br/>Full understanding,<br/>anticipates needs"]
 
     style A fill:#bfdbfe,stroke:#3b82f6,color:#1e293b
     style B fill:#93c5fd,stroke:#2563eb,color:#1e293b
