@@ -26,6 +26,8 @@ const sidebars = {
             { type: 'doc', id: 'user/install-pai', label: 'Install PAI' },
             { type: 'doc', id: 'user/first-session', label: 'Your First Session' },
             { type: 'doc', id: 'user/set-up-telos', label: 'Set Up Your Telos' },
+            { type: 'doc', id: 'user/first-fabric-pattern', label: 'Your First Fabric Pattern' },
+            { type: 'doc', id: 'user/first-rating', label: 'Your First Rating' },
           ],
         },
         {
@@ -39,6 +41,7 @@ const sidebars = {
             { type: 'doc', id: 'user/think-through-decisions', label: 'Think Through Decisions' },
             { type: 'doc', id: 'user/create-visuals', label: 'Create Visual Content' },
             { type: 'doc', id: 'user/manage-goals', label: 'Manage Your Goals' },
+            { type: 'doc', id: 'user/manage-memory', label: 'Manage Your Memory' },
             { type: 'doc', id: 'user/giving-feedback', label: 'Give Feedback' },
           ],
         },
@@ -48,6 +51,8 @@ const sidebars = {
           items: [
             { type: 'doc', id: 'user/skills-catalog', label: 'Skills Catalog' },
             { type: 'doc', id: 'user/telos-reference', label: 'Telos Reference' },
+            { type: 'doc', id: 'user/fabric-patterns-reference', label: 'Fabric Patterns Reference' },
+            { type: 'doc', id: 'user/memory-reference', label: 'Memory Reference' },
           ],
         },
       ],
