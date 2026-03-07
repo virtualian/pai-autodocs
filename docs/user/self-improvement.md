@@ -1,12 +1,16 @@
 ---
 title: "Your AI Gets Better Over Time"
-description: PAI captures your feedback and adapts — the AI you use on day 90 is measurably better than day 1.
+description: PAI's self-improvement system captures feedback and adapts — here's the vision and how much of it works today.
 diataxis_type: explanation
 ---
 
-The AI you use after three months is measurably better than the one you started with -- because it learned from you.
+:::info Where this stands
+PAI's self-improvement system is **early-stage**. The rating mechanism exists — you can rate responses 1–10 and PAI captures that signal. Implicit sentiment detection is partially implemented. However, the sophisticated feedback loop described below (pattern detection across sessions, automatic skill-level improvements, format adaptation from accumulated evidence) is largely **aspirational**. Today, ratings are captured and stored, but the degree to which they systematically improve future responses depends on how well memory and context carry those signals forward. This is an active area of development.
+:::
 
-This is not vague machine learning happening in the cloud. PAI captures concrete signals from your interactions and uses them to update how it works for you. Every rating you give, every reaction you have, shapes the system into something that fits the way you think and work. The improvement is tangible, specific, and entirely yours.
+The vision: the AI you use after three months is measurably better than the one you started with — because it learned from you.
+
+PAI is designed to capture concrete signals from your interactions and use them to update how it works for you. Every rating you give, every reaction you have, is intended to shape the system into something that fits the way you think and work.
 
 ## Your AI gets better over time
 
@@ -102,7 +106,7 @@ A 3 with an explanation is more valuable than a silent 7. The explanation gives 
 
 PAI's improvement follows a continuous cycle. Every pass through this loop makes your experience incrementally better.
 
-<pre class="mermaid">
+```mermaid
 graph TD
     A["🗣️ You use PAI"] --> B["⭐ You give feedback"]
     B --> C["📡 PAI captures signals"]
@@ -117,7 +121,7 @@ graph TD
     style D fill:#f59e0b,stroke:#d97706,color:#ffffff
     style E fill:#10b981,stroke:#059669,color:#ffffff
     style F fill:#3b82f6,stroke:#1e40af,color:#ffffff
-</pre>
+```
 
 The system you use after three months is measurably more effective than the one you started with -- not because the underlying AI model changed, but because PAI has built a detailed understanding of what works for you. Your feedback is the engine that drives that improvement.
 

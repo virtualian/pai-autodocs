@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Blue rounded square background -->
+  <rect width="32" height="32" rx="7" fill="#3B82F6"/>
+  <!-- Open book: left page -->
+  <path d="M16 8 C16 8 12 7 7 9 L7 24 C12 22 16 23 16 23z" fill="white" opacity="0.95"/>
+  <!-- Open book: right page -->
+  <path d="M16 8 C16 8 20 7 25 9 L25 24 C20 22 16 23 16 23z" fill="white"/>
+  <!-- Spine -->
+  <line x1="16" y1="8" x2="16" y2="23" stroke="#3B82F6" stroke-width="0.75"/>
+</svg>

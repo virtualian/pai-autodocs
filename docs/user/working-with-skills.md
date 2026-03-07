@@ -143,17 +143,17 @@ PAI will bring in structured reasoning that surfaces trade-offs and blind spots 
 
 When your request spans multiple domains, PAI automatically combines skills into a pipeline. You do not need to orchestrate this yourself -- just describe the full outcome you want.
 
-<pre class="mermaid">
+```mermaid
 graph LR
-    A["🔍 Research\nGather intelligence"] --> B["📊 Visualize\nCreate charts & diagrams"]
-    B --> C["📝 Write\nStructure into report"]
-    C --> D["✅ Deliver\nPolished result"]
+    A["🔍 Research<br/>Gather intelligence"] --> B["📊 Visualize<br/>Create charts & diagrams"]
+    B --> C["📝 Write<br/>Structure into report"]
+    C --> D["✅ Deliver<br/>Polished result"]
 
     style A fill:#3b82f6,stroke:#1e40af,color:#ffffff
     style B fill:#8b5cf6,stroke:#6d28d9,color:#ffffff
     style C fill:#f59e0b,stroke:#d97706,color:#ffffff
     style D fill:#10b981,stroke:#059669,color:#ffffff
-</pre>
+```
 
 For example:
 

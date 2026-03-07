@@ -1,9 +1,9 @@
 ---
-title: "Start Here: Extend PAI"
-description: "As a developer, I want to build new capabilities for PAI so I can automate custom workflows with skills, hooks, and agents."
+title: "Start Here: Extend Your AI"
+description: "As a developer, I want to build new capabilities for Personal AI Infrastructure so I can automate custom workflows with skills, hooks, and agents."
 ---
 
-Welcome to the Developer section. This is where you learn to extend PAI with your own skills, hooks, and agents — adding new capabilities without forking the core system.
+Welcome to the Developer section. This is where you learn to extend Personal AI Infrastructure (PAI) with your own skills, hooks, and agents — adding new capabilities without forking the core system.
 
 ## What you'll find here
 

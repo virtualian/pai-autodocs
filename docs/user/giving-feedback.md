@@ -96,7 +96,7 @@ When you give a rating of 1 to 3, PAI does more than just record a negative sign
 
 **The deep review process:**
 
-<pre class="mermaid">
+```mermaid
 graph TD
     A["⭐ Low rating received"] --> B["📋 Context capture"]
     B --> C["🔍 Gap analysis"]
@@ -110,7 +110,7 @@ graph TD
     style D fill:#8b5cf6,stroke:#6d28d9,color:#ffffff
     style E fill:#3b82f6,stroke:#1e40af,color:#ffffff
     style F fill:#10b981,stroke:#059669,color:#ffffff
-</pre>
+```
 
 1. **Context capture** -- PAI saves the full interaction: your original request, any clarifications, its response, and your rating with explanation
 2. **Gap analysis** -- identifies specifically where the response diverged from what you needed

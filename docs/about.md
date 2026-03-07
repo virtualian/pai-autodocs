@@ -1,6 +1,6 @@
 ---
 title: About This Site
-description: How PAI Auto-Docs relates to Daniel Miessler's PAI project.
+description: How this documentation site relates to Daniel Miessler's Personal AI Infrastructure (PAI) project.
 ---
 
 ## What is PAI?
@@ -9,9 +9,13 @@ description: How PAI Auto-Docs relates to Daniel Miessler's PAI project.
 
 The official PAI source lives at **[github.com/danielmiessler/Personal_AI_Infrastructure](https://github.com/danielmiessler/Personal_AI_Infrastructure)**.
 
-## What is PAI Auto-Docs?
+## Why does this site exist?
 
-This site is an **unofficial, AI-generated documentation companion** for PAI. It exists to make PAI more accessible by providing structured, role-based documentation organised using the [Diataxis framework](https://diataxis.fr/).
+The PAI project has understandably focused on functionality and technical implementation — Daniel's energy has rightly gone into building the system itself. This site exists to complement that work by improving accessibility to the project and encouraging adoption.
+
+## What is this site?
+
+This site is an **unofficial, AI-generated documentation companion** for PAI. It provides structured, role-based documentation organised using the [Diataxis framework](https://diataxis.fr/) — tutorials for learning, how-to guides for tasks, reference for lookup, and explanations for understanding. This structure lets different audiences (users, power users, developers, contributors) find content suited to their needs and experience level.
 
 ### Key facts
 
@@ -22,7 +26,7 @@ This site is an **unofficial, AI-generated documentation companion** for PAI. It
 
 ## How it works
 
-PAI Auto-Docs uses an automated pipeline to stay in sync with the official PAI repository:
+This site uses an automated pipeline to stay in sync with the official PAI repository:
 
 1. **Daily detection** — A GitHub Actions workflow checks the PAI repo for new commits every day at 6am UTC
 2. **Incremental regeneration** — When changes are detected, only the affected documentation pages are regenerated using the Claude Batch API

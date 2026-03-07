@@ -1,12 +1,16 @@
 ---
 title: "Your AI Remembers"
-description: PAI maintains context across sessions — your projects, preferences, and history persist.
+description: PAI's memory system is designed to persist your context, preferences, and history across sessions — here's where it stands today and where it's heading.
 diataxis_type: explanation
 ---
 
+:::info Where this stands
+PAI's memory system is **partially implemented and actively evolving**. The foundation exists — PAI stores memory files, loads context at session start, and can reference past decisions. However, the seamless experience described below (automatic preference detection, effortless cross-session recall, zero-effort context building) is the **design goal**, not the current reality. Today, memory works best when you actively manage it: telling PAI what to remember, organizing memory files, and occasionally reminding it of prior context. The gap between the vision and the current state is narrowing with each release.
+:::
+
 Most AI tools forget everything between conversations. You explain your project on Monday, and by Wednesday you're starting over. Every session begins with the same ritual: re-establishing context, reminding the AI what you're working on, restating your preferences. It's like working with a brilliant colleague who has amnesia.
 
-PAI works differently. It remembers.
+PAI is designed to work differently — to remember.
 
 ## What PAI remembers
 
@@ -40,17 +44,17 @@ You had a detailed conversation about your team's coding standards. Two weeks la
 
 PAI gets more useful the longer you use it. Here's what that progression feels like.
 
-<pre class="mermaid">
+```mermaid
 graph LR
-    A["📅 Day 1\nName, goals,\nbasic prefs"] --> B["📅 Week 1\nWork style,\ncommon tasks"]
-    B --> C["📅 Month 1\nDeep project context,\nformat preferences"]
-    C --> D["📅 Month 3\nFull understanding,\nanticipates needs"]
+    A["📅 Day 1<br/>Name, goals,<br/>basic prefs"] --> B["📅 Week 1<br/>Work style,<br/>common tasks"]
+    B --> C["📅 Month 1<br/>Deep project context,<br/>format preferences"]
+    C --> D["📅 Month 3<br/>Full understanding,<br/>anticipates needs"]
 
     style A fill:#bfdbfe,stroke:#3b82f6,color:#1e293b
     style B fill:#93c5fd,stroke:#2563eb,color:#1e293b
     style C fill:#60a5fa,stroke:#1d4ed8,color:#ffffff
     style D fill:#3b82f6,stroke:#1e40af,color:#ffffff
-</pre>
+```
 
 **Day 1.** PAI knows your name, your stated goals, and any preferences you shared during setup. It's helpful, but generic. Like a smart new hire on their first day -- capable, but still learning the landscape.
 

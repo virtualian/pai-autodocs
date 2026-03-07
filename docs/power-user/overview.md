@@ -1,9 +1,9 @@
 ---
-title: "Start Here: Customise PAI"
-description: "As a power user, I want to personalise my AI's behaviour, personality, and settings so PAI works exactly the way I prefer."
+title: "Start Here: Customise Your AI"
+description: "As a power user, I want to personalise my AI's behaviour, personality, and settings so Personal AI Infrastructure works exactly the way I prefer."
 ---
 
-Welcome to the Power User section. This is where you make PAI yours — adjusting its personality, configuring skills, and fine-tuning every aspect of its behaviour.
+Welcome to the Power User section. This is where you make Personal AI Infrastructure (PAI) yours — adjusting its personality, configuring skills, and fine-tuning every aspect of its behaviour.
 
 ## What you'll find here
 
