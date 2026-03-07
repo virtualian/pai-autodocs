@@ -20,15 +20,23 @@ Welcome to the User section. This is where you learn what Personal AI Infrastruc
 
 - **[Install PAI](/user/install-pai/)** — Set up PAI on your machine in minutes
 - **[Your First Session](/user/first-session/)** — See PAI in action with a guided walkthrough
+- **[Set Up Your Telos](/user/set-up-telos/)** — Define your goals, projects, and values so PAI works in your context
 
 ### Use PAI effectively
 
-- **[Give Feedback](/user/giving-feedback/)** — How to rate responses and express preferences so PAI learns what works for you
 - **[Work With Skills](/user/working-with-skills/)** — Discover and use PAI's 27+ specialised capabilities
+- **[Research a Topic](/user/research-topics/)** — Quick overviews, standard investigations, and deep multi-source research
+- **[Analyze Content](/user/analyze-content/)** — Extract insights from articles, videos, podcasts, and documents
+- **[Use Fabric Patterns](/user/use-fabric-patterns/)** — Apply structured analysis patterns for consistent, repeatable results
+- **[Think Through Decisions](/user/think-through-decisions/)** — Multi-perspective debate, red-teaming, and first-principles analysis
+- **[Create Visual Content](/user/create-visuals/)** — Generate images, diagrams, flowcharts, and infographics
+- **[Manage Your Goals](/user/manage-goals/)** — Keep your Telos current as priorities shift
+- **[Give Feedback](/user/giving-feedback/)** — Rate responses so PAI learns what works for you
 
 ### Look things up
 
 - **[Skills Catalog](/user/skills-catalog/)** — The complete reference of every skill PAI ships with
+- **[Telos Reference](/user/telos-reference/)** — All 10 Telos files: purpose, format, and contents
 
 ## Recommended path
 
