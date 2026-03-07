@@ -60,7 +60,8 @@ PAI is created by [Daniel Miessler](https://github.com/danielmiessler), who also
 
 ## What to read next
 
-- **[Your AI Remembers](/user/memory/)** — How memory persists across every session
-- **[Your AI Gets Better](/user/self-improvement/)** — How feedback drives improvement
+- **[The Algorithm](/user/the-algorithm/)** — How PAI's structured problem-solving loop actually works
+- **[Telos: Your Goals](/user/telos/)** — How PAI understands who you are and what you're working toward
+- **[Fabric Patterns](/user/fabric/)** — 200+ analysis patterns integrated directly into PAI
 - **[Install PAI](/user/install-pai/)** — Get PAI running on your machine
 - **[Your First Session](/user/first-session/)** — See PAI in action

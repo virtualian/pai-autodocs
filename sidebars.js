@@ -12,6 +12,9 @@ const sidebars = {
           label: 'Explanation',
           items: [
             { type: 'doc', id: 'user/what-is-pai', label: 'What is Personal AI Infrastructure?' },
+            { type: 'doc', id: 'user/the-algorithm', label: 'The Algorithm' },
+            { type: 'doc', id: 'user/telos', label: 'Telos: Your Goals' },
+            { type: 'doc', id: 'user/fabric', label: 'Fabric Patterns' },
             { type: 'doc', id: 'user/memory', label: 'Your AI Remembers' },
             { type: 'doc', id: 'user/self-improvement', label: 'Your AI Gets Better' },
           ],
