@@ -179,7 +179,7 @@ The Algorithm's THINK phase selects the appropriate pattern based on ISC criteri
 
 When an agent completes work, two things happen:
 
-1. **Output capture** -- The `SubagentStop` hook fires and the AgentOutputCapture hook writes the agent's output to `MEMORY/RESEARCH/`.
+1. **Output capture** -- When an agent returns its result, the output is written to `MEMORY/RESEARCH/` by the calling workflow.
 2. **Voice notification** -- If the agent has a voice mapping (all named agents do; custom agents get one via hash), a voice notification speaks the completion summary.
 
 Voice routing follows the agent identity. If Serena (Architect) completes a design review, the voice notification uses Serena's UK Female voice. If Dev (Intern) finishes a research task, it uses Dev's high-energy voice. This audible differentiation lets you track which agent is reporting without reading the terminal.

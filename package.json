@@ -1,7 +1,7 @@
 {
   "name": "pai-autodocs",
   "description": "AI-generated documentation for Personal AI Infrastructure by Daniel Miessler",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -20,6 +20,7 @@
     "@docusaurus/preset-classic": "^3.7.0",
     "@docusaurus/theme-mermaid": "^3.7.0",
     "@easyops-cn/docusaurus-search-local": "^0.46.0",
+    "@vercel/analytics": "^1.6.1",
     "clsx": "^2.1.0",
     "prism-react-renderer": "^2.4.0",
     "react": "^18.3.0",
@@ -30,7 +31,15 @@
     "@docusaurus/types": "^3.7.0"
   },
   "browserslist": {
-    "production": [">0.5%", "not dead", "not op_mini all"],
-    "development": ["last 3 chrome version", "last 3 firefox version", "last 5 safari version"]
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
   }
 }

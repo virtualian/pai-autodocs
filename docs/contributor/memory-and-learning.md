@@ -171,9 +171,9 @@ bun run ~/.claude/skills/PAI/Tools/LearningPatternSynthesis.ts --week
 
 Reports are written to `LEARNING/SYNTHESIS/` and highlight trends like which skills consistently underperform or which types of tasks produce the highest satisfaction.
 
-### FailureCapture
+### Failure context dumps
 
-Triggered automatically by sentiment and rating hooks when a rating of 1-3 is detected. Not typically run manually. It assembles the full context dump (transcript, sentiment, tool calls, analysis) and writes it to `LEARNING/FAILURES/`.
+When the `RatingCapture` hook detects a rating of 1-3, it triggers a full context dump automatically. This assembles the transcript, sentiment analysis, tool call history, and a human-readable analysis into `LEARNING/FAILURES/`. This is not a separate tool — it is a code path within the `RatingCapture` hook.
 
 ## STATE: ephemeral runtime data
 
