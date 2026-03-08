@@ -203,6 +203,7 @@ const sidebars = {
       items: [
         { type: 'doc', id: 'about', label: 'Overview' },
         { type: 'doc', id: 'changelog', label: 'Changelog' },
+        { type: 'doc', id: 'vercel-web-analytics', label: 'Vercel Web Analytics Guide' },
       ],
     },
   ],
