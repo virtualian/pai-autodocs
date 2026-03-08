@@ -11,6 +11,34 @@ All notable changes to this documentation site are tracked here. This changelog 
 
 ---
 
+## v1.2.0 — 2026-03-08
+
+**PAI version:** v4.0.3 (Algorithm v3.7.0)
+
+### Added
+
+- 23 new documentation pages filling Diataxis quadrant gaps across all four audience roles
+- Tutorials: first-session, first-skill, first-cli-tool, first-contribution, first-hook
+- How-to guides: configure-skills, customise-behaviour, steering-rules, voice-notifications, troubleshooting, privacy, manage-memory
+- Reference: skill-file-format, workflow-file-format, skill-lifecycle, directory-conventions, versioning, testing
+- Explanation: system-user-boundary, principles
+
+### Fixed
+
+- Replaced all invented hook names (FormatReminder, AgentFactory, FailureCapture, AgentOutputCapture, ExplicitRatingCapture, ImplicitSentimentCapture, StopOrchestrator, CheckVersion, SessionSummary) with actual production hooks from THEHOOKSYSTEM.md
+- Corrected hook-types.md with all 21 production hooks across 7 event types
+- Removed obsolete RAW/ directory references from memory system docs (v7.0 is projects-native)
+- Fixed ISC acronym from "Intent-Skill-Confidence" to "Ideal State Criteria"
+- Fixed tables trapped inside markdown code fences that rendered as raw text (6 instances across 4 files)
+- Removed duplicate passage in first-session.md
+- Standardised skill count references to "dozens of skills" instead of conflicting 27/38 counts
+
+### Improved
+
+- Restructured user/memory.md and user/self-improvement.md to separate working features from roadmap
+- Rewrote contributor/architecture.md data flow section for Algorithm v3.7.0 accuracy
+- Corrected sidebar ordering in Contributors section to match Diataxis pattern
+
 ## v1.1.0 — 2026-03-05
 
 **PAI version:** v4.0.3 (Algorithm v3.7.0)

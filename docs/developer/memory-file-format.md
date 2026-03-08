@@ -185,7 +185,7 @@ These are human-readable records of specific learnings. Each file describes what
 ### Failure context dumps
 
 **Location:** `LEARNING/FAILURES/YYYY-MM/{timestamp}_{description}/`
-**Written by:** `RatingCapture.hook.ts` via `FailureCapture.ts`
+**Written by:** `RatingCapture` hook (low-rating code path)
 **Trigger:** Ratings of 1-3
 
 Each failure directory contains:
