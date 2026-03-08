@@ -13,6 +13,16 @@ const config = {
   organizationName: 'virtualian',
   projectName: 'pai-autodocs',
 
+  scripts: [
+    {
+      src: 'https://vercel.live/_next-live/feedback/feedback.js',
+      async: true,
+      'data-explicit-opt-in': 'true',
+      'data-owner-id': 'team_KnH1LghX1dstWfiTtPekpVqJ',
+      'data-project-id': 'prj_vGAortNHMEAYzvuBZPePw1CQLdmY',
+    },
+  ],
+
   trailingSlash: true,
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'warn',
