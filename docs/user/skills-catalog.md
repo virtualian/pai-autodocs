@@ -4,7 +4,7 @@ description: Browse all the built-in skills PAI offers — from research and sec
 diataxis_type: reference
 ---
 
-PAI comes with 27 built-in skills that activate automatically based on what you ask for. You do not need to memorize skill names or use special commands. Just describe what you need and PAI picks the right skill.
+PAI comes with dozens of built-in skills that activate automatically based on what you ask for. You do not need to memorize skill names or use special commands. Just describe what you need and PAI picks the right skill.
 
 This catalog is organized by the kind of work you are trying to do, with example prompts for each skill so you can see how to get started.
 

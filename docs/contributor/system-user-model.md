@@ -183,6 +183,7 @@ This is the trade-off of replacement over merge: you get predictability at the c
 
 ## What to read next
 
+- [SYSTEM vs USER: What's Yours](/power-user/system-user-boundary/) -- The practical power-user guide to file ownership and collisions
 - [Customize Your AI](/power-user/customize-your-ai/) -- Hands-on tutorial for creating USER overrides
 - [Configuration Reference](/power-user/configuration/) -- Complete list of all configuration files
 - [Architecture](/contributor/architecture/) -- How the SYSTEM/USER model fits into the broader architecture

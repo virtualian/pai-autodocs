@@ -4,51 +4,49 @@ description: PAI's memory system is designed to persist your context, preference
 diataxis_type: explanation
 ---
 
-:::info Where this stands
-PAI's memory system is **partially implemented and actively evolving**. The foundation exists — PAI stores memory files, loads context at session start, and can reference past decisions. However, the seamless experience described below (automatic preference detection, effortless cross-session recall, zero-effort context building) is the **design goal**, not the current reality. Today, memory works best when you actively manage it: telling PAI what to remember, organizing memory files, and occasionally reminding it of prior context. The gap between the vision and the current state is narrowing with each release.
-:::
-
 Most AI tools forget everything between conversations. You explain your project on Monday, and by Wednesday you're starting over. Every session begins with the same ritual: re-establishing context, reminding the AI what you're working on, restating your preferences. It's like working with a brilliant colleague who has amnesia.
 
 PAI is designed to work differently — to remember.
 
-## What PAI remembers
+## What works today
 
-PAI builds a persistent understanding of you and your work. This isn't something you configure or maintain. It happens naturally as you use it.
+PAI's memory system has a solid foundation. These capabilities are production-ready:
 
-**Your active projects and recent work.** PAI knows what you were working on yesterday, last week, and last month. You can say "that bug I was fixing" and it knows which one. You can reference "the migration we discussed" without specifying which migration, which database, or when the conversation happened. PAI tracks the thread.
+**Goals and project context.** PAI loads your TELOS files (goals, projects, priorities) at session start. You can reference active projects and PAI knows the context. Your goals inform every interaction.
 
-**Your preferences.** How you like information presented -- tables versus prose, concise versus detailed, formal versus casual. Whether you prefer seeing options laid out or a single strong recommendation. These preferences build up naturally over time. You never fill out a settings page. PAI simply pays attention to what works for you.
+**Work tracking.** PAI tracks work sessions through PRD files in `MEMORY/WORK/`. When you return to a task, the criteria, decisions, and progress are all there.
 
-**Past decisions and their outcomes.** If you tried an approach that didn't work, PAI remembers. It won't suggest the same failed strategy again. More importantly, it remembers *why* something failed, so it can steer you away from similar pitfalls even when the surface details look different.
+**Ratings and feedback signals.** Every rating you give (1-10) is captured to `MEMORY/SIGNALS/ratings.jsonl`. Low ratings trigger learning captures. These signals accumulate and inform future behaviour.
 
-**Your goals and priorities.** What you're working toward, upcoming deadlines, what matters most to you right now. PAI factors this into every conversation. When you ask for help planning your week, it already knows what's on your plate.
+**Learnings.** Significant work sessions capture learnings to `MEMORY/LEARNING/`, organised by domain (SYSTEM, ALGORITHM). These are referenced in future sessions.
 
-**Previous conversations.** Context from earlier sessions carries forward. A decision you made last Tuesday, a tradeoff you weighed last month, a direction you committed to last quarter -- all of it is available. You don't need to re-explain.
+**Relationship context.** PAI captures observations and interaction patterns to `MEMORY/RELATIONSHIP/`, building a picture of how you work over time.
 
-## What this looks like in practice
+**Session context loading.** At session start, the LoadContext hook injects recent work summaries, learning signals, and relationship context. You don't start from zero.
 
-The real value of persistent memory shows up in everyday moments. Here are a few.
+Today, memory works best when you actively participate: tell PAI what to remember, organise your TELOS files, and give ratings consistently. The system captures signals automatically, but the quality of recall depends on how well context is structured.
 
-On Monday, you discuss a bug in the authentication module. On Wednesday, you say "that auth bug" and PAI knows exactly which one -- the session token expiry issue you identified three days ago. No clarification needed. No searching through old conversations.
+## Where it's heading
 
-You mentioned preferring tables over bullet lists three weeks ago. PAI still formats information that way without being reminded. It noticed what you responded well to and adapted. You probably forgot you ever stated the preference. PAI didn't.
+The vision for PAI's memory system goes further than what works today. These capabilities are under active development:
 
-You set a goal to launch a feature by March. When you discuss project planning two weeks later, PAI factors that deadline into its suggestions. It might flag that a particular approach, while thorough, would push you past your timeline. It keeps your goals in view even when you're deep in the details.
+**Automatic preference detection.** PAI will notice that you consistently prefer tables over bullet lists, concise over verbose, and formal over casual -- and adapt without being told. Today, you need to state preferences explicitly or through steering rules.
 
-Last month, you tried a caching strategy that caused race conditions. When a similar problem comes up, PAI steers you toward a different approach. It doesn't just remember that something failed -- it remembers the specific failure mode and applies that lesson to new situations.
+**Effortless cross-session recall.** The goal is that you can say "that auth bug" three days later and PAI knows exactly which one. Today, this works for recent work tracked in PRDs but is less reliable for casual conversation references.
 
-You had a detailed conversation about your team's coding standards. Two weeks later, when reviewing code, PAI applies those standards automatically. It flags inconsistencies with the conventions you described, suggests naming patterns that match your team's style, and structures its own output to fit your established patterns.
+**Decision memory.** PAI will track past decisions and their outcomes, steering you away from approaches that failed before. Today, significant decisions are captured in learnings, but the recall is not yet systematic.
+
+**Zero-effort context building.** The ideal is that memory requires no manual maintenance -- no curating, no tagging, no reminding. Today, you get the best results by actively managing your TELOS files and memory directory.
 
 ## How memory builds over time
 
-PAI gets more useful the longer you use it. Here's what that progression feels like.
+PAI gets more useful the longer you use it. Here's what that progression looks like.
 
 ```mermaid
 graph LR
-    A["📅 Day 1<br/>Name, goals,<br/>basic prefs"] --> B["📅 Week 1<br/>Work style,<br/>common tasks"]
-    B --> C["📅 Month 1<br/>Deep project context,<br/>format preferences"]
-    C --> D["📅 Month 3<br/>Full understanding,<br/>anticipates needs"]
+    A["📅 Day 1<br/>Name, goals,<br/>basic prefs"] --> B["📅 Week 1<br/>Work patterns,<br/>rating signals"]
+    B --> C["📅 Month 1<br/>Deep project context,<br/>accumulated learnings"]
+    C --> D["📅 Month 3<br/>Rich understanding,<br/>relationship context"]
 
     style A fill:#bfdbfe,stroke:#3b82f6,color:#1e293b
     style B fill:#93c5fd,stroke:#2563eb,color:#1e293b
@@ -56,27 +54,13 @@ graph LR
     style D fill:#3b82f6,stroke:#1e40af,color:#ffffff
 ```
 
-**Day 1.** PAI knows your name, your stated goals, and any preferences you shared during setup. It's helpful, but generic. Like a smart new hire on their first day -- capable, but still learning the landscape.
+**Day 1.** PAI knows your name, your stated goals, and any preferences you shared during setup. It's helpful, but generic.
 
-**Week 1.** PAI has learned your communication style, your common tasks, and a handful of preferences. Responses start feeling more tailored. You notice it formats things the way you like without being asked. It picks up on shorthand you use and understands it.
+**Week 1.** PAI has accumulated rating signals from your feedback and captured learnings from significant work sessions. Context loading gets richer.
 
-**Month 1.** PAI knows your projects deeply, anticipates your formatting preferences, and references past decisions naturally. Conversations feel efficient -- less setup, more substance. It's like working with someone who genuinely knows your context. You spend less time explaining and more time doing.
+**Month 1.** PAI knows your projects deeply through TELOS and accumulated work PRDs. Learnings from dozens of sessions inform how it approaches your tasks. Relationship context captures how you prefer to work.
 
-**Month 3.** PAI has a rich understanding of how you work. It catches patterns you might not notice yourself, suggests approaches based on what has worked for you before, and rarely needs you to re-explain anything. The relationship between you and your AI has compounded. Every conversation you've had makes the next one better.
-
-## What you don't have to do
-
-This is worth emphasizing: persistent memory requires zero effort from you.
-
-There are no manual notes to maintain. No knowledge base to curate. No tags to apply or categories to organize.
-
-There is no re-explaining at the start of each session. No "last time we talked about..." preamble. No copying context from one conversation to the next.
-
-There are no "remember when I said..." prompts. No reminders about your preferences. No correcting the AI because it forgot something important.
-
-There are no context-setting rituals. No onboarding sequences every time you open a new conversation. No warmup period before PAI becomes useful.
-
-It just works. Use PAI, and it remembers.
+**Month 3.** PAI has a rich understanding built from hundreds of rating signals, dozens of learnings, and extensive relationship context. The gap between starting a session and being productive narrows significantly.
 
 ## What to read next
 

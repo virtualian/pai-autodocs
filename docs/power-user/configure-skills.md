@@ -23,7 +23,7 @@ To see all installed skills, list the skills directory:
 ls ~/.claude/skills/
 ```
 
-PAI v3.0 ships with 38 system skills. You will see directories like:
+PAI ships with dozens of system skills. You will see directories like:
 
 ```
 Agents/        Council/       FirstPrinciples/  PAI/         Research/
@@ -130,28 +130,28 @@ description: Deep research workflow. USE WHEN user wants to research, investigat
 # Research
 
 Deep research and investigation system.
+```
 
-## Workflow Routing
+The `## Workflow Routing` table maps trigger phrases to workflow files:
 
 | Workflow | Trigger | File |
 |----------|---------|------|
 | **Investigate** | "research this", "deep dive" | `Workflows/Investigate.md` |
 | **Summarize** | "summarize findings" | `Workflows/Summarize.md` |
 
-## Examples
+The `## Examples` section shows Claude Code the expected input-to-output patterns (2-3 examples per skill):
 
-**Example 1: Topic research**
+```
+Example 1: Topic research
 User: "Research the state of AI code generation tools"
 -> Invokes Investigate workflow
 -> Produces structured research report
 
-**Example 2: Quick summary**
+Example 2: Quick summary
 User: "Summarize what we found about competitor X"
 -> Invokes Summarize workflow
 -> Returns concise findings summary
 ```
-
-The **Workflow Routing** table maps trigger phrases to workflow files. The **Examples** section shows Claude Code the expected input-to-output patterns (2-3 examples per skill).
 
 ## Customize a skill
 
@@ -309,14 +309,12 @@ The `science_cycle_time` options are:
 
 Workflow routing connects user intent to specific workflow files. The routing table in `SKILL.md` determines which workflow runs:
 
-```markdown
-## Workflow Routing
+The `## Workflow Routing` section maps trigger phrases to workflow files:
 
 | Workflow | Trigger | File |
 |----------|---------|------|
 | **Create** | "write a post", "new article" | `Workflows/Create.md` |
 | **Publish** | "publish", "deploy" | `Workflows/Publish.md` |
-```
 
 When the skill activates, Claude Code matches your request against the trigger descriptions and loads the corresponding workflow file.
 
@@ -324,15 +322,13 @@ When the skill activates, Claude Code matches your request against the trigger d
 
 Workflows can call CLI tools stored in the `Tools/` directory. Workflows map user intent to tool flags using intent-to-flag mapping tables:
 
-```markdown
-## Model Selection
+The `## Model Selection` section maps intent to tool flags:
 
 | User says | Flag | Use case |
 |-----------|------|----------|
 | "fast", "quick" | `--model haiku` | Speed priority |
 | "best quality" | `--model opus` | Quality priority |
 | (default) | `--model sonnet` | Balanced |
-```
 
 This pattern lets the same tool serve different needs based on what you asked for.
 

@@ -195,14 +195,12 @@ Each memory directory is populated by specific hooks. This table maps the relati
 
 | Hook | Event | Writes to |
 |------|-------|-----------|
-| AutoWorkCreation | UserPromptSubmit | `WORK/` |
-| ResponseCapture | Stop | `WORK/`, `LEARNING/SYSTEM/`, `LEARNING/ALGORITHM/` |
-| ExplicitRating | UserPromptSubmit | `LEARNING/SIGNALS/ratings.jsonl` |
-| ImplicitSentiment | UserPromptSubmit | `LEARNING/SIGNALS/ratings.jsonl` |
-| FailureCapture | UserPromptSubmit | `LEARNING/FAILURES/` |
-| SessionSummary | SessionEnd | `WORK/` |
-| AgentOutputCapture | SubagentStop | `RESEARCH/` |
-| SecurityValidator | PreToolUse | `SECURITY/` |
+| RatingCapture | UserPromptSubmit | `SIGNALS/ratings.jsonl` |
+| WorkCompletionLearning | SessionEnd | `LEARNING/SYSTEM/`, `LEARNING/ALGORITHM/` |
+| SessionCleanup | SessionEnd | `WORK/` (marks PRD complete) |
+| RelationshipMemory | SessionEnd | `RELATIONSHIP/` |
+| PRDSync | PostToolUse (Write/Edit) | `STATE/work.json` |
+| SecurityValidator | PreToolUse | Security validation (no file write) |
 
 ## What to read next
 

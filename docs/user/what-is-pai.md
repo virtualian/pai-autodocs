@@ -28,7 +28,7 @@ Rate a response 1-10 and PAI captures that signal. Express frustration or excite
 
 ### It has real capabilities
 
-PAI ships with 27+ specialised skills that activate automatically — deep research, security analysis, content creation, visual design, browser automation, and more. You don't memorise commands or configure anything. Describe what you need and PAI brings the right expertise. Behind the scenes, it can spawn multiple agents working in parallel, compose skills together, and use CLI tools for deterministic operations.
+PAI ships with dozens of specialised skills that activate automatically — deep research, security analysis, content creation, visual design, browser automation, and more. You don't memorise commands or configure anything. Describe what you need and PAI brings the right expertise. Behind the scenes, it can spawn multiple agents working in parallel, compose skills together, and use CLI tools for deterministic operations.
 
 ### It knows your goals
 
@@ -60,7 +60,8 @@ PAI is created by [Daniel Miessler](https://github.com/danielmiessler), who also
 
 ## What to read next
 
-- **[Your AI Remembers](/user/memory/)** — How memory persists across every session
-- **[Your AI Gets Better](/user/self-improvement/)** — How feedback drives improvement
+- **[The Algorithm](/user/the-algorithm/)** — How PAI's structured problem-solving loop actually works
+- **[Telos: Your Goals](/user/telos/)** — How PAI understands who you are and what you're working toward
+- **[Fabric Patterns](/user/fabric/)** — 200+ analysis patterns integrated directly into PAI
 - **[Install PAI](/user/install-pai/)** — Get PAI running on your machine
 - **[Your First Session](/user/first-session/)** — See PAI in action

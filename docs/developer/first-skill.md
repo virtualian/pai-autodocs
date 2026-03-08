@@ -331,7 +331,7 @@ When you type a prompt, skill activation uses a two-pass system:
 
 **Pass 1: Hook hints (before Algorithm starts)**
 
-The FormatReminder hook runs AI inference on your raw prompt and suggests which skills might be relevant. These are draft suggestions -- starting points, not final decisions.
+Claude Code matches your raw prompt against skill descriptions and `USE WHEN` triggers to suggest which skills might be relevant. These are draft suggestions -- starting points, not final decisions.
 
 **Pass 2: THINK validation (after OBSERVE completes)**
 
@@ -442,14 +442,12 @@ Quick Notes (N total, DATE_FIRST to DATE_LAST):
 
 Now update your `SKILL.md` to include the new workflow in the routing table:
 
-```markdown
-## Workflow Routing
+Add a `## Workflow Routing` section:
 
 | Workflow | Trigger | File |
 |----------|---------|------|
 | **Capture** | "take a note", "jot this down", "save a thought" | `Workflows/Capture.md` |
 | **Review** | "show my notes", "review notes", "what did I note" | `Workflows/Review.md` |
-```
 
 And add a third example:
 

@@ -4,87 +4,63 @@ description: PAI's self-improvement system captures feedback and adapts — here
 diataxis_type: explanation
 ---
 
-:::info Where this stands
-PAI's self-improvement system is **early-stage**. The rating mechanism exists — you can rate responses 1–10 and PAI captures that signal. Implicit sentiment detection is partially implemented. However, the sophisticated feedback loop described below (pattern detection across sessions, automatic skill-level improvements, format adaptation from accumulated evidence) is largely **aspirational**. Today, ratings are captured and stored, but the degree to which they systematically improve future responses depends on how well memory and context carry those signals forward. This is an active area of development.
-:::
+The AI you use after three months is measurably better than the one you started with — because it learned from you.
 
-The vision: the AI you use after three months is measurably better than the one you started with — because it learned from you.
+PAI captures concrete signals from your interactions and uses them to shape how it works for you. Every rating you give feeds into a system that exists to make your experience better.
 
-PAI is designed to capture concrete signals from your interactions and use them to update how it works for you. Every rating you give, every reaction you have, is intended to shape the system into something that fits the way you think and work.
-
-## Your AI gets better over time
-
-The first time you use PAI, it knows the basics about you from your goals and preferences. By the tenth session, it knows how you like to work. By the fiftieth, it anticipates what you need before you finish explaining it.
-
-This progression is not theoretical. It is the direct result of feedback signals accumulating over time, building a detailed picture of what works for you and what does not.
-
-## Two types of feedback
-
-PAI listens for two kinds of signals during every session, so you are always contributing to its improvement -- whether you mean to or not.
+## What works today
 
 ### Explicit ratings
 
 After any response, you can type a number from 1 to 10 to rate how well PAI did. This is the most direct signal you can give. A rating of 3 tells PAI something went wrong. A rating of 9 tells it to keep doing exactly that.
 
-You are in control. One number is all it takes to steer the system.
+The RatingCapture hook detects your rating and writes it to `MEMORY/SIGNALS/ratings.jsonl`. Low ratings (<6) automatically trigger a learning capture — PAI records the full context of what went wrong so it can reference it in future sessions.
 
 ### Implicit sentiment
 
-PAI also reads between the lines. If you respond with "this is completely wrong, I needed the opposite," PAI detects frustration and treats it as a negative signal. If you say "this is exactly what I was looking for," that enthusiasm registers as a positive signal.
+PAI also reads between the lines. If you respond with "this is completely wrong, I needed the opposite," the RatingCapture hook uses Haiku inference to detect frustration and treats it as a negative signal. Enthusiasm registers as a positive signal.
 
-You do not need to consciously give feedback for this to work. Your natural reactions during a session are already informative. Just use PAI the way you normally would, and it picks up on how things are landing.
+### How ratings are used
 
-## What happens with your feedback
+| Signal | What happens today |
+|--------|-------------------|
+| **Rating 1-3** | Full context captured as learning. Referenced in future session context loading. |
+| **Rating 4-6** | Captured to ratings.jsonl. Available in performance trend data. |
+| **Rating 7-8** | Captured to ratings.jsonl. Positive signal in trend data. |
+| **Rating 9-10** | Captured to ratings.jsonl. Strong positive in trend data. |
+| **Detected frustration** | Treated as low-rating signal. Context captured. |
 
-Your feedback does not sit idle. PAI acts on it through a structured process, and the results show up in the quality of your next interaction.
+Performance trends (daily, weekly, monthly averages) are loaded into session context at startup, giving PAI awareness of its recent track record.
 
-| Signal | What PAI does |
-|--------|---------------|
-| **Rating 1-3** | Deep review of what went wrong. Full context captured. |
-| **Rating 4-6** | Noted for improvement. Patterns across mid-range ratings get flagged. |
-| **Rating 7-8** | Approach reinforced. PAI notes what worked. |
-| **Rating 9-10** | Strong positive. Approach, format, and style captured as examples. |
-| **Detected frustration** | Similar to low rating -- context flagged for review. |
-| **Detected excitement** | Similar to high rating -- approach noted for reuse. |
+### Algorithm self-reflection
 
-Every signal you send -- whether a deliberate rating or a natural reaction -- feeds into a system that exists to make your experience better.
+After every Algorithm run, PAI captures structured reflections to `algorithm-reflections.jsonl`: what should have been done differently, what capabilities were underused, what a better approach would look like. These reflections feed periodic Algorithm upgrades — the MineReflections and AlgorithmUpgrade workflows aggregate patterns and propose changes to the Algorithm specification itself.
 
-## Patterns, not just individual ratings
+## Where it's heading
 
-PAI does not just react to individual ratings. It looks for patterns across your feedback over time. If you consistently rate research tasks highly but give lower scores to content generation, PAI identifies that gap and focuses improvement efforts where they matter most.
+These capabilities are the design goal but not yet fully realised:
 
-This means you do not need to repeat yourself. Rate one email draft low because the tone is off, and PAI pays attention. Rate three email drafts low for tone, and PAI treats it as a clear pattern worth acting on. The system gets better at distinguishing a one-off miss from a genuine preference.
+**Automatic pattern detection across sessions.** The vision: if you consistently rate research tasks highly but give lower scores to content generation, PAI identifies that gap and focuses improvement efforts where they matter most. Today, the signals are captured but systematic cross-session pattern analysis is under development.
 
-## Skills improve based on evidence
+**Automatic preference adaptation.** The goal: PAI notices you always edit its bullet-point lists into tables, and starts defaulting to tables without being told. Today, you get the best results by stating preferences explicitly or through steering rules in `USER/AISTEERINGRULES.md`.
 
-PAI does not just remember your preferences -- it updates its own approach based on accumulated evidence.
-
-If PAI notices that you consistently rate narrative summaries lower than structured tables, it adapts and starts defaulting to structured output. If your content creation ratings trend upward when PAI uses a particular format, that format becomes the standard for your sessions.
-
-This happens across every capability. Every skill, every workflow, every decision-making pattern is subject to improvement based on what actually works for you.
-
-:::tip
-You do not need to manage this process. PAI handles skill improvements automatically based on your accumulated feedback. You just keep using it and rating responses honestly.
-:::
+**Skill-level improvement from evidence.** The vision: accumulated ratings drive automatic improvements to how each skill operates for you. Today, ratings inform context loading but do not yet trigger automatic skill configuration changes.
 
 ## Practical examples
 
-Here are concrete scenarios showing how your feedback turns into real improvement.
+Here are scenarios showing how feedback works today and where it's heading.
 
-**Email tone preferences**
-You ask PAI to draft an email, and the result is too formal. You type `3 -- way too formal, I needed a casual tone for this audience`. PAI captures that the formality level was wrong, notes your preference for casual tone, and adjusts future email drafts accordingly. The next time you ask for an email, the tone matches what you actually need.
+**Rating with explanation (works today)**
+You type `3 -- way too formal, I needed a casual tone for this audience`. PAI captures the rating and the full context as a learning. Next session, if the learning is loaded into context, PAI can reference your tone preference.
 
-**Implicit table preference**
-Over several sessions, PAI notices you always edit its bullet-point lists into tables before using them. Without you ever saying "I prefer tables," PAI starts defaulting to table format for structured information. Your behavior spoke louder than any explicit instruction.
+**Accumulated rating trends (works today)**
+Over several weeks, your ratings average is visible in the performance trend loaded at session start. PAI can see whether it's trending up or down, giving it awareness of its general effectiveness.
 
-**Skill-level improvement**
-You use PAI for content creation frequently. Over three weeks, your ratings trend upward from an average of 6 to an average of 8 as PAI learns your voice, preferred structure, and level of detail. The system is measurably producing better work for you.
+**Steering rules for preferences (works today)**
+You add `Always use tables instead of bullet lists for structured data` to `USER/AISTEERINGRULES.md`. This takes effect immediately in every session — no need to wait for PAI to infer the preference.
 
-**Research depth preferences**
-You rate a quick summary as a 4, adding "I needed more depth here -- sources, context, the whole picture." PAI notes that you prefer comprehensive research over surface-level overviews. Future research tasks come back with the depth you expect, complete with supporting evidence and multiple perspectives.
-
-**Meeting note format**
-After a few sessions, PAI identifies that you consistently prefer meeting notes structured with action items at the top, key decisions in the middle, and discussion context at the bottom. It adopts this format without being told, because your feedback made the preference clear.
+**Automatic adaptation (future)**
+Over several sessions, PAI notices you always edit its bullet-point lists into tables. Without you ever saying "I prefer tables," PAI starts defaulting to table format. This automatic inference from behavioural patterns is under development.
 
 ## How to give good feedback
 

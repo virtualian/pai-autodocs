@@ -30,7 +30,7 @@ Give your AI a name, a voice, a personality. Define how it addresses you, how fo
 Add steering rules that change how your AI operates. Want it to always verify visual changes with screenshots? Always ask before deploying? Never refactor code you didn't ask it to touch? These rules live in `USER/AISTEERINGRULES.md` and apply to every session.
 
 ### Skills and capabilities
-Control which skills are active, configure skill-specific settings, and add your own custom skills. You can enable, disable, or reconfigure any of PAI's 27+ built-in capabilities.
+Control which skills are active, configure skill-specific settings, and add your own custom skills. You can enable, disable, or reconfigure any of PAI's dozens of built-in capabilities.
 
 ## Why this matters
 
@@ -38,6 +38,7 @@ Most AI tools give you a settings page with a few toggles. PAI gives you a compl
 
 ## Next steps
 
+- **[SYSTEM vs USER: What's Yours](/power-user/system-user-boundary/)** — Which files you own, which are infrastructure, and what happens when they overlap
 - **[Customise Your AI](/power-user/customize-your-ai/)** — Walk through your first customisation
 - **[Configure Skills](/power-user/configure-skills/)** — Control which capabilities are active
 - **[Configuration Reference](/power-user/configuration/)** — Every config file and what it does

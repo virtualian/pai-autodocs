@@ -146,15 +146,13 @@ The `STATE/` directory contains ephemeral runtime data that rebuilds automatical
 
 | Directory | Purpose | Populated By |
 |-----------|---------|--------------|
-| `WORK/` | Work tracking | AutoWorkCreation, ResponseCapture, SessionSummary hooks |
-| `LEARNING/SYSTEM/` | Infrastructure learnings | ResponseCapture, rating hooks |
-| `LEARNING/ALGORITHM/` | Task execution learnings | ResponseCapture, rating hooks |
-| `LEARNING/FAILURES/` | Full context for low ratings | Sentiment/rating hooks via FailureCapture |
-| `LEARNING/SYNTHESIS/` | Aggregated patterns | LearningPatternSynthesis tool |
-| `LEARNING/SIGNALS/` | User satisfaction ratings | ExplicitRating, ImplicitSentiment hooks |
-| `RESEARCH/` | Agent output captures | AgentOutputCapture hook |
-| `SECURITY/` | Security audit events | SecurityValidator hook |
-| `STATE/` | Runtime state | Various hooks and tools |
+| `WORK/` | Work tracking (PRDs per task) | PRDSync, SessionCleanup, WorkCompletionLearning hooks |
+| `LEARNING/SYSTEM/` | Infrastructure learnings | WorkCompletionLearning, RatingCapture hooks |
+| `LEARNING/ALGORITHM/` | Task execution learnings | WorkCompletionLearning, RatingCapture hooks |
+| `SIGNALS/` | User satisfaction ratings | RatingCapture hook |
+| `RESEARCH/` | Agent output captures | WorkCompletionLearning hook |
+| `RELATIONSHIP/` | Relationship context | RelationshipMemory hook |
+| `STATE/` | Runtime state (work.json, events.jsonl) | Various hooks and tools |
 
 ## What to read next
 
