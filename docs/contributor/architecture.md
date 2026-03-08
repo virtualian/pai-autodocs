@@ -75,7 +75,7 @@ PAI uses a hybrid agent model with two types:
 
 **Named agents** have persistent identities with backstories and fixed voice mappings. These are specialized personas — an Engineer, an Architect, a Security Pentester, a Designer — each with calibrated personality traits like humor level, precision, and directness. Personality is not decoration in PAI; it is functional. Different work benefits from different approaches.
 
-**Dynamic agents** are task-specific compositions created on the fly via the AgentFactory. These are assembled from traits as needed and do not persist between sessions.
+**Dynamic agents** are task-specific compositions created on the fly via ComposeAgent. These are assembled from traits as needed and do not persist between sessions.
 
 Agents compose using named patterns:
 
@@ -106,13 +106,12 @@ Session Stop   -->  Capture session summary, persist memory
 Hooks are configured in `settings.json` and can fire at multiple event types. PAI uses hooks for:
 
 - **Context loading:** Loading the right skills and memory at session start
-- **Format enforcement:** Ensuring the Algorithm format is followed (the FormatReminder hook uses AI inference to classify response depth)
 - **Security validation:** Checking commands before execution, blocking dangerous operations
-- **Signal capture:** Detecting sentiment, ratings, and behavioral patterns from user messages
+- **Signal capture:** Detecting sentiment, ratings, and behavioural patterns from user messages
 - **Voice notifications:** Speaking task completions and summaries aloud
 - **Session persistence:** Capturing summaries and learnings at session end
 
-There are 8 event types in the hook system, and PAI ships with 20 production hooks as of v3.0.
+There are 7 event types in the hook system, and PAI ships with 21 production hooks.
 
 ### Memory
 
@@ -122,19 +121,18 @@ Memory is what makes PAI's intelligence compound over time. Without memory, ever
 
 ```
 MEMORY/
-├── RAW/                # Event logs (JSONL) — source of truth
-├── WORK/               # Primary work tracking
+├── WORK/               # Primary work tracking (PRD.md per task)
 ├── LEARNING/           # Learnings organized by domain
 │   ├── SYSTEM/         # System-level learnings
-│   ├── ALGORITHM/      # Algorithm-specific learnings
-│   └── SIGNALS/        # Ratings and feedback (ratings.jsonl)
+│   └── ALGORITHM/      # Algorithm-specific learnings
+├── SIGNALS/            # Ratings and feedback (ratings.jsonl)
 ├── RESEARCH/           # Agent output captures
-├── SECURITY/           # Security events
-├── STATE/              # Runtime state (current-work.json, progress)
+├── RELATIONSHIP/       # Relationship context and observations
+├── STATE/              # Runtime state (work.json, events.jsonl, session-names.json)
 └── PAISYSTEMUPDATES/   # System change documentation
 ```
 
-Everything flows to `RAW/` first as JSONL event logs — this is the source of truth. From there, events are organized into domain-specific directories. The `LEARNING/` directory is particularly important: it stores evidence organized by Algorithm phase, allowing the system to improve its own processes based on accumulated experience.
+Claude Code's native `projects/` directory is the source of truth for project context. The `MEMORY/` directory organises derived state — work tracking, learnings, signals, and runtime state. The `LEARNING/` directory is particularly important: it stores evidence organised by domain, allowing the system to improve its own processes based on accumulated experience.
 
 Memory files follow a naming convention: `YYYY-MM-DD-HHMMSS_[TYPE]_[description].md`.
 
@@ -164,30 +162,34 @@ Here is the typical flow for a user request:
 ```
 1. User sends a message
        |
-2. HOOKS fire (SessionStart / FormatReminder)
-   - Load relevant context (skills, memory, TELOS)
-   - Classify response depth (FULL / ITERATION / MINIMAL)
-   - Suggest capabilities and skills (Pass 1)
+2. HOOKS fire (UserPromptSubmit)
+   - Capture ratings and sentiment (RatingCapture)
+   - Update terminal tab title (UpdateTabTitle)
+   - Auto-name session (SessionAutoName)
        |
-3. THE ALGORITHM begins
-   - OBSERVE: Reverse-engineer intent, create ISC criteria
-   - THINK: Validate capabilities against ISC (Pass 2), select agents
-   - PLAN: Finalize approach
-   - BUILD/EXECUTE: Agents do the work (parallel when independent)
+3. THE ALGORITHM begins (if task warrants it)
+   - OBSERVE: Reverse-engineer intent, classify effort tier, create ISC criteria
+   - THINK: Pressure-test criteria, identify risks
+   - PLAN: Finalise approach (Advanced+ effort: written plan in PRD)
+   - BUILD/EXECUTE: Invoke capabilities, tick off ISC criteria in PRD
    - VERIFY: Check each ISC criterion with evidence
-   - LEARN: Capture what to improve
+   - LEARN: Capture reflections to algorithm-reflections.jsonl
        |
-4. HOOKS fire (signal capture)
-   - Detect sentiment and ratings
-   - Capture to MEMORY/RAW/
-   - Route to appropriate MEMORY subdirectories
+4. HOOKS fire (Stop)
+   - Cache response for next rating capture (LastResponseCache)
+   - Reset terminal tab state (ResponseTabReset)
+   - Voice notification (VoiceCompletion)
+   - Cross-reference integrity check (DocIntegrity)
+   - Algorithm progress in tab (AlgorithmTab)
        |
 5. Response delivered to user
        |
-6. On session end, HOOKS fire (Stop)
-   - Generate session summary
-   - Persist learnings to MEMORY/LEARNING/
-   - Update STATE/
+6. On session end, HOOKS fire (SessionEnd)
+   - Capture work and learning to MEMORY/ (WorkCompletionLearning)
+   - Mark PRD complete, clear state (SessionCleanup)
+   - Capture relationship context (RelationshipMemory)
+   - Update system counts (UpdateCounts)
+   - Run integrity checks (IntegrityCheck)
 ```
 
 The critical insight is that hooks and the Algorithm work together. Hooks handle the lifecycle plumbing — loading context, capturing signals, persisting state. The Algorithm handles the intellectual work — understanding intent, selecting capabilities, verifying output.

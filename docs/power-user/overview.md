@@ -10,6 +10,7 @@ Welcome to the Power User section. This is where you make Personal AI Infrastruc
 ### Understand customisation
 
 - **[How Customisation Works](/power-user/how-customization-works/)** — Why PAI is deeply customisable and how its two-tier architecture keeps your changes safe across upgrades
+- **[SYSTEM vs USER: What's Yours](/power-user/system-user-boundary/)** — Which files belong to you, which belong to infrastructure, and what happens when they overlap
 
 ### Get hands-on
 
@@ -18,10 +19,15 @@ Welcome to the Power User section. This is where you make Personal AI Infrastruc
 ### Solve specific problems
 
 - **[Configure Skills](/power-user/configure-skills/)** — Enable, disable, and fine-tune the skills available in your PAI install
+- **[Configure Voice and Notifications](/power-user/voice-notifications/)** — Set up voice feedback, adjust notification settings, and test endpoints
+- **[Customise PAI Behaviour](/power-user/customise-behaviour/)** — Add steering rules, adjust response format, and override defaults safely
 
 ### Look things up
 
 - **[Configuration Reference](/power-user/configuration/)** — The complete reference of every setting in `settings.json` and the USER tier
+- **[Steering Rules Reference](/power-user/steering-rules/)** — Complete catalog of AI behavioural rules: syntax, precedence, conflict resolution
+- **[Context Routing Reference](/power-user/context-routing/)** — How PAI resolves which context files to load and the routing table format
+- **[CLAUDE.md Anatomy](/power-user/claude-md-anatomy/)** — Field-by-field breakdown of CLAUDE.md structure, load order, and override semantics
 
 ## Recommended path
 

@@ -10,31 +10,18 @@ PAI's memory system persists context across sessions. This reference covers wher
 
 ```
 ~/.claude/MEMORY/
-├── RAW/                # Event logs (JSONL) — source of truth
-├── WORK/               # Active work tracking
+├── WORK/               # Active work tracking (PRDs per task)
 ├── LEARNING/           # Learnings organised by domain
 │   ├── SYSTEM/         # System-level learnings
-│   ├── ALGORITHM/      # Algorithm-specific learnings
-│   └── SIGNALS/        # Ratings and feedback (ratings.jsonl)
+│   └── ALGORITHM/      # Algorithm-specific learnings
+├── SIGNALS/            # Ratings and feedback (ratings.jsonl)
 ├── RESEARCH/           # Agent output captures
-├── SECURITY/           # Security events
-├── STATE/              # Runtime state
+├── RELATIONSHIP/       # Relationship context and observations
+├── STATE/              # Runtime state (work.json, events.jsonl, session-names.json)
 └── PAISYSTEMUPDATES/   # System change documentation
 ```
 
 ## Key directories
-
-### RAW/
-
-**Purpose:** Source of truth for all events.
-
-**Format:** JSONL (one JSON object per line).
-
-**Contains:** Every captured event — prompts, responses, ratings, decisions, errors. All other directories are derived from RAW.
-
-**File naming:** `YYYY-MM-DD-HHMMSS_[TYPE]_[description].md`
-
----
 
 ### WORK/
 

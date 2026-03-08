@@ -15,6 +15,7 @@ Welcome to the User section. This is where you learn what Personal AI Infrastruc
 - **[Fabric Patterns](/user/fabric/)** — 200+ curated analysis patterns from Daniel Miessler's Fabric, integrated directly into PAI
 - **[Your AI Remembers](/user/memory/)** — PAI's memory file scaffolding: what's in place today and the vision for automatic context persistence
 - **[Your AI Gets Better](/user/self-improvement/)** — PAI's feedback scaffolding: the 1-10 rating system exists, but closed-loop automatic improvement is still planned
+- **[Privacy and Your Data](/user/privacy/)** — What PAI stores, where it lives, what goes to Claude's API, and what stays local
 
 ### Get started
 
@@ -26,7 +27,7 @@ Welcome to the User section. This is where you learn what Personal AI Infrastruc
 
 ### Use PAI effectively
 
-- **[Work With Skills](/user/working-with-skills/)** — Discover and use PAI's 27+ specialised capabilities
+- **[Work With Skills](/user/working-with-skills/)** — Discover and use PAI's specialised capabilities
 - **[Research a Topic](/user/research-topics/)** — Quick overviews, standard investigations, and deep multi-source research
 - **[Analyze Content](/user/analyze-content/)** — Extract insights from articles, videos, podcasts, and documents
 - **[Use Fabric Patterns](/user/use-fabric-patterns/)** — Apply structured analysis patterns for consistent, repeatable results
@@ -42,6 +43,7 @@ Welcome to the User section. This is where you learn what Personal AI Infrastruc
 - **[Telos Reference](/user/telos-reference/)** — All 10 Telos files: purpose, format, and contents
 - **[Fabric Patterns Reference](/user/fabric-patterns-reference/)** — Catalog of commonly used Fabric patterns
 - **[Memory Reference](/user/memory-reference/)** — Memory file structure, storage locations, and conventions
+- **[Troubleshooting](/user/troubleshooting/)** — Common problems, error messages, and fixes
 
 ## Recommended path
 

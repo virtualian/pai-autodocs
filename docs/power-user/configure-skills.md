@@ -23,7 +23,7 @@ To see all installed skills, list the skills directory:
 ls ~/.claude/skills/
 ```
 
-PAI v3.0 ships with 38 system skills. You will see directories like:
+PAI ships with dozens of system skills. You will see directories like:
 
 ```
 Agents/        Council/       FirstPrinciples/  PAI/         Research/

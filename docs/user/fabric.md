@@ -54,6 +54,6 @@ PAI is, in a sense, the evolution of Fabric's ideas into full infrastructure. Wh
 
 ## What to read next
 
-- [Working With Skills](/user/working-with-skills/) -- how Fabric fits alongside PAI's other 27+ skills
+- [Working With Skills](/user/working-with-skills/) -- how Fabric fits alongside PAI's other skills
 - [Skills Catalog](/user/skills-catalog/) -- find Fabric and every other skill in the full reference
 - [What is PAI?](/user/what-is-pai/) -- the broader vision that connects Fabric and PAI

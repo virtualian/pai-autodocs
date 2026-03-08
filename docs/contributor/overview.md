@@ -15,9 +15,22 @@ Welcome to the Contributor section. This is where you go deep into Personal AI I
 - **[CLI-First Design](/contributor/cli-first/)** — Why PAI is built on the command line and what that enables
 - **[The SYSTEM/USER Model](/contributor/system-user-model/)** — The two-tier separation that makes PAI safe to customise and upgrade
 
+### Get started contributing
+
+- **[Your First Contribution](/contributor/first-contribution/)** — Fork, make a change, validate, and submit your first pull request
+
+### Look things up
+
+- **[Directory Conventions](/contributor/directory-conventions/)** — Canonical file paths, naming rules, and where new files belong
+- **[The 16 Founding Principles](/contributor/principles/)** — The constitutional principles governing every PAI design decision
+- **[Versioning and Compatibility](/contributor/versioning/)** — Semver rules, breaking change definitions, and upgrade boundaries
+
 ### Contribute changes
 
 - **[Upgrade PAI](/contributor/upgrade-pai/)** — How to submit improvements, handle versioning, and maintain backwards compatibility
+- **[Add a Skill to Core](/contributor/add-skill/)** — Promote a personal skill to the system skill set with the canonicalisation checklist
+- **[Update System Files](/contributor/update-system-files/)** — Safely modify SYSTEM files while preserving USER customisations
+- **[Write a Constitutional Principle](/contributor/write-principle/)** — How to propose, word, and integrate a new founding principle
 
 ## Recommended path
 

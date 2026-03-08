@@ -28,7 +28,7 @@ The pattern is simple: say what you need, and PAI figures out how to deliver it.
 
 ## What you can do with skills
 
-PAI ships with 38+ built-in skills organized across several categories. Here is what each one offers -- and what to try.
+PAI ships with dozens of built-in skills organised across several categories. Here is what each one offers -- and what to try.
 
 ### Research and intelligence
 

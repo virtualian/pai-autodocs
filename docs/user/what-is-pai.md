@@ -28,7 +28,7 @@ Rate a response 1-10 and PAI captures that signal. Express frustration or excite
 
 ### It has real capabilities
 
-PAI ships with 27+ specialised skills that activate automatically — deep research, security analysis, content creation, visual design, browser automation, and more. You don't memorise commands or configure anything. Describe what you need and PAI brings the right expertise. Behind the scenes, it can spawn multiple agents working in parallel, compose skills together, and use CLI tools for deterministic operations.
+PAI ships with dozens of specialised skills that activate automatically — deep research, security analysis, content creation, visual design, browser automation, and more. You don't memorise commands or configure anything. Describe what you need and PAI brings the right expertise. Behind the scenes, it can spawn multiple agents working in parallel, compose skills together, and use CLI tools for deterministic operations.
 
 ### It knows your goals
 

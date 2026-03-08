@@ -111,8 +111,6 @@ Here's roughly what you'll see when you give PAI a task. The exact content varie
 📚 LEARN — Notes your preference for concise slide decks.
 ```
 
-Each phase builds on the last. By the time you get to the output, it's been observed, planned, built, and verified. Not just generated.
-
 ---
 
 ## The wow moments
