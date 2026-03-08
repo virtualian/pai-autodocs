@@ -11,6 +11,14 @@ All notable changes to this documentation site are tracked here. This changelog 
 
 ---
 
+## v1.2.1 — 2026-03-08
+
+**PAI version:** v4.0.3 (Algorithm v3.7.0)
+
+### Added
+
+- Vercel Toolbar for production — authenticated team members can leave comments and flag issues directly on the live site
+
 ## v1.2.0 — 2026-03-08
 
 **PAI version:** v4.0.3 (Algorithm v3.7.0)
