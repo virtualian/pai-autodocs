@@ -112,7 +112,7 @@ Include the common ways users phrase requests for your skill's domain. Think abo
 
 Here's a minimal but complete SKILL.md:
 
-```markdown
+````markdown
 ---
 name: WeatherCheck
 description: Check weather conditions for any location — current conditions,
@@ -131,11 +131,11 @@ Supports current conditions, 5-day forecasts, and severe weather alerts.
 ## Voice Notification
 
 When executing a workflow, send a voice notification:
-\`\`\`bash
+```bash
 curl -s -X POST http://localhost:8888/notify \
   -H "Content-Type: application/json" \
   -d '{"message": "Checking weather conditions"}'
-\`\`\`
+```
 
 ## Workflows
 
@@ -158,7 +158,7 @@ curl -s -X POST http://localhost:8888/notify \
 ## References
 - `Tools/WeatherAPI.ts` — OpenWeatherMap API wrapper
 - `Tools/WeatherAPI.help.md` — API tool documentation
-```
+````
 
 ## Skill naming and the SYSTEM/USER model
 

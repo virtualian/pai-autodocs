@@ -442,14 +442,12 @@ Quick Notes (N total, DATE_FIRST to DATE_LAST):
 
 Now update your `SKILL.md` to include the new workflow in the routing table:
 
-```markdown
-## Workflow Routing
+Add a `## Workflow Routing` section:
 
 | Workflow | Trigger | File |
 |----------|---------|------|
 | **Capture** | "take a note", "jot this down", "save a thought" | `Workflows/Capture.md` |
 | **Review** | "show my notes", "review notes", "what did I note" | `Workflows/Review.md` |
-```
 
 And add a third example:
 

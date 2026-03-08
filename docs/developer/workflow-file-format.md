@@ -55,15 +55,13 @@ Final step with output requirements.
 
 Each `SKILL.md` contains a routing table that maps task types to workflow files. This is how PAI decides which workflow to run:
 
-```markdown
-## Workflows
+The table appears under a `## Workflows` heading in the SKILL.md:
 
 | Workflow | When | File |
 |----------|------|------|
 | QuickResearch | Fast lookup, single query | `Workflows/QuickResearch.md` |
 | ExtensiveResearch | Deep multi-source investigation | `Workflows/ExtensiveResearch.md` |
 | DeepInvestigation | Maximum depth, no time pressure | `Workflows/DeepInvestigation.md` |
-```
 
 The `When` column describes the conditions under which this workflow is selected. PAI reads the user's request and matches it against these descriptions.
 
