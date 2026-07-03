@@ -1,16 +1,16 @@
 {
-  "sha": "2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9",
+  "sha": "a5992db68a0f18cde26e3d89c53dc619e364bbba",
   "latestRelease": {
-    "tag": "v5.0.0",
-    "id": 322138785,
-    "publishedAt": "2026-05-13T21:20:48Z",
-    "bodyHash": "c7b6f0b75939bf01525fdc782609f90d85635d6d8a9af1cf92ff6a2a6f24f9b6"
+    "tag": "v6.0.0",
+    "id": 348266380,
+    "publishedAt": "2026-07-02T20:07:07Z",
+    "bodyHash": "c487d5295421ba6e8a4b0f8e27f38ca07e9ea3889e326389b8c6e17d49134d84"
   },
   "releaseBodyHashes": {
+    "v6.0.0": "c487d5295421ba6e8a4b0f8e27f38ca07e9ea3889e326389b8c6e17d49134d84",
     "v5.0.0": "c7b6f0b75939bf01525fdc782609f90d85635d6d8a9af1cf92ff6a2a6f24f9b6",
     "v4.0.3": "a3fd780d3f755bbe4b8e0361fa92a655c316fa253b5b93ccadee15dc72a8c6bd",
     "v4.0.1": "0563c1ab9075b627de0e5bfdeec30a4f34b11dc9e6c3de57b8530d9799b19dc7",
-    "v4.0.0": "61e0f54859fcfcf1bb8791da83a00703f5e57e1f917f8262e42241c94d17038a",
-    "v3.0.0": "251bb6fe5e15ebc9d173efd60be9302204f816b97cdcf8045aefc86af52f6520"
+    "v4.0.0": "61e0f54859fcfcf1bb8791da83a00703f5e57e1f917f8262e42241c94d17038a"
   }
 }
